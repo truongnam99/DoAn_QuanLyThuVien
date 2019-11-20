@@ -10,6 +10,7 @@ public class DocGiaDTO {
 	private String lopMon;
 	private Date ngaySinh;
 	private String sdt;
+	private String Email;
 	
 	public DocGiaDTO() {
 		super();
@@ -58,5 +59,11 @@ public class DocGiaDTO {
 	}
 	public void setSdt(String sdt) {
 		this.sdt = sdt;
+	}
+	public String getEmail() {
+		return Email;
+	}
+	public void setEmail(String email) {
+		Email = email;
 	}
 }

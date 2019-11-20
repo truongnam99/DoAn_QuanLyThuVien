@@ -20,12 +20,7 @@ public class QLDocGiaBLL {
 		return instance;
 	}
 	
-	public String insert(DocGiaDTO docGia) {
-		
-		if(DocGiaDAL.getInstance().insert(docGia) > 0)
-			return "thanhcong";
-		return "thatbai";
-	}
+	
 	
 	public DefaultTableModel getResources() {
 		ArrayList<DocGiaDTO> dsDocGia = new ArrayList<DocGiaDTO>();
@@ -36,9 +31,14 @@ public class QLDocGiaBLL {
 			dtm.addColumn("Mã độc giả");
 			dtm.addColumn("Họ và tên");
 			dtm.addColumn("Loại độc giả");
+			dtm.addColumn("Lớp/Môn");
+			dtm.addColumn("Ngày sinh");
+			dtm.addColumn("SDT");
+			dtm.addColumn("Email");
 			int i = 1;
 			for(DocGiaDTO dg : dsDocGia) {
-				Object[] row = {i++, dg.getMaDocGia(), dg.getTenDocGia(),dg.getLoaiDocGia()};
+				Object[] row = {i++, dg.getMaDocGia(), dg.getTenDocGia(),dg.getLoaiDocGia().getTenLoaiDocGia(),
+						dg.getLopMon(), dg.getNgaySinh(), dg.getSdt(), dg.getEmail()};
 				dtm.addRow(row);
 			}
 			
@@ -51,4 +51,6 @@ public class QLDocGiaBLL {
 		}
 		return dtm;
 	}
+	
+	
 }

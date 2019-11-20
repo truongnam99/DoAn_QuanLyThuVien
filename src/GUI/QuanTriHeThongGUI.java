@@ -26,7 +26,8 @@ public class QuanTriHeThongGUI {
 	void init() {
 		frmMain = new JFrame("Quản lý thư viện");
 		frmMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		pnMain = QLNhanVienGUI.getInstance().getPnTongQuanQLNhanVien();
+		//pnMain = QLNhanVienGUI.getInstance().getPnTongQuanQLNhanVien();
+		pnMain = QLDocGiaGUI.getInstance().getPnMain();
 		frmMain.setBounds(100, 100, 1065, 595);
 		frmMain.getContentPane().add(pnMain);
 	}

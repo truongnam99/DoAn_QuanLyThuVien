@@ -39,7 +39,7 @@ public class QLDocGiaGUI {
 		tbDocGia.setModel(QLDocGiaBLL.getInstance().getResources());
 	}
 	
-	private void refreshData() {
+	private void refreshResources() {
 		
 	}
 
@@ -207,7 +207,7 @@ public class QLDocGiaGUI {
 				
 				
 				
-				refreshData();
+				refreshResources();
 			}
 		});
 		
