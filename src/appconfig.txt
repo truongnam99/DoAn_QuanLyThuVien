@@ -1,0 +1,3 @@
+con:=jdbc:mysql://localhost:3306/qltv?useUnicode=yes&characterEncoding=UTF-8
+user:=root
+pass:=tuananh
