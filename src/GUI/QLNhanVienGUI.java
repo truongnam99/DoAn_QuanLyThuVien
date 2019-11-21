@@ -116,7 +116,6 @@ public class QLNhanVienGUI {
 				tfEmail.setText(tbQLNhanVien.getValueAt(tbQLNhanVien.getSelectedRow(), 6).toString());
 			}
 		});
-		
 		pnQLNhanVien.add(sc,BorderLayout.CENTER);
 		
 		JPanel pnThongTinNhanVien = new JPanel();
@@ -228,10 +227,6 @@ public class QLNhanVienGUI {
 			}
 		});
 		pnThongTinNhanVien.add(btnThem);
-		
-		
-		
-		
 		
 		JButton btnSua = new JButton("Sửa");
 		btnSua.setIcon(new ImageIcon("icon\\setting.png"));

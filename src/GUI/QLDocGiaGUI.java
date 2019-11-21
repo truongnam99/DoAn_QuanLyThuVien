@@ -6,8 +6,8 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -23,12 +23,21 @@ import DTO.DocGiaDTO;
 import DTO.LoaiDocGiaDTO;
 
 import javax.swing.SwingConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 public class QLDocGiaGUI {
 	static QLDocGiaGUI instance = null;
 	private JPanel pnMain;
 	private JTable tbDocGia;
-	private JTextField txtHoTen;
+	private JTextField tfHoTen;
+	private JTextField tfEmail;
+	private JTextField tfSDT;
+	private JTextField tfNgaySinh;
+	private JTextField tfLopChuyenMon;
+	private JTextField tfMaDocGia;
+	private JComboBox<LoaiDocGiaDTO> cbbLoaiDocGia;
+	private JLabel lblMessage;
 	
 	private QLDocGiaGUI() {
 		initialize();
@@ -36,13 +45,9 @@ public class QLDocGiaGUI {
 	}
 
 	private void loadResources() {
-		tbDocGia.setModel(QLDocGiaBLL.getInstance().getResources());
+		tbDocGia.setModel(QLDocGiaBLL.getInstance().getResources(cbbLoaiDocGia));
 	}
 	
-	private void refreshResources() {
-		
-	}
-
 	public static QLDocGiaGUI getInstance() {
 		if (instance == null)
 			instance = new QLDocGiaGUI();
@@ -51,6 +56,23 @@ public class QLDocGiaGUI {
 	
 	public JPanel getPnMain() {
 		return pnMain;
+	}
+			
+	private void reloadResources() {
+		DefaultTableModel dm = (DefaultTableModel) tbDocGia.getModel();
+		dm.getDataVector().removeAllElements();
+		dm.fireTableDataChanged();
+		tbDocGia.setModel(QLDocGiaBLL.getInstance().reloadResources());
+	}
+	
+	private void clearField() {
+		tfEmail.setText("");
+		tfHoTen.setText("");
+		tfLopChuyenMon.setText("");
+		tfMaDocGia.setText("");
+		tfNgaySinh.setText("");
+		tfSDT.setText("");
+		cbbLoaiDocGia.setSelectedItem(0);
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -69,13 +91,13 @@ public class QLDocGiaGUI {
 		JPanel pnDanhSachDocGia = new JPanel();
 		pnDanhSachDocGia.setLayout(null);
 		pnDanhSachDocGia.setBackground(SystemColor.activeCaption);
-		pnDanhSachDocGia.setBounds(0, 71, 1065, 230);
+		pnDanhSachDocGia.setBounds(0, 71, 1065, 213);
 		pnMain.add(pnDanhSachDocGia);
 		
 		JPanel pnThongTinDocGia = new JPanel();
 		pnThongTinDocGia.setLayout(null);
 		pnThongTinDocGia.setBackground(SystemColor.activeCaption);
-		pnThongTinDocGia.setBounds(0, 302, 1065, 256);
+		pnThongTinDocGia.setBounds(0, 283, 1065, 275);
 		pnMain.add(pnThongTinDocGia);
 		
 		//add control
@@ -91,7 +113,29 @@ public class QLDocGiaGUI {
 		tbDocGia = new JTable();
 		tbDocGia.setBounds(0, 0, 1065, 256);
 		JScrollPane sc = new JScrollPane(tbDocGia, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		sc.setBounds(0, 0, 1065, 230);
+		sc.setBounds(0, 0, 1065, 213);
+		tbDocGia.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent arg0) {
+				if (tbDocGia.getSelectedRow()< 0)
+					return;
+				tfMaDocGia.setText(tbDocGia.getValueAt(tbDocGia.getSelectedRow(), 1).toString());
+				tfHoTen.setText(tbDocGia.getValueAt(tbDocGia.getSelectedRow(), 2).toString());
+				
+				for (int i = 0; i< cbbLoaiDocGia.getItemCount();i++) {
+					if(tbDocGia.getValueAt(tbDocGia.getSelectedRow(), 3).toString().equals(cbbLoaiDocGia.getItemAt(i).toString())) {
+						cbbLoaiDocGia.setSelectedItem(cbbLoaiDocGia.getItemAt(i));
+					}
+				}
+				
+				tfLopChuyenMon.setText(tbDocGia.getValueAt(tbDocGia.getSelectedRow(), 4).toString());
+				tfNgaySinh.setText(tbDocGia.getValueAt(tbDocGia.getSelectedRow(), 5).toString());
+				tfSDT.setText(tbDocGia.getValueAt(tbDocGia.getSelectedRow(), 6).toString());
+				tfEmail.setText(tbDocGia.getValueAt(tbDocGia.getSelectedRow(), 7).toString());
+			}
+			
+		});
 		pnDanhSachDocGia.add(sc,BorderLayout.CENTER);
 		
 		JLabel lblThongTinDocGia = new JLabel("THÔNG TIN ĐỘC GIẢ");
@@ -102,88 +146,77 @@ public class QLDocGiaGUI {
 		JPanel pnThongTinNhap = new JPanel();
 		pnThongTinNhap.setFocusTraversalKeysEnabled(false);
 		pnThongTinNhap.setBackground(SystemColor.inactiveCaptionBorder);
-		pnThongTinNhap.setBounds(10, 39, 860, 208);
+		pnThongTinNhap.setBounds(10, 39, 860, 236);
 		pnThongTinDocGia.add(pnThongTinNhap);
 		pnThongTinNhap.setLayout(null);
 		
-		JLabel lblHoTen = new JLabel("Họ Tên:");
+		JLabel lblHoTen = new JLabel("Họ Tên:*");
 		lblHoTen.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblHoTen.setBounds(10, 34, 89, 26);
+		lblHoTen.setBounds(10, 83, 89, 26);
 		pnThongTinNhap.add(lblHoTen);
 		
-		txtHoTen = new JTextField();
-		txtHoTen.setBounds(109, 32, 258, 30);
-		txtHoTen.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		pnThongTinNhap.add(txtHoTen);
-		txtHoTen.setColumns(10);
+		tfHoTen = new JTextField();
+		tfHoTen.setBounds(109, 80, 258, 30);
+		tfHoTen.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		pnThongTinNhap.add(tfHoTen);
+		tfHoTen.setColumns(10);
 		
-		JLabel lblMaDocGia = new JLabel("Mã độc giả:");
+		JLabel lblMaDocGia = new JLabel("Mã độc giả:*");
 		lblMaDocGia.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblMaDocGia.setBounds(10, 83, 89, 26);
+		lblMaDocGia.setBounds(10, 34, 89, 26);
 		pnThongTinNhap.add(lblMaDocGia);
 		
-		JTextField txtMaDocGia = new JTextField();
-		txtMaDocGia.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		txtMaDocGia.setBounds(109, 87, 258, 30);
-		pnThongTinNhap.add(txtMaDocGia);
-		txtMaDocGia.setColumns(10);
+		tfMaDocGia = new JTextField();
+		tfMaDocGia.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		tfMaDocGia.setBounds(109, 32, 258, 30);
+		pnThongTinNhap.add(tfMaDocGia);
+		tfMaDocGia.setColumns(10);
 		
-		JLabel lblLoaiDocGia = new JLabel("Loại độc giả:");
+		JLabel lblLoaiDocGia = new JLabel("Loại độc giả:*");
 		lblLoaiDocGia.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblLoaiDocGia.setBounds(10, 138, 89, 26);
+		lblLoaiDocGia.setBounds(10, 135, 89, 26);
 		pnThongTinNhap.add(lblLoaiDocGia);
 		
-		JComboBox<LoaiDocGiaDTO> cbbLoaiDocGia = new JComboBox<LoaiDocGiaDTO>();
-		cbbLoaiDocGia.setBounds(109, 141, 258, 30);
+		cbbLoaiDocGia = new JComboBox<LoaiDocGiaDTO>();
+		cbbLoaiDocGia.setBounds(109, 132, 258, 30);
 		pnThongTinNhap.add(cbbLoaiDocGia);
 		
-//		JTextField txtLoaiDocGia = new JTextField();
-//		txtLoaiDocGia.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-//		txtLoaiDocGia.setBounds(109, 141, 258, 30);
-//		pnThongTinNhap.add(txtLoaiDocGia);
-//		txtLoaiDocGia.setColumns(10);
-		
-		JLabel lblLopChuyenMon = new JLabel("Lớp/Chuyên môn:");
+		JLabel lblLopChuyenMon = new JLabel("Lớp/Chuyên môn:*");
 		lblLopChuyenMon.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		lblLopChuyenMon.setBounds(428, 34, 133, 26);
 		pnThongTinNhap.add(lblLopChuyenMon);
 		
-		JTextField txtLopChuyenMon = new JTextField();
-		txtLopChuyenMon.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		txtLopChuyenMon.setBounds(564, 32, 258, 30);
-		pnThongTinNhap.add(txtLopChuyenMon);
-		txtLopChuyenMon.setColumns(10);
+		tfLopChuyenMon = new JTextField();
+		tfLopChuyenMon.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		tfLopChuyenMon.setBounds(564, 32, 258, 30);
+		pnThongTinNhap.add(tfLopChuyenMon);
+		tfLopChuyenMon.setColumns(10);
 		
-		JLabel lblNgaySinh = new JLabel("Ngày sinh:");
+		JLabel lblNgaySinh = new JLabel("Ngày sinh:*");
 		lblNgaySinh.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		lblNgaySinh.setBounds(428, 83, 113, 26);
 		pnThongTinNhap.add(lblNgaySinh);
 		
-		JTextField txtNgaySinh = new JTextField();
-		txtNgaySinh.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		txtNgaySinh.setBounds(564, 87, 258, 30);
-		pnThongTinNhap.add(txtNgaySinh);
-		txtNgaySinh.setColumns(10);
+		tfNgaySinh = new JTextField();
+		tfNgaySinh.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		tfNgaySinh.setBounds(564, 80, 258, 30);
+		pnThongTinNhap.add(tfNgaySinh);
+		tfNgaySinh.setColumns(10);
 		
 		JLabel lblSDT = new JLabel("Số điện thoại:");
 		lblSDT.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblSDT.setBounds(428, 138, 119, 26);
+		lblSDT.setBounds(428, 135, 119, 26);
 		pnThongTinNhap.add(lblSDT);
 		
-		JTextField txtSDT = new JTextField();
-		txtSDT.setFont(new Font("Times New Roman",Font.PLAIN, 15));
-		txtSDT.setBounds(564, 141, 258, 30);
-		pnThongTinNhap.add(txtSDT);
-		txtSDT.setColumns(10);
-		
-		
-		
+		tfSDT = new JTextField();
+		tfSDT.setFont(new Font("Times New Roman",Font.PLAIN, 15));
+		tfSDT.setBounds(564, 132, 258, 30);
+		pnThongTinNhap.add(tfSDT);
+		tfSDT.setColumns(10);
+	
 		//Cac chuc nang them sua xoa
 		JButton btnThem = new JButton("Thêm");
 		btnThem.setIcon(new ImageIcon("icon\\new.png"));
-		ImageIcon add = null;
-		
-		
 		btnThem.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		btnThem.setBounds(911, 39, 138, 41);
 		pnThongTinDocGia.add(btnThem);
@@ -192,53 +225,97 @@ public class QLDocGiaGUI {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				
-				
-//				
-//				DocGiaDTO docGia = new DocGiaDTO(txtMaDocGia.getText(), txtHoTen.getText(), txtLoaiDocGia.getText(),
-//						txtLopChuyenMon.getText(), Date.valueOf(txtNgaySinh.getText()),txtSDT.getText());
-//	
-//				
-//				
-//				String result = QLDocGiaBLL.getInstance().insert(docGia);
-//				System.out.println(result);
-//				Object[] rowData = {((DefaultTableModel) tbDocGia.getModel()).getRowCount() + 1, txtMaDocGia.getText(), txtHoTen.getText(), txtLoaiDocGia.getText()};
-//				((DefaultTableModel) tbDocGia.getModel()).addRow(rowData);
-				//hiển thị kết quả thêm vào
-				
-				
-				
-				refreshResources();
+				if(tfNgaySinh.getText().equals("")) {
+					lblMessage.setText("Ngày sinh đang bị trống");
+					return;
+				}
+				DocGiaDTO dg = new DocGiaDTO(tfMaDocGia.getText(), tfHoTen.getText(), 
+						(LoaiDocGiaDTO) cbbLoaiDocGia.getSelectedItem(), tfLopChuyenMon.getText(), Date.valueOf(tfNgaySinh.getText()), tfSDT.getText(), tfEmail.getText());
+				String result = QLDocGiaBLL.getInstance().addProcessing(dg);
+				lblMessage.setText(result);
+				reloadResources();
 			}
 		});
 		
 		JButton btnHuy = new JButton("Hủy");
 		btnHuy.setIcon(new ImageIcon("icon\\del.png"));
 		btnHuy.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		btnHuy.setBounds(911, 150, 138, 41);
+		btnHuy.setBounds(911, 159, 138, 41);
+		btnHuy.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				clearField();
+			}
+		});
 		pnThongTinDocGia.add(btnHuy);
 		
 		JButton btnSua = new JButton("Sửa");
 		btnSua.setIcon(new ImageIcon("icon\\setting.png"));
 		btnSua.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		btnSua.setBounds(911, 94, 138, 41);
+		btnSua.setBounds(911, 101, 138, 41);
+		btnSua.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				DocGiaDTO dg = new DocGiaDTO(tfMaDocGia.getText(), tfHoTen.getText(), 
+						(LoaiDocGiaDTO) cbbLoaiDocGia.getSelectedItem(), tfLopChuyenMon.getText(), Date.valueOf(tfNgaySinh.getText()), tfSDT.getText(), tfEmail.getText());
+				String result = QLDocGiaBLL.getInstance().changeProcessing(dg);
+				lblMessage.setText(result);
+				reloadResources();
+			}
+		});
 		pnThongTinDocGia.add(btnSua);
 		
 		JButton btnXoa = new JButton("Xóa");
 		btnXoa.setIcon(new ImageIcon("icon\\delete.png"));
 		btnXoa.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		btnXoa.setBounds(911, 206, 138, 41);
+		btnXoa.setBounds(911, 223, 138, 41);
+		btnXoa.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				String msg = QLDocGiaBLL.getInstance().deleteProcessing(tfMaDocGia.getText());
+				lblMessage.setText(msg);
+				reloadResources();
+				clearField();
+			}
+		});
 		pnThongTinDocGia.add(btnXoa);
 		
 		//set tab key
-		txtHoTen.setNextFocusableComponent(txtMaDocGia);
-		txtMaDocGia.setNextFocusableComponent(cbbLoaiDocGia);
-		cbbLoaiDocGia.setNextFocusableComponent(txtLopChuyenMon);
-		txtLopChuyenMon.setNextFocusableComponent(txtNgaySinh);
-		txtNgaySinh.setNextFocusableComponent(txtSDT);
-		txtSDT.setNextFocusableComponent(btnThem);
+		tfHoTen.setNextFocusableComponent(tfMaDocGia);
+		tfMaDocGia.setNextFocusableComponent(cbbLoaiDocGia);
+		cbbLoaiDocGia.setNextFocusableComponent(tfLopChuyenMon);
+		tfLopChuyenMon.setNextFocusableComponent(tfNgaySinh);
+		tfNgaySinh.setNextFocusableComponent(tfSDT);
+		tfSDT.setNextFocusableComponent(btnThem);
 		btnThem.setNextFocusableComponent(btnHuy);
 		btnHuy.setNextFocusableComponent(btnXoa);
 		btnXoa.setNextFocusableComponent(btnSua);
-		btnSua.setNextFocusableComponent(txtHoTen);
+		btnSua.setNextFocusableComponent(tfHoTen);
+		
+		tfEmail = new JTextField();
+		tfEmail.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		tfEmail.setColumns(10);
+		tfEmail.setBounds(109, 185, 258, 30);
+		pnThongTinNhap.add(tfEmail);
+		
+		JLabel lblEmail = new JLabel("Email:");
+		lblEmail.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		lblEmail.setBounds(10, 182, 89, 26);
+		pnThongTinNhap.add(lblEmail);
+		
+		lblMessage = new JLabel();
+		lblMessage.setFont(new Font("Times New Roman", Font.ITALIC, 12));
+		lblMessage.setForeground(Color.red);
+		lblMessage.setBounds(109, 5, 713, 26);
+		pnThongTinNhap.add(lblMessage);
+		
+		JLabel label = new JLabel("(*) Không được bỏ trống");
+		label.setFont(new Font("Times New Roman", Font.ITALIC, 12));
+		label.setForeground(Color.red);
+		label.setBounds(429, 192, 393, 26);
+		pnThongTinNhap.add(label);
 	}
 }

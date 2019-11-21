@@ -20,23 +20,23 @@ public class QLNhanVienBLL {
 	private boolean checkData(NhanVienDTO nv) throws MyNullException {
 		if (nv.getMaTaiKhoan().equals(""))
 		{
-			throw new MyNullException("Mã tài khoản không được bỏ trống");
+			throw new MyNullException("Mã tài khoản đang bị trống");
 		}
 		if (nv.getTenTaiKhoan().equals(""))
 		{
-			throw new MyNullException("Tên tài khoản không được bỏ trống");
+			throw new MyNullException("Tên tài khoản đang bị trống");
 		}
 		if (nv.getTenNhanVien().equals(""))
 		{
-			throw new MyNullException("Tên nhân viên không được bỏ trống");
+			throw new MyNullException("Tên nhân viên đang bị trống");
 		}
 		if (nv.getMatKhau().equals(""))
 		{
-			throw new MyNullException("Mật khẩu không được bỏ trống");
+			throw new MyNullException("Mật khẩu đang bị trống");
 		}
 		if (nv.getLoaiTaiKhoan().equals(""))
 		{
-			throw new MyNullException("Loại tài khoản không được bỏ trống");
+			throw new MyNullException("Loại tài khoản đang bị trống");
 		}
 		return true;
 	}

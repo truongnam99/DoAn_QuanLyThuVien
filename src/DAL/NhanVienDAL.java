@@ -40,10 +40,8 @@ public class NhanVienDAL {
 	
 	public int changeProcessing(NhanVienDTO nv) {
 		int result;
-		
 		String query = "update taikhoan set TenTaiKhoan=\"" + nv.getTenTaiKhoan()+"\", LoaiTaiKhoan=\"" + nv.getLoaiTaiKhoan()+"\", Email=\""
 				+nv.getEmail()+"\",  MatKhau=\""+nv.getMatKhau()+"\", TenNhanVien=\"" +nv.getTenNhanVien()+"\" where MaTaiKhoan=\"" +nv.getMaTaiKhoan()+"\"";
-		System.out.println(query);
 		result = DAL.getInstance().executeQueryUpdate(query);
 		
 		if (result > 0)

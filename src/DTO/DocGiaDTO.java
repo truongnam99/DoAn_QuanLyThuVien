@@ -10,12 +10,12 @@ public class DocGiaDTO {
 	private String lopMon;
 	private Date ngaySinh;
 	private String sdt;
-	private String Email;
+	private String email;
 	
 	public DocGiaDTO() {
 		super();
 	}
-	public DocGiaDTO(String maDocGia, String tenDocGia, LoaiDocGiaDTO loaiDocGia, String lopMon, Date ngaySinh, String sdt) {
+	public DocGiaDTO(String maDocGia, String tenDocGia, LoaiDocGiaDTO loaiDocGia, String lopMon, Date ngaySinh, String sdt, String email) {
 		super();
 		this.maDocGia = maDocGia;
 		this.tenDocGia = tenDocGia;
@@ -23,7 +23,9 @@ public class DocGiaDTO {
 		this.lopMon = lopMon;
 		this.ngaySinh = ngaySinh;
 		this.sdt = sdt;
+		this.email = email;
 	}
+	
 	public String getMaDocGia() {
 		return maDocGia;
 	}
@@ -61,9 +63,9 @@ public class DocGiaDTO {
 		this.sdt = sdt;
 	}
 	public String getEmail() {
-		return Email;
+		return email;
 	}
 	public void setEmail(String email) {
-		Email = email;
+		this.email = email;
 	}
 }

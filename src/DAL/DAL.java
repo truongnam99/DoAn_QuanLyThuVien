@@ -15,8 +15,8 @@ public class DAL {
 	private Statement st;
 	private HashMap<String, String> values;
 	private DAL() {
-		try {
-			BufferedReader br = new BufferedReader(new FileReader("appconfig.txt"));
+		try (BufferedReader br = new BufferedReader(new FileReader("appconfig.txt"))){
+			
 			String line;
 
 			values = new HashMap<String, String>();
