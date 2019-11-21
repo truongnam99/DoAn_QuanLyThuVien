@@ -1,14 +1,19 @@
 package GUI;
 
+import java.awt.Font;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
 public class QuanTriHeThongGUI {
 
 	private JFrame frmMain;
-	private JPanel pnMain;
 	private static QuanTriHeThongGUI instance = null;
-	
 	private QuanTriHeThongGUI(){
 		init();
 	}
@@ -26,10 +31,32 @@ public class QuanTriHeThongGUI {
 	void init() {
 		frmMain = new JFrame("Quản lý thư viện");
 		frmMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//pnMain = QLNhanVienGUI.getInstance().getPnTongQuanQLNhanVien();
-		pnMain = QLDocGiaGUI.getInstance().getPnMain();
-		frmMain.setBounds(100, 100, 1065, 595);
-		frmMain.getContentPane().add(pnMain);
+		frmMain.setBounds(100, 100, 1065, 650);//595
+		frmMain.getContentPane().add(QLNhanVienGUI.getInstance().getPnTongQuanQLNhanVien());
+		frmMain.getContentPane().setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(0, 560, 1065, 50);
+		frmMain.getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		JButton btnThoat = new JButton("Thoát");
+		btnThoat.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		btnThoat.setIcon(new ImageIcon("icon//logout.png"));
+		btnThoat.setBounds(896, 5, 138, 41);
+		btnThoat.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frmMain.setVisible(false);
+				QLDangNhapGUI.getInstance().getFrame().setVisible(true);
+			}
+		});
+		panel.add(btnThoat);
+		panel.setBackground(SystemColor.activeCaption);
+		frmMain.repaint();
+		frmMain.invalidate();
+		//frmMain.setBounds(100, 595, 1065, 55);
 	}
 	
 }
