@@ -93,7 +93,7 @@ public class QLDocGiaBLL {
 			dtm.addColumn("Mã độc giả");
 			dtm.addColumn("Họ và tên");
 			dtm.addColumn("Loại độc giả");
-			dtm.addColumn("Lớp/Môn");
+			dtm.addColumn("Lớp/Chuyên môn");
 			dtm.addColumn("Ngày sinh");
 			dtm.addColumn("SDT");
 			dtm.addColumn("Email");
@@ -134,7 +134,7 @@ public class QLDocGiaBLL {
 			dtm.addColumn("Mã độc giả");
 			dtm.addColumn("Họ và tên");
 			dtm.addColumn("Loại độc giả");
-			dtm.addColumn("Lớp/Môn");
+			dtm.addColumn("Lớp/ Chuyên môn");
 			dtm.addColumn("Ngày sinh");
 			dtm.addColumn("SDT");
 			dtm.addColumn("Email");

@@ -65,20 +65,25 @@ public class QLTrangChuGUI {
 		pnLoGoTruong.add(lblLoGoTruong);
 		
 		JLabel lblTenTruong = new JLabel("TR\u01AF\u1EDCNG PT N\u0102NG KHI\u1EBEU -  \u0110HQG TP.HCM");
-		lblTenTruong.setBounds(240, 82, 522, 86);
+		lblTenTruong.setBounds(240, 82, 432, 86);
 		lblTenTruong.setForeground(Color.BLUE);
-		lblTenTruong.setFont(new Font("Times New Roman", Font.BOLD, 24));
+		lblTenTruong.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		pnLoGoTruong.add(lblTenTruong);
 		
 		JPanel pnLich = new JPanel();
-		pnLich.setBackground(SystemColor.activeCaption);
-		pnLich.setBounds(729, 230, 326, 330);
+		pnLich.setBackground(SystemColor.controlHighlight);
+		pnLich.setBounds(729, 46, 326, 514);
 		pnLoGoTruong.add(pnLich);
 		pnLich.setLayout(null);
 		
 		JCalendar calendar = new JCalendar();
-		calendar.setBounds(0, 0, 326, 330);
+		calendar.setBounds(0, 25, 326, 359);
 		pnLich.add(calendar);
+		
+		JLabel lblNewLabel = new JLabel("Lịch năm");
+		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		lblNewLabel.setBounds(10, 0, 316, 25);
+		pnLich.add(lblNewLabel);
 		
 		
 		

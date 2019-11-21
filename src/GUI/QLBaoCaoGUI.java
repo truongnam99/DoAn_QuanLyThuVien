@@ -22,7 +22,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.SwingConstants;
-import DTO.BaoCaoDTO;
+import DTO.BaoCaoMuonDTO;
 
 public class QLBaoCaoGUI {
 
@@ -108,7 +108,7 @@ public class QLBaoCaoGUI {
 		JButton btnThongKe = new JButton("Th\u1ED1ng k\u00EA");
 		btnThongKe.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		btnThongKe.setIcon(new ImageIcon("icon\\edit.png"));
-		btnThongKe.setBounds(584, 40, 150, 41);
+		btnThongKe.setBounds(584, 40, 157, 41);
 		panelTieuDeQLTK.add(btnThongKe);
 		
 		JButton btnLapBaoCao = new JButton("L\u1EADp b\u00E1o c\u00E1o");
