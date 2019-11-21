@@ -303,7 +303,7 @@ public class QLDocGiaGUI {
 		
 		JLabel lblEmail = new JLabel("Email:");
 		lblEmail.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblEmail.setBounds(10, 182, 89, 26);
+		lblEmail.setBounds(10, 188, 81, 26);
 		pnThongTinNhap.add(lblEmail);
 		
 		lblMessage = new JLabel();
@@ -315,7 +315,7 @@ public class QLDocGiaGUI {
 		JLabel label = new JLabel("(*) Không được bỏ trống");
 		label.setFont(new Font("Times New Roman", Font.ITALIC, 12));
 		label.setForeground(Color.red);
-		label.setBounds(429, 192, 393, 26);
+		label.setBounds(429, 188, 393, 26);
 		pnThongTinNhap.add(label);
 	}
 }

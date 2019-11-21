@@ -63,7 +63,7 @@ public class TrangChuGUI {
 		
 		JLabel lblQuyenSach = new JLabel("QUY\u1EC2N S\u00C1CH");
 		lblQuyenSach.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblQuyenSach.setIcon(new ImageIcon("D:\\OOAD\\icon\\quyensach.png"));
+		lblQuyenSach.setIcon(new ImageIcon("icon\\quyensach.png"));
 		lblQuyenSach.setBounds(111, 40, 143, 39);
 		pnTitle.add(lblQuyenSach);
 		
@@ -98,20 +98,25 @@ public class TrangChuGUI {
 		pnMain.add(lblLoGoTruong);
 		
 		JLabel lblTenTruong = new JLabel("TR\u01AF\u1EDCNG PT N\u0102NG KHI\u1EBEU -  \u0110HQG TP.HCM");
-		lblTenTruong.setBounds(240, 82, 522, 86);
+		lblTenTruong.setBounds(240, 82, 439, 86);
 		lblTenTruong.setForeground(Color.BLUE);
-		lblTenTruong.setFont(new Font("Times New Roman", Font.BOLD, 24));
+		lblTenTruong.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		pnMain.add(lblTenTruong);
 		
 		JPanel pnLich = new JPanel();
-		pnLich.setBackground(SystemColor.activeCaption);
-		pnLich.setBounds(729, 230, 326, 330);
+		pnLich.setBackground(SystemColor.controlHighlight);
+		pnLich.setBounds(729, 46, 326, 514);
 		pnMain.add(pnLich);
 		pnLich.setLayout(null);
 		
 		JCalendar calendar = new JCalendar();
-		calendar.setBounds(0, 0, 326, 330);
+		calendar.setBounds(0, 25, 326, 359);
 		pnLich.add(calendar);
+		
+		JLabel lblNewLabel = new JLabel("Lịch năm:");
+		lblNewLabel.setBounds(10, 0, 316, 25);
+		pnLich.add(lblNewLabel);
+		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		
 		
 		pnMenu = new JPanel();
@@ -245,14 +250,21 @@ public class TrangChuGUI {
 				pnMain.repaint();
 			}
 		});
+		JMenu mnThongKe=new JMenu("BÁO CÁO");
+		mnThongKe.setHorizontalAlignment(SwingConstants.LEFT);
+		mnThongKe.setIcon(new ImageIcon("icon\\chart2.png"));
+		mnThongKe.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		mnThongKe.setBackground(SystemColor.textHighlight);
+		mnThongKe.setForeground(SystemColor.menuText);
+		mbMenu.add(mnThongKe);
 		
-		JMenuItem mnBaoCao = new JMenuItem("BÁO CÁO");
+		JMenuItem mnBaoCao = new JMenuItem("BÁO CÁO SÁCH MƯỢN");
 		mnBaoCao.setHorizontalAlignment(SwingConstants.LEFT);
 		mnBaoCao.setIcon(new ImageIcon("icon\\chart.png"));
 		mnBaoCao.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		mnBaoCao.setBackground(SystemColor.textHighlight);
+		mnBaoCao.setBackground(SystemColor.inactiveCaptionBorder);
 		mnBaoCao.setForeground(SystemColor.menuText);
-		mbMenu.add(mnBaoCao);
+		mnThongKe.add(mnBaoCao);
 		mnBaoCao.addActionListener(new ActionListener() {
 			
 			@Override
@@ -261,6 +273,26 @@ public class TrangChuGUI {
 				pnMain.removeAll();
 				QLBaoCaoGUI qlBaoCao = QLBaoCaoGUI.getInstance();
 				pnMain.add(qlBaoCao.getPnTongQuanQLTK());
+				pnMain.revalidate();
+				pnMain.repaint();
+			}
+		});
+		
+		JMenuItem mnBaoCaoTraTre=new JMenuItem("BÁO CÁO TRẢ TRỄ");
+		mnBaoCaoTraTre.setHorizontalAlignment(SwingConstants.LEFT);
+		mnBaoCaoTraTre.setIcon(new ImageIcon("icon\\chart.png"));
+		mnBaoCaoTraTre.setFont(new Font("Times New Roman", Font.BOLD,14));
+		mnBaoCaoTraTre.setBackground(SystemColor.inactiveCaptionBorder);
+		mnBaoCaoTraTre.setForeground(SystemColor.menuText);
+		mnThongKe.add(mnBaoCaoTraTre);
+		mnBaoCaoTraTre.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				pnMain.removeAll();
+				QLBaoCaoTraTreGUI qlBaoCaoTre=QLBaoCaoTraTreGUI.getInstance();
+				pnMain.add(qlBaoCaoTre.getPnTongQuanTKSach());
 				pnMain.revalidate();
 				pnMain.repaint();
 			}
@@ -325,6 +357,8 @@ public class TrangChuGUI {
 				pnMain.repaint();
 			}
 		});
+		
+		
 		
 	}
 }
