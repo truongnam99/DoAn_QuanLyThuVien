@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: qltv
+-- Host: localhost    Database: qltv
 -- ------------------------------------------------------
 -- Server version	8.0.18
 
@@ -39,7 +39,7 @@ CREATE TABLE `taikhoan` (
 
 LOCK TABLES `taikhoan` WRITE;
 /*!40000 ALTER TABLE `taikhoan` DISABLE KEYS */;
-INSERT INTO `taikhoan` VALUES ('TK01','Trương Hoàng Nam','truongnam','Trương Hoàng Nam','Quản trị hệ thống','truongnam@gmail.com'),('TK03','truongnam','truongnam','truongnam','Quản trị hệ thống','truongnam@gmail.com');
+INSERT INTO `taikhoan` VALUES ('TK01','hoangnam','hoangnam','Hoang Nam','Thủ thư',''),('TK02','truongnam','truongnam','Truong Nam','Quản trị hệ thống','');
 /*!40000 ALTER TABLE `taikhoan` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-21 14:25:53
+-- Dump completed on 2019-11-21 20:30:23

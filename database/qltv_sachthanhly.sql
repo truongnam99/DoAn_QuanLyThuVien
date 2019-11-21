@@ -16,27 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `theloai`
+-- Table structure for table `sachthanhly`
 --
 
-DROP TABLE IF EXISTS `theloai`;
+DROP TABLE IF EXISTS `sachthanhly`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `theloai` (
-  `MaTheLoai` varchar(8) NOT NULL,
-  `TenTheLoai` varchar(45) NOT NULL,
-  PRIMARY KEY (`MaTheLoai`)
+CREATE TABLE `sachthanhly` (
+  `MaSach` varchar(8) NOT NULL,
+  `TenSach` varchar(300) NOT NULL,
+  `Thể loại` varchar(100) NOT NULL,
+  `TacGia` varchar(100) NOT NULL,
+  `NhaXuatBan` varchar(45) NOT NULL,
+  `LyDo` varchar(500) NOT NULL,
+  `ThoiGianLuuKho` date NOT NULL,
+  `NgayThanhLy` varchar(45) NOT NULL,
+  PRIMARY KEY (`MaSach`),
+  CONSTRAINT `fk_sachthanhly_sach_masach` FOREIGN KEY (`MaSach`) REFERENCES `sach` (`MaSach`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `theloai`
+-- Dumping data for table `sachthanhly`
 --
 
-LOCK TABLES `theloai` WRITE;
-/*!40000 ALTER TABLE `theloai` DISABLE KEYS */;
-INSERT INTO `theloai` VALUES ('TL000001','Toán'),('TL000002','Sinh'),('TL000003','Lý'),('TL000004','Hóa'),('TL000005','Anh'),('TL000006','Sử'),('TL000007','Văn');
-/*!40000 ALTER TABLE `theloai` ENABLE KEYS */;
+LOCK TABLES `sachthanhly` WRITE;
+/*!40000 ALTER TABLE `sachthanhly` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sachthanhly` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -48,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-21 20:30:22
+-- Dump completed on 2019-11-21 20:30:23
