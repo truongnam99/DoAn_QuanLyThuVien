@@ -103,7 +103,7 @@ public class QLNhanVienBLL {
 	
 	public DefaultTableModel getResources() {
 		ArrayList<NhanVienDTO> dsNhanVien = new ArrayList<NhanVienDTO>();
-		dsNhanVien = NhanVienDAL.getInstance().getResources();
+		dsNhanVien = NhanVienDAL.getInstance().reloadResource();
 		DefaultTableModel dtm = new DefaultTableModel();
 		try {
 			dtm.addColumn("STT");
