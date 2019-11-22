@@ -1,0 +1,8 @@
+bin/
+appconfig.txt
+.settings/
+.classpath
+.project
+jcalendar-1.4.jar
+mysql-connector.jar
+qltv.sql
