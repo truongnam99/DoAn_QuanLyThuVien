@@ -12,6 +12,27 @@ public class NhanVienDAL {
 	
 	private NhanVienDAL() {
 		dsNhanVien=new ArrayList<NhanVienDTO>();
+		try {
+			String query=new String("select * from taikhoan");
+			ResultSet resultSet=DAL.getInstance().executeQueryToGetData(query);
+			while(resultSet.next()) {
+				String email;
+				if (resultSet.getObject(6) == null)
+					email = "";
+				else
+					email = resultSet.getObject(6).toString();
+				dsNhanVien.add(new NhanVienDTO(
+						resultSet.getObject(1).toString(),
+						resultSet.getObject(2).toString(),
+						resultSet.getObject(3).toString(),
+						resultSet.getObject(4).toString(),
+						resultSet.getObject(5).toString(),
+						email));
+			}
+		}
+		catch(Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 	
 	public static NhanVienDAL getInstance() {
@@ -57,27 +78,6 @@ public class NhanVienDAL {
 	}
 	
 	public ArrayList<NhanVienDTO> getResources(){
-		try {
-			String query=new String("select * from taikhoan");
-			ResultSet resultSet=DAL.getInstance().executeQueryToGetData(query);
-			while(resultSet.next()) {
-				String email;
-				if (resultSet.getObject(6) == null)
-					email = "";
-				else
-					email = resultSet.getObject(6).toString();
-				dsNhanVien.add(new NhanVienDTO(
-						resultSet.getObject(1).toString(),
-						resultSet.getObject(2).toString(),
-						resultSet.getObject(3).toString(),
-						resultSet.getObject(4).toString(),
-						resultSet.getObject(5).toString(),
-						email));
-			}
-		}
-		catch(Exception ex) {
-			ex.printStackTrace();
-		}
 		return dsNhanVien;
 	}
 	

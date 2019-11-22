@@ -219,7 +219,7 @@ public class QLNhanVienGUI {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				NhanVienDTO nv = new NhanVienDTO(tfMaTaiKhoan.getText(), tfTenNhanVien.getText(), tfMatKhau.getText(), 
+				NhanVienDTO nv = new NhanVienDTO(tfMaTaiKhoan.getText(), tfTenTaiKhoan.getText(), tfMatKhau.getText(), 
 						tfTenNhanVien.getText(), cbbLoaiTaiKhoan.getSelectedItem().toString(), tfEmail.getText());
 				String result = QLNhanVienBLL.getInstance().addProcessing(nv);
 				lblMessage.setText(result);

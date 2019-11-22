@@ -188,8 +188,8 @@ public class QLChaoMung {
 		JButton btnDangXuat = new JButton("Đăng xuất");
 		btnDangXuat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TrangChuGUI.getInstance().getFrmTrangChu().hide();
-				
+				TrangChuGUI.getInstance().getFrmTrangChu().setVisible(false);
+				QLDangNhapGUI.getInstance().getFrame().setVisible(true);
 			}
 		});
 		btnDangXuat.setIcon(new ImageIcon("icon\\logout.png"));
