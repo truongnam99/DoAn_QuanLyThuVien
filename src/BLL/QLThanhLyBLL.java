@@ -146,7 +146,7 @@ public class QLThanhLyBLL {
 	}
 	 public DefaultTableModel getResources() {
 		 ArrayList<ThanhLyDTO> dsThanhLy=new ArrayList<ThanhLyDTO>();
-			dsThanhLy=ThanhLyDAL.getInstance().reloadResources();
+			dsThanhLy=ThanhLyDAL.getInstance().getResources();
 			DefaultTableModel dtm=new DefaultTableModel();
 			try {
 				dtm.addColumn("STT");

@@ -68,7 +68,7 @@ public class ThanhLyDAL {
 	
 	public ArrayList<ThanhLyDTO> getResources(){
 		try {
-			String query=new String("selet * from sachthanhly");
+			String query=new String("select * from sachthanhly");
 			ResultSet resultSet=DAL.getInstance().executeQueryToGetData(query);
 			while(resultSet.next()) {
 				dsThanhLy.add(new ThanhLyDTO(resultSet.getObject(1).toString(),
