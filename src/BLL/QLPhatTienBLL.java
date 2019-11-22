@@ -38,10 +38,7 @@ public class QLPhatTienBLL {
 		{
 			throw new MyNullException("Ngày phạt không được bỏ trống");
 		}
-		if(pt.getLyDo().equals(""))
-		{
-			throw new MyNullException("Lý do không được bỏ trống");
-		}
+		
 		return true;
 	}
 	

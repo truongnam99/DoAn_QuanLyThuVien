@@ -194,11 +194,11 @@ public class QLPhatTienGUI {
 		lblMessage.setBounds(116, 3, 683, 22);
 		pnThongTinNhap.add(lblMessage);
 		
-		JLabel lblNewLabel = new JLabel("(*) Không được bỏ trống");
-		lblNewLabel.setForeground(Color.RED);
-		lblNewLabel.setFont(new Font("Times New Roman", Font.ITALIC, 12));
-		lblNewLabel.setBounds(457, 161, 144, 14);
-		pnThongTinNhap.add(lblNewLabel);
+		JLabel lblKhongBoTrong = new JLabel("(*) Không được bỏ trống");
+		lblKhongBoTrong.setForeground(Color.RED);
+		lblKhongBoTrong.setFont(new Font("Times New Roman", Font.ITALIC, 12));
+		lblKhongBoTrong.setBounds(457, 161, 144, 14);
+		pnThongTinNhap.add(lblKhongBoTrong);
 		
 		JButton btnThem = new JButton("Th\u00EAm");
 		btnThem.setBounds(897, 37, 138, 41);
