@@ -64,7 +64,7 @@ public class QLBaoCaoTraTreGUI {
 		pnTieuDeTK.add(lblNgay);
 		
 		txtfNgay = new JTextField();
-		txtfNgay.setBounds(127, 49, 68, 26);
+		txtfNgay.setBounds(127, 49, 68, 25);
 		pnTieuDeTK.add(txtfNgay);
 		txtfNgay.setColumns(10);
 		
@@ -74,7 +74,7 @@ public class QLBaoCaoTraTreGUI {
 		pnTieuDeTK.add(lblMaBaoCao);
 		
 		txtfMaBaoCao = new JTextField();
-		txtfMaBaoCao.setBounds(400, 49, 86, 26);
+		txtfMaBaoCao.setBounds(400, 49, 101, 25);
 		pnTieuDeTK.add(txtfMaBaoCao);
 		txtfMaBaoCao.setColumns(10);
 		
