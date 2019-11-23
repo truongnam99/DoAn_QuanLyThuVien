@@ -32,6 +32,7 @@ public class QuanTriHeThongGUI {
 		frmMain = new JFrame("Quản lý thư viện");
 		frmMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmMain.setBounds(100, 100, 1065, 650);//595
+		//frmMain.getContentPane().add(QLNhanVienGUI.getInstance().getPnTongQuanQLNhanVien());
 		frmMain.getContentPane().add(QLNhanVienGUI.getInstance().getPnTongQuanQLNhanVien());
 		frmMain.getContentPane().setLayout(null);
 		
@@ -56,7 +57,6 @@ public class QuanTriHeThongGUI {
 		panel.setBackground(SystemColor.activeCaption);
 		frmMain.repaint();
 		frmMain.invalidate();
-		//frmMain.setBounds(100, 595, 1065, 55);
 	}
 	
 }

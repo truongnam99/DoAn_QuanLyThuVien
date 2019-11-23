@@ -6,9 +6,12 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.sql.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -20,6 +23,9 @@ import javax.swing.table.DefaultTableModel;
 
 import BLL.QLDocGiaBLL;
 import BLL.QLMuonTraBLL;
+import CustomControl.ButtonEditor;
+import CustomControl.ButtonRenderer;
+import DTO.MuonTraDTO;
 
 public class QLMuonTraGUI {
 
@@ -34,6 +40,8 @@ public class QLMuonTraGUI {
 	
 	private void loadResources() {
 		tbMuonTra.setModel(QLMuonTraBLL.getInstance().getResources());
+		tbMuonTra.getColumn("TRẢ SÁCH").setCellRenderer(new ButtonRenderer());
+		tbMuonTra.getColumn("TRẢ SÁCH").setCellEditor(new  ButtonEditor(new JCheckBox()));
 	}
 	
 	private void refreshDataTable() {
@@ -113,6 +121,21 @@ public class QLMuonTraGUI {
 		tbMuonTra.setBounds(0, 0, 1060, 230);
 		JScrollPane sc = new JScrollPane(tbMuonTra, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		sc.setBounds(0, 44, 1065, 212);
+		tbMuonTra.addMouseListener(new MouseAdapter() {
+			@Override
+		    public void mouseClicked(java.awt.event.MouseEvent evt) {
+		        int row = tbMuonTra.rowAtPoint(evt.getPoint());
+		        int col = tbMuonTra.columnAtPoint(evt.getPoint());
+		        if (row >= 0 && col >= 0) {
+		        	if (col == 7) {
+		        		MuonTraDTO item  = new MuonTraDTO();
+		        		//item.setMaDocGia(tbMuonTra.getValueAt(row, 2).toString());
+		        		//item.setMaSach(tbMuonTra.getValueAt(row, 3).toString());
+		        		item.setNgayMuon(Date.valueOf(tbMuonTra.getValueAt(row, 4).toString()));
+		        	}
+		        }
+		    }
+		});
 		pnDanhSachMuon.add(sc,BorderLayout.CENTER);
 		
 		JLabel lblThongTinMuonTra = new JLabel("THÔNG TIN MƯỢN TRẢ");
@@ -125,6 +148,13 @@ public class QLMuonTraGUI {
 		btnThem.setIcon(new ImageIcon("icon\\new.png"));
 		btnThem.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		btnThem.setBounds(910,39,138,41);
+		btnThem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		pnThongTinMuonTra.add(btnThem);
 		
 		JButton btnSua = new JButton();
@@ -242,8 +272,5 @@ public class QLMuonTraGUI {
 		btnHuy.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		btnHuy.setBounds(910, 150, 138, 41);
 		pnThongTinMuonTra.add(btnHuy);
-		
-		
-		
 	}
 }
