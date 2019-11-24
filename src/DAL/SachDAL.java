@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import DTO.*;
 import MyException.ContainException;
+import MyException.MyException;
 
 public class SachDAL {
 	
@@ -21,6 +22,18 @@ public class SachDAL {
 		return instance;
 	}
 	
+	public boolean isTrong(String maSach) throws MyException{
+		for (SachDTO s: dsSach) {
+			if (s.getMaSach().equals(maSach))
+				if (s.getTrangThai().equals("Trống"))
+					return true;
+				else 
+					return false;
+		}
+		
+		throw new MyException("Mã sách không hợp lệ");
+	}
+	
 	private void loadResources() {
 		try {
 			String query = new String("select * from sach");
@@ -29,8 +42,8 @@ public class SachDAL {
 			while(resultSet.next()) {
 				dsSach.add(new SachDTO(
 						resultSet.getObject(1).toString(), 
-						resultSet.getObject(3).toString(), 
 						resultSet.getObject(2).toString(), 
+						resultSet.getObject(3).toString(), 
 						resultSet.getObject(4).toString(),
 						resultSet.getObject(5).toString(),
 						Date.valueOf(resultSet.getObject(6).toString()),
@@ -68,6 +81,19 @@ public class SachDAL {
 		if (result>0)
 			dsSach.add(s);
 		return result;
+	}
+	
+	public void changeTrangThai(String maSach, String trangThai) throws MyException{
+		String query = "update sach set TrangThai = \""+trangThai+"\" where MaSach=\""+maSach+"\"";
+		int result = DAL.getInstance().executeQueryUpdate(query);
+		if (result == 0)
+			throw new MyException("Cập nhật trạng thái sách không thành công!");
+		for (SachDTO s: dsSach) {
+			if (maSach.equals(maSach)) {
+				s.setTrangThai(trangThai);
+				return;
+			}
+		}
 	}
 	
 	public SachDTO getSach(String maSach) {
@@ -110,7 +136,7 @@ public class SachDAL {
 		+ "\", TrangThai=\"" + s.getTrangThai() 
 		+ "\", NamXuatBan=\"" + s.getNamXuatBan() 
 		+ "\" where MaSach=\"" + s.getMaSach()+"\"";
-		System.out.println("Query = "+ query);
+		//System.out.println("Query = "+ query);
 		result = DAL.getInstance().executeQueryUpdate(query);
 		
 		if (result > 0)

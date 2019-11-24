@@ -185,6 +185,7 @@ public class TrangChuGUI {
 				// TODO Auto-generated method stub
 				pnMain.removeAll();
 				QLSachGUI qlSach=QLSachGUI.getInstance();
+				qlSach.reloadResources();
 				pnMain.add(qlSach.getPnTongQuanQLSach());
 				pnMain.revalidate();
 				pnMain.repaint();
@@ -204,6 +205,7 @@ public class TrangChuGUI {
 			public void actionPerformed(ActionEvent e) {
 				pnMain.removeAll();
 				QLDocGiaGUI qlDocGia = QLDocGiaGUI.getInstance();
+				qlDocGia.reloadResources();
 				pnMain.add(qlDocGia.getPnMain());
 				pnMain.revalidate();
 				pnMain.repaint();

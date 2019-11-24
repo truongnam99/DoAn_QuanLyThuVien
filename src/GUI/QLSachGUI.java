@@ -66,7 +66,7 @@ public class QLSachGUI {
 		return pnTongQuanQLSach;
 	}
 	
-	private void reloadResources() {
+	public void reloadResources() {
 		tbQLSach.setModel(QLSachBLL.getInstance().getResources());
 	}
 	

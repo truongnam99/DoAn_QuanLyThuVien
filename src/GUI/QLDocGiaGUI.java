@@ -58,7 +58,7 @@ public class QLDocGiaGUI {
 		return pnMain;
 	}
 			
-	private void reloadResources() {
+	public void reloadResources() {
 		DefaultTableModel dm = (DefaultTableModel) tbDocGia.getModel();
 		dm.getDataVector().removeAllElements();
 		dm.fireTableDataChanged();

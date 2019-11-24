@@ -4,8 +4,8 @@ import java.sql.Date;
 
 public class MuonTraDTO {
 	
-	private DocGiaDTO docGia;
-	private SachDTO sach;
+	private String maDocGia;
+	private String maSach;
 	private Date ngayMuon;
 	private Date ngayTra;
 	private String TrangThai;
@@ -13,42 +13,60 @@ public class MuonTraDTO {
 	public MuonTraDTO() {
 		super();
 	}
-	public MuonTraDTO(DocGiaDTO docGia,  SachDTO sach, Date ngayMuon,Date ngayTra,String TrangThai) {
+
+	public MuonTraDTO(String maDocGia, String maSach, Date ngayMuon, Date ngayTra, String trangThai) {
 		super();
-		
-		this.docGia = docGia;
-		this.sach=sach;
+		this.maDocGia = maDocGia;
+		this.maSach = maSach;
 		this.ngayMuon = ngayMuon;
-		this.ngayTra=ngayTra;
-		this.TrangThai=TrangThai;
+		this.ngayTra = ngayTra;
+		TrangThai = trangThai;
 	}
-	public DocGiaDTO getDocGia() {
-		return docGia;
+
+	public MuonTraDTO(String maDocGia, String maSach, Date ngayMuon, Date ngayTra) {
+		super();
+		this.maDocGia = maDocGia;
+		this.maSach = maSach;
+		this.ngayMuon = ngayMuon;
+		this.ngayTra = ngayTra;
 	}
-	public void setDocGia(DocGiaDTO docGia) {
-		this.docGia = docGia;
+	
+	public String getMaDocGia() {
+		return maDocGia;
 	}
-	public SachDTO getSach() {
-		return sach;
+
+	public void setMaDocGia(String maDocGia) {
+		this.maDocGia = maDocGia;
 	}
-	public void setSach(SachDTO sach) {
-		this.sach = sach;
+
+	public String getMaSach() {
+		return maSach;
 	}
+
+	public void setMaSach(String maSach) {
+		this.maSach = maSach;
+	}
+
 	public Date getNgayMuon() {
 		return ngayMuon;
 	}
+
 	public void setNgayMuon(Date ngayMuon) {
 		this.ngayMuon = ngayMuon;
 	}
+
 	public Date getNgayTra() {
 		return ngayTra;
 	}
+
 	public void setNgayTra(Date ngayTra) {
 		this.ngayTra = ngayTra;
 	}
+
 	public String getTrangThai() {
 		return TrangThai;
 	}
+
 	public void setTrangThai(String trangThai) {
 		TrangThai = trangThai;
 	}

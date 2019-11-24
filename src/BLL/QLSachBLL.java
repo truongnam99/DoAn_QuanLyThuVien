@@ -7,6 +7,7 @@ import DAL.DocGiaDAL;
 import DAL.SachDAL;
 import DTO.*;
 import MyException.ContainException;
+import MyException.MyException;
 import MyException.MyNullException;
 public class QLSachBLL {
 public static QLSachBLL instance;
@@ -29,6 +30,10 @@ public static QLSachBLL instance;
 			throw new MyNullException("Lớp/Môn đang bị bỏ trống");
 		
 		return true;
+	}
+	
+	public boolean isTrong(String maSach) throws MyException{
+		return SachDAL.getInstance().isTrong(maSach);
 	}
 	
 	public String addProcessing(SachDTO s) {
