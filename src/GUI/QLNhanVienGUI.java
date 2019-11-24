@@ -204,12 +204,12 @@ public class QLNhanVienGUI {
 		tfEmail.setBounds(523, 150, 258, 31);
 		pnThongTinNhap.add(tfEmail);
 		
-		JLabel label = new JLabel();
-		label.setForeground(Color.RED);
-		label.setFont(new Font("Times New Roman", Font.ITALIC, 12));
-		label.setBounds(127, 187, 654, 21);
-		label.setText("(*) Không được bỏ trống");
-		pnThongTinNhap.add(label);
+		JLabel lblKhongBoTrong = new JLabel();
+		lblKhongBoTrong.setForeground(Color.RED);
+		lblKhongBoTrong.setFont(new Font("Times New Roman", Font.ITALIC, 12));
+		lblKhongBoTrong.setBounds(127, 187, 654, 21);
+		lblKhongBoTrong.setText("(*) Không được bỏ trống");
+		pnThongTinNhap.add(lblKhongBoTrong);
 		
 		JButton btnThem = new JButton("Thêm");
 		btnThem.setIcon(new ImageIcon("icon\\new.png"));

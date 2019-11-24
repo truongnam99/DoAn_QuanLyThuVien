@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `sachthanhly`;
 CREATE TABLE `sachthanhly` (
   `MaSach` varchar(8) NOT NULL,
   `TenSach` varchar(300) NOT NULL,
-  `Thể loại` varchar(100) NOT NULL,
+  `TheLoai` varchar(100) NOT NULL,
   `TacGia` varchar(100) NOT NULL,
   `NhaXuatBan` varchar(45) NOT NULL,
   `LyDo` varchar(500) NOT NULL,

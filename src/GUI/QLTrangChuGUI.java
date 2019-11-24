@@ -59,20 +59,20 @@ public class QLTrangChuGUI {
 		pnTongQuanQLTrangChu.add(pnLoGoTruong);
 		pnLoGoTruong.setLayout(null);
 		
-		JLabel lblLoGoTruong = new JLabel("New label");
+		JLabel lblLoGoTruong = new JLabel("");
 		lblLoGoTruong.setBounds(12, 11, 217, 224);
 		lblLoGoTruong.setIcon(new ImageIcon("icon\\PTNKLogo.png"));
 		pnLoGoTruong.add(lblLoGoTruong);
 		
 		JLabel lblTenTruong = new JLabel("TR\u01AF\u1EDCNG PT N\u0102NG KHI\u1EBEU -  \u0110HQG TP.HCM");
-		lblTenTruong.setBounds(240, 82, 432, 86);
+		lblTenTruong.setBounds(253, 39, 769, 86);
 		lblTenTruong.setForeground(Color.BLUE);
-		lblTenTruong.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		lblTenTruong.setFont(new Font("Times New Roman", Font.BOLD, 30));
 		pnLoGoTruong.add(lblTenTruong);
 		
 		JPanel pnLich = new JPanel();
 		pnLich.setBackground(SystemColor.controlHighlight);
-		pnLich.setBounds(729, 46, 326, 514);
+		pnLich.setBounds(729, 145, 326, 404);
 		pnLoGoTruong.add(pnLich);
 		pnLich.setLayout(null);
 		
@@ -84,6 +84,11 @@ public class QLTrangChuGUI {
 		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		lblNewLabel.setBounds(10, 0, 316, 25);
 		pnLich.add(lblNewLabel);
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon("icon\\PTNK_overview.jpg"));
+		label.setBounds(12, 145, 707, 404);
+		pnLoGoTruong.add(label);
 		
 		
 		

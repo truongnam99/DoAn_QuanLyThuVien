@@ -101,7 +101,7 @@ public class QLBaoCaoGUI {
 		panelTieuDeQLTK.add(lblMaBaoCao);
 		
 		txtfMaBaoCao = new JTextField();
-		txtfMaBaoCao.setBounds(378, 50, 101, 25);
+		txtfMaBaoCao.setBounds(378, 49, 101, 25);
 		panelTieuDeQLTK.add(txtfMaBaoCao);
 		txtfMaBaoCao.setColumns(10);
 		
