@@ -10,17 +10,23 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+
+import BLL.BaoCaoBLL;
+
 import javax.swing.SwingConstants;
 import DTO.BaoCaoMuonDTO;
 
@@ -69,10 +75,10 @@ public class QLBaoCaoGUI {
 		pnTongQuanQLTK.add(panelTieuDeQLTK);
 		panelTieuDeQLTK.setLayout(null);
 		
-		JLabel lblTieuDe = new JLabel("QU\u1EA2N L\u00DD TH\u1ED0NG K\u00CA M\u01AF\u1EE2N S\u00C1CH THEO TH\u1EC2 LO\u1EA0I");
+		JLabel lblTieuDe = new JLabel("THỐNG KÊ MƯỢN SÁCH THEO THỂ LOẠI TỪNG THÁNG");
 		lblTieuDe.setForeground(Color.RED);
 		lblTieuDe.setFont(new Font("Times New Roman", Font.BOLD, 24));
-		lblTieuDe.setBounds(254, 5, 604, 28);
+		lblTieuDe.setBounds(158, 11, 748, 28);
 		panelTieuDeQLTK.add(lblTieuDe);
 		
 		JLabel lblThang = new JLabel("Th\u00E1ng:");
@@ -82,6 +88,10 @@ public class QLBaoCaoGUI {
 		
 		txtfThang = new JTextField();
 		txtfThang.setBounds(137, 49, 30, 25);
+		SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy");  
+		SimpleDateFormat monthFormat = new SimpleDateFormat("MM");
+		java.util.Date date = new java.util.Date();
+		txtfThang.setText(monthFormat.format(date));
 		panelTieuDeQLTK.add(txtfThang);
 		txtfThang.setColumns(10);
 		
@@ -91,8 +101,9 @@ public class QLBaoCaoGUI {
 		panelTieuDeQLTK.add(lblDauXet);
 		
 		txtfNam = new JTextField();
-		txtfNam.setBounds(185, 49, 30, 25);
+		txtfNam.setBounds(185, 49, 46, 25);
 		panelTieuDeQLTK.add(txtfNam);
+		txtfNam.setText(yearFormat.format(date));
 		txtfNam.setColumns(10);
 		
 		JLabel lblMaBaoCao = new JLabel("M\u00E3 b\u00E1o c\u00E1o:");
@@ -108,6 +119,14 @@ public class QLBaoCaoGUI {
 		JButton btnThongKe = new JButton("Th\u1ED1ng k\u00EA");
 		btnThongKe.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		btnThongKe.setIcon(new ImageIcon("icon\\edit.png"));
+		btnThongKe.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				DefaultTableModel dtm = BaoCaoBLL.getInstance().thongKe(Integer.parseInt(txtfThang.getText()) - 1, Integer.parseInt(txtfNam.getText()));
+				tbQLThongKe.setModel(dtm);
+			}
+		});
 		btnThongKe.setBounds(584, 40, 157, 41);
 		panelTieuDeQLTK.add(btnThongKe);
 		
@@ -116,6 +135,13 @@ public class QLBaoCaoGUI {
 		btnLapBaoCao.setIcon(new ImageIcon("icon\\print.png"));
 		btnLapBaoCao.setBounds(824, 40, 157, 41);
 		panelTieuDeQLTK.add(btnLapBaoCao);
+		btnLapBaoCao.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				BaoCaoBLL.getInstance().lapBaoCao();
+			}
+		});
 		
 		JPanel pnQLThongKe = new JPanel();
 		pnQLThongKe.setBounds(0, 89, 1065, 471);
@@ -125,15 +151,14 @@ public class QLBaoCaoGUI {
 		tbQLThongKe.setBounds(0, 0, 624, 352);
 		JScrollPane sc = new JScrollPane(tbQLThongKe, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		pnQLThongKe.add(sc);
-		tbQLThongKe.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null},
-				{null, null, null, null},
-			},
-			new String[] {
-				"Mã thể loại", "Tên thể loại", "Số lượt mượn", "Tỉ lệ"
-			}
-		));
+//		tbQLThongKe.setModel(new DefaultTableModel(
+//			new Object[][] {
+//				{null, null, null, null},
+//				{null, null, null, null},
+//			},
+//			new String[] {"Tên thể loại", "Số lượt mượn", "Tỉ lệ"
+//			}
+//		));
 		
 	}
 }
