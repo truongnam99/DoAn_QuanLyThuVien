@@ -52,8 +52,10 @@ public class MuonTraDAL {
 			String query = "insert into quanlymuonsach values(\"" + maDocGia + "\", \"" + maSach + "\", \"" + ngayMuon + "\", \"" + ngayTra+"\", \"0\")";
 			System.out.println(query+ "tai addProcessing ở MuonTraDAL");
 			int result = DAL.getInstance().executeQueryUpdate(query);
+			
 			if(result > 0) {
 				SachDAL.getInstance().changeTrangThai(maSach, "Đang được mượn");
+				dsMuonTra.add(new MuonTraDTO(maDocGia, maSach, Date.valueOf(ngayMuon), Date.valueOf(ngayTra), 0+""));
 			}
 			return result;
 		}catch(MyException e) {

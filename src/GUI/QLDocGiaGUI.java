@@ -39,6 +39,8 @@ public class QLDocGiaGUI {
 	private JComboBox<LoaiDocGiaDTO> cbbLoaiDocGia;
 	private JLabel lblMessage;
 	
+	private boolean isEdit = true;
+	
 	private QLDocGiaGUI() {
 		initialize();
 		loadResources();
@@ -63,6 +65,10 @@ public class QLDocGiaGUI {
 		dm.getDataVector().removeAllElements();
 		dm.fireTableDataChanged();
 		tbDocGia.setModel(QLDocGiaBLL.getInstance().reloadResources());
+	}
+	
+	private void setStateForTexfeild() {
+		tfMaDocGia.setEditable(isEdit);
 	}
 	
 	private void clearField() {
@@ -120,6 +126,9 @@ public class QLDocGiaGUI {
 			public void valueChanged(ListSelectionEvent arg0) {
 				if (tbDocGia.getSelectedRow()< 0)
 					return;
+				
+				isEdit = false;
+				setStateForTexfeild();
 				tfMaDocGia.setText(tbDocGia.getValueAt(tbDocGia.getSelectedRow(), 1).toString());
 				tfHoTen.setText(tbDocGia.getValueAt(tbDocGia.getSelectedRow(), 2).toString());
 				
@@ -246,6 +255,8 @@ public class QLDocGiaGUI {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				clearField();
+				isEdit = true;
+				setStateForTexfeild();
 			}
 		});
 		pnThongTinDocGia.add(btnHuy);

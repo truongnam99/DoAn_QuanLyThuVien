@@ -78,8 +78,20 @@ public class QLMuonTraBLL {
 		if(maSach.equals(""))
 			throw new MyNullException("Mã độc giả đang bị trống");
 		try {
-			Date.valueOf(ngayMuon);
-			Date.valueOf(ngayTra);
+			java.util.Date nm = new java.util.Date(ngayMuon);
+			java.util.Date nt = new java.util.Date(ngayTra);
+			
+			SachDTO s = SachDAL.getInstance().getSach(maSach);	
+			
+			if(nm.compareTo(nt) > 0) {
+				throw new MyException("Ngày mượn phải bé hơn ngày trả");
+			}
+			
+			java.util.Date nn = new java.util.Date(s.getNgayNhap().toString());
+			
+			if(nm.compareTo(nn) < 0) {
+				throw new MyException("Ngày mượn đang bé hơn ngày nhập sách vào");
+			}
 		}
 		catch(Exception e) {
 			throw new MyException("Ngày tháng bị lỗi");

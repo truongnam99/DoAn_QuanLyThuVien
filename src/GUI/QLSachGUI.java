@@ -29,8 +29,6 @@ import DTO.DocGiaDTO;
 import DTO.LoaiDocGiaDTO;
 import DTO.SachDTO;
 
-
-
 public class QLSachGUI {
 	private JTable tbQLSach;
 	private JTextField tfMaSach;
@@ -44,6 +42,8 @@ public class QLSachGUI {
 	private JPanel pnTongQuanQLSach;
 	private JLabel lblMessage;
 	private JRadioButton rdbtnTrong;
+	
+	private boolean isChanging = false;
 	
 	static QLSachGUI instance=null;
 	
@@ -80,6 +80,10 @@ public class QLSachGUI {
 		tfTheLoai.setText("");
 		tfTriGia.setText("");
 		rdbtnTrong.setSelected(true);
+	}
+	
+	private void setStateForTextfield() {
+			tfMaSach.setEditable(isChanging);
 	}
 	
 	private void initialize() {
@@ -214,12 +218,6 @@ public class QLSachGUI {
 		pnThongTinNhap.add(tfTriGia);
 		tfTriGia.setColumns(10);
 		
-		JLabel lblNewLabel = new JLabel("(*) Không được để trống");
-		lblNewLabel.setFont(new Font("Times New Roman", Font.ITALIC, 12));
-		lblNewLabel.setForeground(Color.RED);
-		lblNewLabel.setBounds(454, 226, 355, 14);
-		pnThongTinNhap.add(lblNewLabel);
-		
 		lblMessage = new JLabel("(*) Không được để trống");
 		lblMessage.setForeground(Color.RED);
 		lblMessage.setFont(new Font("Times New Roman", Font.ITALIC, 12));
@@ -256,16 +254,21 @@ public class QLSachGUI {
 		JButton btnSua = new JButton("Sửa\r\n");
 		btnSua.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String tinhTrang;
-				if (rdbtnTrong.isSelected())
-					tinhTrang = "Trống";
-				else
-					tinhTrang = "Đang được mượn";
-				SachDTO s = new SachDTO(tfMaSach.getText(), tfTacGia.getText(), tfTenSach.getText(), tfTheLoai.getText(), tfNhaXuatBan.getText(), 
-						Date.valueOf(tfNgayNhap.getText()), tfTriGia.getText(), tinhTrang, Date.valueOf(tfNamXuatBan.getText()));
-				String result = QLSachBLL.getInstance().changeProcessing(s);
-				lblMessage.setText(result);
-				reloadResources();
+				try {
+					String tinhTrang;
+					if (rdbtnTrong.isSelected())
+						tinhTrang = "Trống";
+					else
+						tinhTrang = "Đang được mượn";
+					SachDTO s = new SachDTO(tfMaSach.getText(), tfTacGia.getText(), tfTenSach.getText(), tfTheLoai.getText(), tfNhaXuatBan.getText(), 
+							Date.valueOf(tfNgayNhap.getText()), tfTriGia.getText(), tinhTrang, Date.valueOf(tfNamXuatBan.getText()));
+					String result = QLSachBLL.getInstance().changeProcessing(s);
+					lblMessage.setText(result);
+					reloadResources();
+				}
+				catch(Exception ex) {
+					lblMessage.setText("Kiểm tra lại các thông tin của bạn, đặc biệt là ngày tháng");
+				}
 			}
 		});
 		btnSua.setIcon(new ImageIcon("icon\\setting.png"));
@@ -283,7 +286,8 @@ public class QLSachGUI {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				clearField();
-				
+				isChanging = true;
+				setStateForTextfield();
 			}
 		});
 		
@@ -312,7 +316,8 @@ public class QLSachGUI {
 			public void valueChanged(ListSelectionEvent e) {
 				if (tbQLSach.getSelectedRow()< 0)
 					return;
-				
+				isChanging = false;
+				setStateForTextfield();
 				tfMaSach.setText(tbQLSach.getValueAt(tbQLSach.getSelectedRow(), 1).toString());
 				tfTenSach.setText(tbQLSach.getValueAt(tbQLSach.getSelectedRow(), 2).toString());
 				tfTheLoai.setText(tbQLSach.getValueAt(tbQLSach.getSelectedRow(), 3).toString());

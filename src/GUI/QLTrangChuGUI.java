@@ -20,10 +20,6 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import com.toedter.calendar.JCalendar;
 
-
-
-
-
 public class QLTrangChuGUI {
 
 	private JPanel pnTongQuanQLTrangChu;

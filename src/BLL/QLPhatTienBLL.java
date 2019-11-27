@@ -6,6 +6,7 @@ import javax.swing.table.DefaultTableModel;
 import DAL.PhatTienDAL;
 import DTO.*;
 import MyException.ContainException;
+import MyException.MyException;
 import MyException.MyNullException;
 
 public class QLPhatTienBLL {
@@ -21,7 +22,7 @@ public class QLPhatTienBLL {
 		return instance;
 	}
 	
-	private boolean checkData(PhatTienDTO pt) throws MyNullException{
+	private boolean checkData(PhatTienDTO pt) throws MyNullException, MyException{
 		if(pt.getMaLanPhat().equals(""))
 		{
 			throw new MyNullException("Mã lần phạt không được bỏ trống");
@@ -38,6 +39,14 @@ public class QLPhatTienBLL {
 		{
 			throw new MyNullException("Ngày phạt không được bỏ trống");
 		}
+		try {
+			int t = Integer.parseInt(pt.getSoTien());
+			if (t < 0)
+				throw new MyException("Số tiền phạt phải lớn hơn 0");
+		}catch(Exception e) {
+			throw new MyException("Số tiền phải là số");
+		}
+		
 		
 		return true;
 	}
@@ -65,6 +74,9 @@ public class QLPhatTienBLL {
 		catch(ContainException ex2) {
 			return ex2.getMessage();
 		}
+		catch(MyException e) {
+			return e.getMessage();
+		}
 	}
 	
 	public String changeProcessing (PhatTienDTO pt) {
@@ -85,6 +97,9 @@ public class QLPhatTienBLL {
 		}
 		catch(MyNullException e) {
 			return e.toString();
+		}
+		catch(MyException e) {
+			return e.getMessage();
 		}
 	}
 	

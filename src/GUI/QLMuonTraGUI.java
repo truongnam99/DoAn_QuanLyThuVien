@@ -43,6 +43,9 @@ public class QLMuonTraGUI {
 	private JTextField tfNgayTra;
 	private JTextField tfLoaiDocGia;
 	private JLabel lblMessage;
+	
+	private boolean isEdit = true;
+	
 	private QLMuonTraGUI() {
 		initialize();
 		loadResources();
@@ -65,6 +68,12 @@ public class QLMuonTraGUI {
 	}
 	public JTextField getText() {
 		return tfTimKiem;
+	}
+	
+	private void setStateForTextfeild() {
+		tfMaDocGia.setEditable(isEdit);
+		tfMaSach.setEditable(isEdit);
+		
 	}
 	private void initialize() {
 		pnMain = new JPanel();
@@ -140,6 +149,8 @@ public class QLMuonTraGUI {
 						loadResources();
 		        	}
 		        	else {
+		        		isEdit = false;
+		        		setStateForTextfeild();
 		        		// hiển thị thông tin vào trong các trường
 		        		tfMaDocGia.setText(tbMuonTra.getValueAt(tbMuonTra.getSelectedRow(), 1).toString());
 		        		tfHoTen.setText(tbMuonTra.getValueAt(tbMuonTra.getSelectedRow(), 2).toString());;
@@ -183,7 +194,6 @@ public class QLMuonTraGUI {
 		btnSua.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		btnSua.setBounds(910,95,138,41);
 		btnSua.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String msg = QLMuonTraBLL.getInstance().changeProcessing(tfMaDocGia.getText(), tfMaSach.getText(), tfNgayMuon.getText(), tfNgayTra.getText());;
@@ -319,6 +329,8 @@ public class QLMuonTraGUI {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				isEdit = true;
+				setStateForTextfeild();
 				tfHoTen.setText("");
 				tfLoaiDocGia.setText("");
 				tfLopChuyenMon.setText("");

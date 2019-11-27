@@ -11,6 +11,8 @@ import javax.swing.*;
 import DAL.DAL;
 import com.toedter.calendar.JCalendar;
 
+import BLL.ChaoMungBLL;
+
 public class TrangChuGUI {
 
 	private JFrame frmTrangChu;
@@ -165,7 +167,9 @@ public class TrangChuGUI {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				pnMain.removeAll();
+				//ChaoMungBLL.GetInstance().setNhanVien(nv);
 				QLChaoMung qlChaoMung=QLChaoMung.getInstance();
+				qlChaoMung.loadResources();
 				pnMain.add(qlChaoMung.getPnTongQuanQLChaoMung());
 				pnMain.revalidate();
 				pnMain.repaint();
@@ -305,26 +309,6 @@ public class TrangChuGUI {
 			}
 		});
 		
-		JMenuItem mnNhanVien=new JMenuItem("NHÂN VIÊN");
-		mnNhanVien.setHorizontalAlignment(SwingConstants.LEFT);
-		mnNhanVien.setIcon(new ImageIcon("icon\\nhanvien.png"));
-		mnNhanVien.setFont(new Font("Times New Roman",Font.BOLD,14));
-		mnNhanVien.setBackground(SystemColor.textHighlight);
-		mnNhanVien.setForeground(SystemColor.menuText);
-		mbMenu.add(mnNhanVien);
-		mnNhanVien.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				pnMain.removeAll();
-				QLNhanVienGUI qlNhanVien = QLNhanVienGUI.getInstance();
-				pnMain.add(qlNhanVien.getPnTongQuanQLNhanVien());
-				pnMain.revalidate();
-				pnMain.repaint();
-			}
-		});
-		
 		JMenuItem mnThanhLy=new JMenuItem("THANH LÝ");
 		mnThanhLy.setIcon(new ImageIcon("icon\\System.png"));
 		mnThanhLy.setHorizontalAlignment(SwingConstants.LEFT);
@@ -339,7 +323,7 @@ public class TrangChuGUI {
 				// TODO Auto-generated method stub
 				pnMain.removeAll();
 				QLThanhLyGUI qlThanhLy = QLThanhLyGUI.getInstance();
-				pnMain.add(qlThanhLy.getPnTongQuanQLThanhly());
+				pnMain.add(qlThanhLy.getPnMain());
 				pnMain.revalidate();
 				pnMain.repaint();
 			}

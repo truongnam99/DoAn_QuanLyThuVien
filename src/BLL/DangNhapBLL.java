@@ -42,6 +42,7 @@ public class DangNhapBLL {
 			for (NhanVienDTO nv: dsNhanVien) {
 				if (nv.getTenTaiKhoan().equals(taiKhoan) && nv.getMatKhau().equals(matKhau)) {
 					if(nv.getLoaiTaiKhoan().equals("Thủ thư")) {
+						ChaoMungBLL.GetInstance().setNhanVien(nv);
 						TrangChuGUI trangchu=TrangChuGUI.getInstance();
 						trangchu.getFrmTrangChu().setVisible(true);
 					}
