@@ -24,19 +24,15 @@ DROP TABLE IF EXISTS `sach`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `sach` (
   `MaSach` varchar(8) NOT NULL,
-  `MaTacGia` varchar(8) NOT NULL,
-  `TenSach` varchar(45) DEFAULT NULL,
-  `MaTheLoai` varchar(8) DEFAULT NULL,
-  `NhaXuatBan` varchar(45) DEFAULT NULL,
-  `NgayNhap` date DEFAULT NULL,
-  `GiaSach` int(11) DEFAULT NULL,
-  `TrangThai` tinyint(4) DEFAULT NULL,
+  `TacGia` varchar(500) DEFAULT NULL,
+  `TenSach` varchar(500) NOT NULL,
+  `TheLoai` varchar(500) DEFAULT NULL,
+  `NhaXuatBan` varchar(200) DEFAULT NULL,
+  `NgayNhap` date NOT NULL,
+  `GiaSach` int(11) NOT NULL,
+  `TrangThai` varchar(15) NOT NULL,
   `NamXuatBan` date DEFAULT NULL,
-  PRIMARY KEY (`MaSach`),
-  KEY `FK_SACH_TACGIA_MTG_idx` (`MaTacGia`),
-  KEY `FK_SACH_THELOAI_MTL_idx` (`MaTheLoai`),
-  CONSTRAINT `FK_SACH_TACGIA_MTG` FOREIGN KEY (`MaTacGia`) REFERENCES `tacgia` (`MaTacGia`),
-  CONSTRAINT `FK_SACH_THELOAI_MTL` FOREIGN KEY (`MaTheLoai`) REFERENCES `theloai` (`MaTheLoai`)
+  PRIMARY KEY (`MaSach`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -46,7 +42,7 @@ CREATE TABLE `sach` (
 
 LOCK TABLES `sach` WRITE;
 /*!40000 ALTER TABLE `sach` DISABLE KEYS */;
-INSERT INTO `sach` VALUES ('ST000001','TG000001','Toán 11','TL000001','Bộ giáo dục và đào tạo','2019-01-05',23000,1,'2013-05-01'),('ST000002','TG000002','Toán 12','TL000001','Bộ giáo dục và đào tạo','2019-01-05',23000,1,'2013-05-01');
+INSERT INTO `sach` VALUES ('ST000001','Bộ giáo dục và đào tạo','Toán 11','Toán học','Bộ giáo dục và đào tạo','2019-01-05',23000,'Trống','2013-05-01'),('ST000002','Bộ giáo dục và đào tạo','Toán 12','Toán học','Bộ giáo dục và đào tạo','2019-01-05',23000,'Trống','2013-05-01'),('ST000003','Nhiều tác giả','Văn 11','Văn học','Giáo dục','2015-02-02',23000,'Trống','2012-01-01'),('ST000004','Nhiều tác giả','Toán cao cấp','Toán học','Giáo dục','2015-02-02',23000,'Trống','2012-01-01'),('ST000005','Bộ giáo dục và đào tạo','Toán 10','Toán học','Bộ giáo dục và đào tạo','2019-01-05',20000,'Trống','2013-05-01'),('ST000006','Nhiều tác giả','Toán cao cấp','Toán học','Giáo dục','2015-02-02',23000,'Trống','2012-01-01');
 /*!40000 ALTER TABLE `sach` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -59,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-21 20:30:23
+-- Dump completed on 2019-11-27 10:36:45

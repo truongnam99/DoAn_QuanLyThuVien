@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `sachthanhly`;
 CREATE TABLE `sachthanhly` (
   `MaSach` varchar(8) NOT NULL,
   `TenSach` varchar(300) NOT NULL,
-  `TheLoai` varchar(100) NOT NULL,
+  `Thể loại` varchar(100) NOT NULL,
   `TacGia` varchar(100) NOT NULL,
   `NhaXuatBan` varchar(45) NOT NULL,
   `LyDo` varchar(500) NOT NULL,
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-21 20:30:23
+-- Dump completed on 2019-11-27 10:36:45

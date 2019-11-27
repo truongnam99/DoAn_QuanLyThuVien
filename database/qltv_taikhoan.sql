@@ -39,7 +39,7 @@ CREATE TABLE `taikhoan` (
 
 LOCK TABLES `taikhoan` WRITE;
 /*!40000 ALTER TABLE `taikhoan` DISABLE KEYS */;
-INSERT INTO `taikhoan` VALUES ('TK01','hoangnam','hoangnam','Hoang Nam','Thủ thư',''),('TK02','truongnam','truongnam','Truong Nam','Quản trị hệ thống','');
+INSERT INTO `taikhoan` VALUES ('admin','admin','admin','admin','Quản trị hệ thống',''),('TK01','hoangnam','hoangnam','Hoang Nam','Thủ thư','');
 /*!40000 ALTER TABLE `taikhoan` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-21 20:30:23
+-- Dump completed on 2019-11-27 10:36:45
