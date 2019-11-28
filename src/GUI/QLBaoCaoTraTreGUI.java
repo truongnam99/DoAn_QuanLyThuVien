@@ -12,7 +12,16 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+
+import BLL.QLBaoCaoTreBLL;
+
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Calendar;
 
 
 
@@ -64,7 +73,11 @@ public class QLBaoCaoTraTreGUI {
 		pnTieuDeTK.add(lblNgay);
 		
 		txtfNgay = new JTextField();
-		txtfNgay.setBounds(127, 49, 68, 26);
+		txtfNgay.setBounds(127, 49, 101, 25);
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+		java.util.Date date= new java.util.Date();
+		txtfNgay.setText(formatter.format(date));
+	
 		pnTieuDeTK.add(txtfNgay);
 		txtfNgay.setColumns(10);
 		
@@ -74,20 +87,37 @@ public class QLBaoCaoTraTreGUI {
 		pnTieuDeTK.add(lblMaBaoCao);
 		
 		txtfMaBaoCao = new JTextField();
-		txtfMaBaoCao.setBounds(400, 49, 86, 26);
+		txtfMaBaoCao.setBounds(400, 49, 101, 25);
 		pnTieuDeTK.add(txtfMaBaoCao);
 		txtfMaBaoCao.setColumns(10);
 		
-		JButton btnThongKe = new JButton("Th\u1ED1ng k\u00EA");
+		JButton btnThongKe = new JButton("Thống kê");
 		btnThongKe.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		btnThongKe.setIcon(new ImageIcon("icon\\edit.png"));
 		btnThongKe.setBounds(589, 40, 157, 41);
+		btnThongKe.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				DefaultTableModel dtm=QLBaoCaoTreBLL.getInstance().thongke();
+				tbThongKe.setModel(dtm);
+			}
+		});
 		pnTieuDeTK.add(btnThongKe);
 		
-		JButton btnLapBaoCao = new JButton("L\u1EADp b\u00E1o c\u00E1o");
+		JButton btnLapBaoCao = new JButton("Lập báo cáo");
 		btnLapBaoCao.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		btnLapBaoCao.setIcon(new ImageIcon("icon\\print.png"));
 		btnLapBaoCao.setBounds(808, 40, 157, 41);
+		btnLapBaoCao.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				QLBaoCaoTreBLL.getInstance().lapBaoCaoTre();
+			}
+		});
 		pnTieuDeTK.add(btnLapBaoCao);
 		
 		JPanel pnThongKe = new JPanel();
@@ -98,15 +128,6 @@ public class QLBaoCaoTraTreGUI {
 		tbThongKe = new JTable();
 		tbThongKe.setBounds(0, 0, 624, 352);
 		JScrollPane sc = new JScrollPane(tbThongKe, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		tbThongKe.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null},
-				{null, null, null, null},
-			},
-			new String[] {
-				"Tên sách", "Mã sách", "Ngày mượn", "Số ngày trả trễ"
-			}
-		));
 		pnThongKe.add(sc,BorderLayout.CENTER);
 		
 		

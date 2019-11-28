@@ -11,6 +11,8 @@ import javax.swing.*;
 import DAL.DAL;
 import com.toedter.calendar.JCalendar;
 
+import BLL.ChaoMungBLL;
+
 public class TrangChuGUI {
 
 	private JFrame frmTrangChu;
@@ -46,7 +48,7 @@ public class TrangChuGUI {
 		frmTrangChu.setBounds(10, 10, 1341, 720);
 		frmTrangChu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmTrangChu.getContentPane().setLayout(null);
-		frmTrangChu.setResizable(false);
+		//frmTrangChu.setResizable(false);
 		
 		ImageIcon icTrangChu = new ImageIcon("icon\\home.png");
 		
@@ -91,21 +93,21 @@ public class TrangChuGUI {
 		pnTrangChu.add(pnMain);
 		pnMain.setLayout(null);
 		
-		JLabel lblLoGoTruong = new JLabel("New label");
+		JLabel lblLoGoTruong = new JLabel("");
 		lblLoGoTruong.setBackground(Color.LIGHT_GRAY);
 		lblLoGoTruong.setBounds(12, 11, 221, 224);
 		lblLoGoTruong.setIcon(new ImageIcon("icon\\PTNKLogo.png"));
 		pnMain.add(lblLoGoTruong);
 		
 		JLabel lblTenTruong = new JLabel("TR\u01AF\u1EDCNG PT N\u0102NG KHI\u1EBEU -  \u0110HQG TP.HCM");
-		lblTenTruong.setBounds(240, 82, 439, 86);
+		lblTenTruong.setBounds(253, 39, 769, 86);
 		lblTenTruong.setForeground(Color.BLUE);
-		lblTenTruong.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		lblTenTruong.setFont(new Font("Times New Roman", Font.BOLD, 30));
 		pnMain.add(lblTenTruong);
 		
 		JPanel pnLich = new JPanel();
 		pnLich.setBackground(SystemColor.controlHighlight);
-		pnLich.setBounds(729, 46, 326, 514);
+		pnLich.setBounds(729, 145, 326, 404);
 		pnMain.add(pnLich);
 		pnLich.setLayout(null);
 		
@@ -117,6 +119,11 @@ public class TrangChuGUI {
 		lblNewLabel.setBounds(10, 0, 316, 25);
 		pnLich.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		
+		JLabel lblTruong = new JLabel("");
+		lblTruong.setIcon(new ImageIcon("icon\\PTNK_overview.jpg"));
+		lblTruong.setBounds(12, 145, 707, 404);
+		pnMain.add(lblTruong);
 		
 		
 		pnMenu = new JPanel();
@@ -160,7 +167,9 @@ public class TrangChuGUI {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				pnMain.removeAll();
+				//ChaoMungBLL.GetInstance().setNhanVien(nv);
 				QLChaoMung qlChaoMung=QLChaoMung.getInstance();
+				qlChaoMung.loadResources();
 				pnMain.add(qlChaoMung.getPnTongQuanQLChaoMung());
 				pnMain.revalidate();
 				pnMain.repaint();
@@ -185,6 +194,7 @@ public class TrangChuGUI {
 				// TODO Auto-generated method stub
 				pnMain.removeAll();
 				QLSachGUI qlSach=QLSachGUI.getInstance();
+				qlSach.reloadResources();
 				pnMain.add(qlSach.getPnTongQuanQLSach());
 				pnMain.revalidate();
 				pnMain.repaint();
@@ -204,6 +214,7 @@ public class TrangChuGUI {
 			public void actionPerformed(ActionEvent e) {
 				pnMain.removeAll();
 				QLDocGiaGUI qlDocGia = QLDocGiaGUI.getInstance();
+				qlDocGia.reloadResources();
 				pnMain.add(qlDocGia.getPnMain());
 				pnMain.revalidate();
 				pnMain.repaint();
@@ -298,26 +309,6 @@ public class TrangChuGUI {
 			}
 		});
 		
-		JMenuItem mnNhanVien=new JMenuItem("NHÂN VIÊN");
-		mnNhanVien.setHorizontalAlignment(SwingConstants.LEFT);
-		mnNhanVien.setIcon(new ImageIcon("icon\\nhanvien.png"));
-		mnNhanVien.setFont(new Font("Times New Roman",Font.BOLD,14));
-		mnNhanVien.setBackground(SystemColor.textHighlight);
-		mnNhanVien.setForeground(SystemColor.menuText);
-		mbMenu.add(mnNhanVien);
-		mnNhanVien.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				pnMain.removeAll();
-				QLNhanVienGUI qlNhanVien = QLNhanVienGUI.getInstance();
-				pnMain.add(qlNhanVien.getPnTongQuanQLNhanVien());
-				pnMain.revalidate();
-				pnMain.repaint();
-			}
-		});
-		
 		JMenuItem mnThanhLy=new JMenuItem("THANH LÝ");
 		mnThanhLy.setIcon(new ImageIcon("icon\\System.png"));
 		mnThanhLy.setHorizontalAlignment(SwingConstants.LEFT);
@@ -332,7 +323,7 @@ public class TrangChuGUI {
 				// TODO Auto-generated method stub
 				pnMain.removeAll();
 				QLThanhLyGUI qlThanhLy = QLThanhLyGUI.getInstance();
-				pnMain.add(qlThanhLy.getPnTongQuanQLThanhly());
+				pnMain.add(qlThanhLy.getPnMain());
 				pnMain.revalidate();
 				pnMain.repaint();
 			}

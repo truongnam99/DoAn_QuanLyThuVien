@@ -41,6 +41,8 @@ public class QLPhatTienGUI {
 	private JTextField txtfLyDo;
 	private JTextField txtfMaDocGia;
 	
+	private boolean isEdit = true;
+	
 	private QLPhatTienGUI(){
 		initialize();
 		loadResources();
@@ -60,6 +62,10 @@ public class QLPhatTienGUI {
 	
 	public JPanel getPnTongQuanQLPhatTien() {
 		return pnTongQuanQLViPham;
+	}
+	
+	private void setStateForTextfeild() {
+		txtfMaLanPhat.setEditable(isEdit);
 	}
 	
 	private void reloadResources() {
@@ -112,6 +118,8 @@ public class QLPhatTienGUI {
 				// TODO Auto-generated method stub
 				if(tbQLViPham.getSelectedRow()<0)
 					return;
+				isEdit = false;
+				setStateForTextfeild();
 				txtfMaLanPhat.setText(tbQLViPham.getValueAt(tbQLViPham.getSelectedRow(), 1).toString());
 				txtfSoTien.setText(tbQLViPham.getValueAt(tbQLViPham.getSelectedRow(), 2).toString());
 				txtfMaDocGia.setText(tbQLViPham.getValueAt(tbQLViPham.getSelectedRow(), 3).toString());
@@ -210,10 +218,15 @@ public class QLPhatTienGUI {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				PhatTienDTO pt=new PhatTienDTO(txtfMaLanPhat.getText(),txtfSoTien.getText(),txtfMaDocGia.getText(),Date.valueOf(txtfNgayPhat.getText().toString()),txtfLyDo.getText());
-				String result =QLPhatTienBLL.getInstance().addProcessing(pt);
-				lblMessage.setText(result);
-				reloadResources();
+				try {
+					PhatTienDTO pt=new PhatTienDTO(txtfMaLanPhat.getText(),txtfSoTien.getText(),txtfMaDocGia.getText(),Date.valueOf(txtfNgayPhat.getText().toString()),txtfLyDo.getText());
+					String result =QLPhatTienBLL.getInstance().addProcessing(pt);
+					lblMessage.setText(result);
+					reloadResources();
+				}catch(Exception ex) {
+					lblMessage.setText("Ngày phạt phải đúng định dạng ngày");
+				}
+				
 			}
 		});
 		
@@ -228,6 +241,8 @@ public class QLPhatTienGUI {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				clearField();
+				isEdit = true;
+				setStateForTextfeild();
 			}
 		});
 		
@@ -256,11 +271,15 @@ public class QLPhatTienGUI {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				PhatTienDTO pt=new PhatTienDTO(txtfMaLanPhat.getText(),txtfSoTien.getText(),txtfMaDocGia.getText(),Date.valueOf(txtfNgayPhat.getText().toString()),txtfLyDo.getText());
-				String result=QLPhatTienBLL.getInstance().changeProcessing(pt);
-				lblMessage.setText(result);
-				reloadResources();
+				try {
+					PhatTienDTO pt=new PhatTienDTO(txtfMaLanPhat.getText(),txtfSoTien.getText(),txtfMaDocGia.getText(),Date.valueOf(txtfNgayPhat.getText().toString()),txtfLyDo.getText());
+					String result=QLPhatTienBLL.getInstance().changeProcessing(pt);
+					lblMessage.setText(result);
+					reloadResources();
+				}
+				catch(Exception ex) {
+					lblMessage.setText("Kiểm tra lại các thông tin của bạn, đặc biệt là ngày tháng");
+				}
 			}
 		});
 		pnThongTinDocGia.add(btnSua);
