@@ -99,7 +99,7 @@ public class QLSachGUI {
 		pnTongQuanQLSach.add(pnTieuDeQLSach);
 		pnTieuDeQLSach.setLayout(null);
 		
-		JLabel lblQLSach = new JLabel("QU\u1EA2N L\u00DD S\u00C1CH");
+		JLabel lblQLSach = new JLabel("QUÁN LÝ SÁCH");
 		lblQLSach.setForeground(Color.RED);
 		lblQLSach.setFont(new Font("Times New Roman", Font.BOLD, 24));
 		lblQLSach.setBounds(448, 11, 219, 35);
@@ -273,13 +273,13 @@ public class QLSachGUI {
 		});
 		btnSua.setIcon(new ImageIcon("icon\\setting.png"));
 		btnSua.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		btnSua.setBounds(902, 99, 138, 41);
+		btnSua.setBounds(902, 103, 138, 41);
 		pnThongTinSach.add(btnSua);
 		
 		JButton btnHuy = new JButton("Hủy");
 		btnHuy.setIcon(new ImageIcon("icon\\del.png"));
 		btnHuy.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		btnHuy.setBounds(902, 169, 138, 41);
+		btnHuy.setBounds(902, 173, 138, 41);
 		pnThongTinSach.add(btnHuy);
 		btnHuy.addActionListener(new ActionListener() {
 			

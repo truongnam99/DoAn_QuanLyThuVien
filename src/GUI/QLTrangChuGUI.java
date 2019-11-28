@@ -60,7 +60,7 @@ public class QLTrangChuGUI {
 		lblLoGoTruong.setIcon(new ImageIcon("icon\\PTNKLogo.png"));
 		pnLoGoTruong.add(lblLoGoTruong);
 		
-		JLabel lblTenTruong = new JLabel("TR\u01AF\u1EDCNG PT N\u0102NG KHI\u1EBEU -  \u0110HQG TP.HCM");
+		JLabel lblTenTruong = new JLabel("TRƯỜNG THPT NĂNG KHIẾU -  ĐHQG TP.HCM");
 		lblTenTruong.setBounds(253, 39, 769, 86);
 		lblTenTruong.setForeground(Color.BLUE);
 		lblTenTruong.setFont(new Font("Times New Roman", Font.BOLD, 30));

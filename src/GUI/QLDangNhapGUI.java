@@ -17,6 +17,8 @@ import javax.swing.JTextField;
 import BLL.DangNhapBLL;
 
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
 
 
@@ -26,6 +28,7 @@ public class QLDangNhapGUI {
 	private JFrame frame;
 	private JTextField tfTaiKhoan;
 	private JPasswordField pfMatKhau;
+	private JLabel lblMessage;
 
 	/**
 	 * Launch the application.
@@ -56,6 +59,7 @@ public class QLDangNhapGUI {
 	
 	/**
 	 * Create the application.
+	 * @wbp.parser.entryPoint
 	 */
 	public QLDangNhapGUI() {
 		initialize();
@@ -81,7 +85,7 @@ public class QLDangNhapGUI {
 		pnTongQuanDangNhap.add(pnHinh);
 		pnHinh.setLayout(null);
 		
-		JLabel lblHinh = new JLabel("New label");
+		JLabel lblHinh = new JLabel("");
 		lblHinh.setIcon(new ImageIcon("icon\\Untitled.png"));
 		lblHinh.setBounds(0, 0, 327, 441);
 		pnHinh.add(lblHinh);
@@ -96,23 +100,51 @@ public class QLDangNhapGUI {
 		lblTaiKhoan.setBounds(10, 140, 102, 20);
 		pnDangNhap.add(lblTaiKhoan);
 		
+		
 		pfMatKhau = new JPasswordField();
 		pfMatKhau.setBounds(111, 195, 167, 26);
 		pnDangNhap.add(pfMatKhau);
 		pfMatKhau.setColumns(10);
+		pfMatKhau.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				if(e.getKeyCode()==KeyEvent.VK_ENTER) {
+					System.out.println(pfMatKhau.getText());
+					if (DangNhapBLL.getInstance().dangNhap(tfTaiKhoan.getText(), pfMatKhau.getText()))
+						frame.setVisible(false);
+					else {
+						lblMessage.setText("Đăng nhập không thành công! vui lòng kiểm tra lại");
+					}
+				}
+			}
+		});
 		
 		JLabel lblMatKhau = new JLabel("Mật khẩu:*");
 		lblMatKhau.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		lblMatKhau.setBounds(10, 195, 76, 27);
 		pnDangNhap.add(lblMatKhau);
 		
-		JLabel lblMessage = new JLabel("(*) Không được để trống");
+		lblMessage = new JLabel("(*) Không được để trống");
 		lblMessage.setFont(new Font("Times New Roman", Font.ITALIC, 12));
 		lblMessage.setForeground(Color.RED);
 		lblMessage.setBounds(122, 243, 156, 27);
 		pnDangNhap.add(lblMessage);
 		
-		JButton btnDangNhap = new JButton("\u0110\u0102NG NH\u1EACP");
+		JButton btnDangNhap = new JButton("ĐĂNG NHẬP");
 		btnDangNhap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println(pfMatKhau.getText());
@@ -127,9 +159,36 @@ public class QLDangNhapGUI {
 		btnDangNhap.setForeground(Color.WHITE);
 		btnDangNhap.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		btnDangNhap.setBounds(10, 293, 120, 41);
+		btnDangNhap.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				if(e.getKeyCode()==KeyEvent.VK_ENTER) {
+					System.out.println(pfMatKhau.getText());
+					if (DangNhapBLL.getInstance().dangNhap(tfTaiKhoan.getText(), pfMatKhau.getText()))
+						frame.setVisible(false);
+					else {
+						lblMessage.setText("Đăng nhập không thành công! vui lòng kiểm tra lại");
+					}
+				}
+			}
+		});
 		pnDangNhap.add(btnDangNhap);
 		
-		JButton btnThoat = new JButton("THO\u00C1T");
+		JButton btnThoat = new JButton("THOÁT");
 		btnThoat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.exit(0);
@@ -146,8 +205,35 @@ public class QLDangNhapGUI {
 		tfTaiKhoan.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		pnDangNhap.add(tfTaiKhoan);
 		tfTaiKhoan.setColumns(10);
+		tfTaiKhoan.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				if(e.getKeyCode()==KeyEvent.VK_ENTER) {
+					System.out.println(pfMatKhau.getText());
+					if (DangNhapBLL.getInstance().dangNhap(tfTaiKhoan.getText(), pfMatKhau.getText()))
+						frame.setVisible(false);
+					else {
+						lblMessage.setText("Đăng nhập không thành công! vui lòng kiểm tra lại");
+					}
+				}
+			}
+		});
 		
-		JLabel lblDangNhap = new JLabel("\u0110\u0102NG NH\u1EACP");
+		JLabel lblDangNhap = new JLabel("ĐĂNG NHẬP");
 		lblDangNhap.setBounds(80, 57, 149, 35);
 		pnDangNhap.add(lblDangNhap);
 		lblDangNhap.setForeground(Color.BLUE);

@@ -171,7 +171,7 @@ public class QLChaoMung {
 		JButton btnLuu = new JButton("Lưu");
 		btnLuu.setIcon(new ImageIcon("icon\\save.png"));
 		btnLuu.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		btnLuu.setBounds(289, 154, 138, 41);
+		btnLuu.setBounds(289, 154, 168, 41);
 		btnLuu.addActionListener(new ActionListener() {
 			
 			@Override
@@ -185,7 +185,7 @@ public class QLChaoMung {
 		JButton btnHuy = new JButton("Hủy");
 		btnHuy.setIcon(new ImageIcon("icon\\del.png"));
 		btnHuy.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		btnHuy.setBounds(556, 154, 138, 41);
+		btnHuy.setBounds(576, 154, 168, 41);
 		btnHuy.addActionListener(new ActionListener() {
 			
 			@Override

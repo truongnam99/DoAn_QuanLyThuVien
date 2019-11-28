@@ -96,7 +96,7 @@ public class QLPhatTienGUI {
 		pnTongQuanQLViPham.add(pnTieuDeQLViPham);
 		pnTieuDeQLViPham.setLayout(null);
 		
-		JLabel lblQLViPham = new JLabel("QU\u1EA2N L\u00DD VI PH\u1EA0M");
+		JLabel lblQLViPham = new JLabel("QUẢN LÝ VI PHẠM");
 		lblQLViPham.setForeground(Color.RED);
 		lblQLViPham.setFont(new Font("Times New Roman", Font.BOLD, 24));
 		lblQLViPham.setBounds(434, 13, 221, 33);
@@ -246,7 +246,7 @@ public class QLPhatTienGUI {
 			}
 		});
 		
-		JButton btnXoa = new JButton("X\u00F3a");
+		JButton btnXoa = new JButton("Xóa");
 		btnXoa.setBounds(897, 201, 138, 41);
 		pnThongTinDocGia.add(btnXoa);
 		btnXoa.setIcon(new ImageIcon("icon\\delete.png"));

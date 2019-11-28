@@ -20,6 +20,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import java.awt.Color;
+import javax.swing.ImageIcon;
 
 public class QLThanhLyGUI {
 	private static QLThanhLyGUI instance;
@@ -80,7 +81,7 @@ public class QLThanhLyGUI {
 		});
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(345, 75, 720, 327);
+		scrollPane_1.setBounds(353, 75, 691, 327);
 		pnMain.add(scrollPane_1);
 		
 		tbSachThanhLy = new JTable();
@@ -109,6 +110,7 @@ public class QLThanhLyGUI {
 		tfTenSach.setColumns(10);
 		
 		JButton btnThem = new JButton("Thêm");
+		btnThem.setIcon(new ImageIcon("icon\\new.png"));
 		btnThem.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		btnThem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -120,10 +122,11 @@ public class QLThanhLyGUI {
 				
 			}
 		});
-		btnThem.setBounds(72, 508, 115, 41);
+		btnThem.setBounds(72, 508, 158, 41);
 		pnMain.add(btnThem);
 		
 		JButton btnXoa = new JButton("Xóa");
+		btnXoa.setIcon(new ImageIcon("icon\\delete.png"));
 		btnXoa.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		btnXoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -134,11 +137,11 @@ public class QLThanhLyGUI {
 					}
 			}
 		});
-		btnXoa.setBounds(228, 508, 115, 41);
+		btnXoa.setBounds(485, 508, 158, 41);
 		pnMain.add(btnXoa);
 		
 		JTextArea taLyDo = new JTextArea();
-		taLyDo.setBounds(409, 413, 646, 84);
+		taLyDo.setBounds(409, 412, 635, 85);
 		pnMain.add(taLyDo);
 		
 		lblNewLabel = new JLabel("Lý do:");
@@ -153,6 +156,7 @@ public class QLThanhLyGUI {
 		pnMain.add(label);
 		
 		btnThanhLy = new JButton("Thanh lý");
+		btnThanhLy.setIcon(new ImageIcon("icon\\edit.png"));
 		btnThanhLy.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String msg = QLThanhLyBLL.getInstance().thanhLy(taLyDo.getText());
@@ -161,23 +165,23 @@ public class QLThanhLyGUI {
 			}
 		});
 		btnThanhLy.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		btnThanhLy.setBounds(940, 508, 115, 41);
+		btnThanhLy.setBounds(886, 508, 158, 41);
 		pnMain.add(btnThanhLy);
 		
-		lblNewLabel_1 = new JLabel("Danh sách Sách:");
+		lblNewLabel_1 = new JLabel("DANH SÁCH CUỐN SÁCH");
 		lblNewLabel_1.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		lblNewLabel_1.setBounds(10, 52, 333, 21);
 		pnMain.add(lblNewLabel_1);
 		
-		lblNewLabel_2 = new JLabel("Danh sách Sách thanh lý:");
+		lblNewLabel_2 = new JLabel("DANH SÁCH CUỐN SÁCH ĐƯỢC THANH LÝ");
 		lblNewLabel_2.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		lblNewLabel_2.setBounds(353, 52, 183, 21);
+		lblNewLabel_2.setBounds(353, 52, 333, 21);
 		pnMain.add(lblNewLabel_2);
 		
 		lblMessage = new JLabel();
 		lblMessage.setFont(new Font("Times New Roman", Font.ITALIC, 13));
 		lblMessage.setForeground(Color.RED);
-		lblMessage.setBounds(580, 57, 410, 14);
+		lblMessage.setBounds(692, 57, 352, 14);
 		pnMain.add(lblMessage);
 	}
 }

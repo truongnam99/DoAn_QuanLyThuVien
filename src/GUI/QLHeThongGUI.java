@@ -166,7 +166,7 @@ public class QLHeThongGUI {
 		pnTongQuanQLQuyDinh.add(pnTieuDeQuyDinh);
 		pnTieuDeQuyDinh.setLayout(null);
 		
-		JLabel lblQuyDinh = new JLabel("QU\u1EA2N L\u00DD QUY \u0110\u1ECANH");
+		JLabel lblQuyDinh = new JLabel("QUẢN LÝ QUY ĐỊNH");
 		lblQuyDinh.setForeground(Color.RED);
 		lblQuyDinh.setFont(new Font("Times New Roman", Font.BOLD, 24));
 		lblQuyDinh.setBounds(435, 5, 236, 35);
@@ -178,7 +178,7 @@ public class QLHeThongGUI {
 		pnTongQuanQLQuyDinh.add(pnThongTinQuyDinh);
 		pnThongTinQuyDinh.setLayout(null);
 		
-		JLabel lblThongTinQuyDinh = new JLabel("TH\u00D4NG TIN QUY \u0110\u1ECANH");
+		JLabel lblThongTinQuyDinh = new JLabel("THÔNG TIN QUY ĐỊNH");
 		lblThongTinQuyDinh.setFont(new Font("Times New Roman", Font.BOLD, 17));
 		lblThongTinQuyDinh.setBounds(5, 5, 219, 22);
 		pnThongTinQuyDinh.add(lblThongTinQuyDinh);
@@ -188,7 +188,7 @@ public class QLHeThongGUI {
 		pnThongTinQuyDinh.add(pnHocSinh);
 		pnHocSinh.setLayout(null);
 		
-		JLabel lblHocSinh = new JLabel("H\u1ECDc sinh");
+		JLabel lblHocSinh = new JLabel("Học sinh");
 		lblHocSinh.setBounds(5, 0, 59, 23);
 		pnHocSinh.add(lblHocSinh);
 		lblHocSinh.setFont(new Font("Times New Roman", Font.BOLD, 12));
@@ -199,7 +199,7 @@ public class QLHeThongGUI {
 		pnHocSinh.add(pnThongTinHocSinh);
 		pnThongTinHocSinh.setLayout(null);
 		
-		JLabel lblSoSachMuonHS = new JLabel("S\u1ED1 s\u00E1ch m\u01B0\u1EE3n t\u1ED1i \u0111a:");
+		JLabel lblSoSachMuonHS = new JLabel("Số sách mượn tối đa:");
 		lblSoSachMuonHS.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		lblSoSachMuonHS.setBounds(10, 41, 144, 14);
 		pnThongTinHocSinh.add(lblSoSachMuonHS);
@@ -211,7 +211,7 @@ public class QLHeThongGUI {
 	
 		
 		
-		JLabel lblThoiGianMuonHS = new JLabel("Th\u1EDDi gian m\u01B0\u1EE3n t\u1ED1i \u0111a:");
+		JLabel lblThoiGianMuonHS = new JLabel("Thời gian mượn tối đa:");
 		lblThoiGianMuonHS.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		lblThoiGianMuonHS.setBounds(10, 99, 144, 14);
 		pnThongTinHocSinh.add(lblThoiGianMuonHS);
@@ -295,7 +295,7 @@ public class QLHeThongGUI {
 		pnThongTinQuyDinh.add(pnGiaoVien);
 		pnGiaoVien.setLayout(null);
 		
-		JLabel lblGiaoVien = new JLabel("Gi\u00E1o vi\u00EAn");
+		JLabel lblGiaoVien = new JLabel("Giáo viên");
 		lblGiaoVien.setBounds(5, 0, 76, 22);
 		pnGiaoVien.add(lblGiaoVien);
 		lblGiaoVien.setFont(new Font("Times New Roman", Font.BOLD, 12));
@@ -306,7 +306,7 @@ public class QLHeThongGUI {
 		pnGiaoVien.add(pnThongTinGiaoVien);
 		pnThongTinGiaoVien.setLayout(null);
 		
-		JLabel lblSoSachMuonGV = new JLabel("S\u1ED1 s\u00E1ch m\u01B0\u1EE3n t\u1ED1i \u0111a:");
+		JLabel lblSoSachMuonGV = new JLabel("Số sách mượn tối đa:");
 		lblSoSachMuonGV.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		lblSoSachMuonGV.setBounds(10, 42, 144, 14);
 		pnThongTinGiaoVien.add(lblSoSachMuonGV);
@@ -316,7 +316,7 @@ public class QLHeThongGUI {
 		txtfSoSachMuonGV.setBounds(178, 33, 127, 30);
 		pnThongTinGiaoVien.add(txtfSoSachMuonGV);
 		
-		JLabel lblThoiGianMuonGV = new JLabel("Th\u1EDDi gian m\u01B0\u1EE3n t\u1ED1i \u0111a:");
+		JLabel lblThoiGianMuonGV = new JLabel("Thời gian mượn tối đa:");
 		lblThoiGianMuonGV.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		lblThoiGianMuonGV.setBounds(10, 99, 144, 14);
 		pnThongTinGiaoVien.add(lblThoiGianMuonGV);
@@ -394,7 +394,7 @@ public class QLHeThongGUI {
 		
 		
 		//LƯU
-		JButton btnLuu = 	new JButton("L\u01B0u");
+		JButton btnLuu = 	new JButton("Lưu");
 		btnLuu.setBounds(223, 426, 139, 41);
 		pnThongTinQuyDinh.add(btnLuu);
 		btnLuu.setIcon(new ImageIcon("icon\\save.png"));

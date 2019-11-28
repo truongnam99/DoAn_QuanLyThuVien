@@ -137,4 +137,19 @@ public static QLSachBLL instance;
 			return e.getMessage();
 		}
 	}
+
+	public int SoCuonSach() {
+		// TODO Auto-generated method stub
+		return SachDAL.getInstance().getResources().size();
+	}
+
+	public int SoTheLoai() {
+		ArrayList<SachDTO> dsSach = SachDAL.getInstance().getResources();
+		ArrayList<String> theLoai = new ArrayList<String>();
+		for(SachDTO s: dsSach) {
+			if (!theLoai.contains(s.getTheLoai()))
+				theLoai.add(s.getTheLoai());
+		}
+		return theLoai.size();
+	}
 }

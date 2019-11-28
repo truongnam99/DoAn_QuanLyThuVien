@@ -37,7 +37,7 @@ public class QuanTriHeThongGUI {
 		frmMain.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 560, 1065, 50);
+		panel.setBounds(0, 560, 1049, 50);
 		frmMain.getContentPane().add(panel);
 		panel.setLayout(null);
 		

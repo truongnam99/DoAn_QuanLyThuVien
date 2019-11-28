@@ -143,4 +143,9 @@ public class DocGiaDAL {
 	public ArrayList<DocGiaDTO> reloadResources(){
 		return dsDocGia;
 	}
+
+	public int getSodocgia() {
+		
+		return dsDocGia.size();
+	}
 }

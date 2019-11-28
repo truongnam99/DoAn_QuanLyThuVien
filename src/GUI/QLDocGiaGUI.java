@@ -249,7 +249,7 @@ public class QLDocGiaGUI {
 		JButton btnHuy = new JButton("Hủy");
 		btnHuy.setIcon(new ImageIcon("icon\\del.png"));
 		btnHuy.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		btnHuy.setBounds(911, 159, 138, 41);
+		btnHuy.setBounds(911, 162, 138, 41);
 		btnHuy.addActionListener(new ActionListener() {
 			
 			@Override

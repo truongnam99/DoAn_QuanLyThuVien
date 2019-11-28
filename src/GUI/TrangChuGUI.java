@@ -12,6 +12,9 @@ import DAL.DAL;
 import com.toedter.calendar.JCalendar;
 
 import BLL.ChaoMungBLL;
+import BLL.QLDocGiaBLL;
+import BLL.QLMuonTraBLL;
+import BLL.QLSachBLL;
 
 public class TrangChuGUI {
 
@@ -21,11 +24,18 @@ public class TrangChuGUI {
 	private JPanel pnMain;
 	private JPanel pnTrangChu;
 	private JMenuBar mbMenu;
-	
+	private int soCuonSach;
+	private int soTheLoai;
+	private int soDocGia;
+	private int soSachMuon;
 	
 	static TrangChuGUI instance = null;
 	
 	private TrangChuGUI() {
+		soCuonSach=QLSachBLL.getInstance().SoCuonSach();
+		soTheLoai=QLSachBLL.getInstance().SoTheLoai();
+		soDocGia=QLDocGiaBLL.getInstance().SoDocGia();
+		soSachMuon=QLMuonTraBLL.getInstance().SoSachMuon();
 		initialize();
 	}
 	
@@ -63,29 +73,53 @@ public class TrangChuGUI {
 		pnTitle.setBackground(SystemColor.activeCaption);
 		pnTitle.setLayout(null);
 		
-		JLabel lblQuyenSach = new JLabel("QUY\u1EC2N S\u00C1CH");
+		JLabel lblQuyenSach = new JLabel("QUYỂN SÁCH");
 		lblQuyenSach.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		lblQuyenSach.setIcon(new ImageIcon("icon\\quyensach.png"));
 		lblQuyenSach.setBounds(111, 40, 143, 39);
 		pnTitle.add(lblQuyenSach);
 		
-		JLabel lblTheLoai = new JLabel("TH\u1EC2 LO\u1EA0I");
+		JLabel lblTheLoai = new JLabel("THỂ LOẠI");
 		lblTheLoai.setIcon(new ImageIcon("icon\\theloai.png"));
 		lblTheLoai.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		lblTheLoai.setBounds(384, 39, 123, 41);
 		pnTitle.add(lblTheLoai);
 		
-		JLabel lblDocGia = new JLabel("\u0110\u1ED8C GI\u1EA2");
+		JLabel lblDocGia = new JLabel("ĐỘC GIẢ");
 		lblDocGia.setIcon(new ImageIcon("icon\\367785583.jpg"));
 		lblDocGia.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		lblDocGia.setBounds(629, 40, 116, 39);
 		pnTitle.add(lblDocGia);
 		
-		JLabel lblSachMuon = new JLabel("S\u00C1CH M\u01AF\u1EE2N");
+		JLabel lblSachMuon = new JLabel("SÁCH MƯỢN");
 		lblSachMuon.setIcon(new ImageIcon("icon\\images.png"));
 		lblSachMuon.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		lblSachMuon.setBounds(866, 40, 131, 39);
 		pnTitle.add(lblSachMuon);
+		
+		JLabel lblSoCuonSach = new JLabel("");
+		lblSoCuonSach.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		lblSoCuonSach.setBounds(89, 40, 21, 39);
+		lblSoCuonSach.setText(soCuonSach+"");
+		pnTitle.add(lblSoCuonSach);
+		
+		JLabel lblSoTheLoai = new JLabel("");
+		lblSoTheLoai.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		lblSoTheLoai.setBounds(365, 40, 21, 39);
+		lblSoTheLoai.setText(soTheLoai+"");
+		pnTitle.add(lblSoTheLoai);
+		
+		JLabel lblSoDocGia = new JLabel("");
+		lblSoDocGia.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		lblSoDocGia.setBounds(605, 40, 21, 39);
+		lblSoDocGia.setText(soDocGia+"");
+		pnTitle.add(lblSoDocGia);
+		
+		JLabel lblSoSachMuon = new JLabel("");
+		lblSoSachMuon.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		lblSoSachMuon.setBounds(852, 40, 16, 39);
+		lblSoSachMuon.setText(soSachMuon+"");
+		pnTitle.add(lblSoSachMuon);
 		
 		pnMain = new JPanel();
 		pnMain.setBackground(SystemColor.inactiveCaptionBorder);
@@ -99,7 +133,7 @@ public class TrangChuGUI {
 		lblLoGoTruong.setIcon(new ImageIcon("icon\\PTNKLogo.png"));
 		pnMain.add(lblLoGoTruong);
 		
-		JLabel lblTenTruong = new JLabel("TR\u01AF\u1EDCNG PT N\u0102NG KHI\u1EBEU -  \u0110HQG TP.HCM");
+		JLabel lblTenTruong = new JLabel("TRƯỜNG THPT NĂNG KHIẾU -  ĐHQG TP.HCM");
 		lblTenTruong.setBounds(253, 39, 769, 86);
 		lblTenTruong.setForeground(Color.BLUE);
 		lblTenTruong.setFont(new Font("Times New Roman", Font.BOLD, 30));

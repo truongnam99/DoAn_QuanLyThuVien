@@ -27,7 +27,6 @@ import java.util.Calendar;
 
 public class QLBaoCaoTraTreGUI {
 	private JTextField txtfNgay;
-	private JTextField txtfMaBaoCao;
 	private JTable tbThongKe;
 	private JPanel pnTongQuanTKSach;
 	static QLBaoCaoTraTreGUI instance;
@@ -69,11 +68,11 @@ public class QLBaoCaoTraTreGUI {
 		
 		JLabel lblNgay = new JLabel("Ngày:");
 		lblNgay.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblNgay.setBounds(71, 52, 46, 23);
+		lblNgay.setBounds(172, 50, 46, 23);
 		pnTieuDeTK.add(lblNgay);
 		
 		txtfNgay = new JTextField();
-		txtfNgay.setBounds(127, 49, 101, 25);
+		txtfNgay.setBounds(228, 49, 101, 25);
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 		java.util.Date date= new java.util.Date();
 		txtfNgay.setText(formatter.format(date));
@@ -81,20 +80,10 @@ public class QLBaoCaoTraTreGUI {
 		pnTieuDeTK.add(txtfNgay);
 		txtfNgay.setColumns(10);
 		
-		JLabel lblMaBaoCao = new JLabel("M\u00E3 b\u00E1o c\u00E1o:");
-		lblMaBaoCao.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblMaBaoCao.setBounds(323, 52, 77, 23);
-		pnTieuDeTK.add(lblMaBaoCao);
-		
-		txtfMaBaoCao = new JTextField();
-		txtfMaBaoCao.setBounds(400, 49, 101, 25);
-		pnTieuDeTK.add(txtfMaBaoCao);
-		txtfMaBaoCao.setColumns(10);
-		
 		JButton btnThongKe = new JButton("Thống kê");
 		btnThongKe.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		btnThongKe.setIcon(new ImageIcon("icon\\edit.png"));
-		btnThongKe.setBounds(589, 40, 157, 41);
+		btnThongKe.setBounds(507, 40, 157, 41);
 		btnThongKe.addActionListener(new ActionListener() {
 			
 			@Override
@@ -109,7 +98,7 @@ public class QLBaoCaoTraTreGUI {
 		JButton btnLapBaoCao = new JButton("Lập báo cáo");
 		btnLapBaoCao.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		btnLapBaoCao.setIcon(new ImageIcon("icon\\print.png"));
-		btnLapBaoCao.setBounds(808, 40, 157, 41);
+		btnLapBaoCao.setBounds(755, 40, 157, 41);
 		btnLapBaoCao.addActionListener(new ActionListener() {
 			
 			@Override

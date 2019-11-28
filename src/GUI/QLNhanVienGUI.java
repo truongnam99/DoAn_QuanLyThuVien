@@ -133,14 +133,14 @@ public class QLNhanVienGUI {
 		pnTongQuanQLNhanVien.add(pnThongTinNhanVien);
 		pnThongTinNhanVien.setLayout(null);
 		
-		JLabel lblThongTinNhanVien = new JLabel("Thông tin tài khoản");
+		JLabel lblThongTinNhanVien = new JLabel("THÔNG TIN TÀI KHOẢN");
 		lblThongTinNhanVien.setFont(new Font("Times New Roman", Font.BOLD, 17));
 		lblThongTinNhanVien.setBounds(10, 5, 208, 22);
 		pnThongTinNhanVien.add(lblThongTinNhanVien);
 		
 		JPanel pnThongTinNhap = new JPanel();
 		pnThongTinNhap.setBackground(SystemColor.inactiveCaptionBorder);
-		pnThongTinNhap.setBounds(10, 26, 842, 219);
+		pnThongTinNhap.setBounds(10, 27, 842, 219);
 		pnThongTinNhanVien.add(pnThongTinNhap);
 		pnThongTinNhap.setLayout(null);
 		
@@ -152,21 +152,21 @@ public class QLNhanVienGUI {
 		
 		JLabel lblMaTaiKhoan = new JLabel("Mã tài khoản:*");
 		lblMaTaiKhoan.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblMaTaiKhoan.setBounds(26, 53, 91, 14);
+		lblMaTaiKhoan.setBounds(26, 37, 91, 14);
 		pnThongTinNhap.add(lblMaTaiKhoan);
 		
 		tfMaTaiKhoan = new JTextField();
-		tfMaTaiKhoan.setBounds(127, 45, 258, 31);
+		tfMaTaiKhoan.setBounds(127, 29, 258, 31);
 		pnThongTinNhap.add(tfMaTaiKhoan);
 		tfMaTaiKhoan.setColumns(10);
 		
 		JLabel lblTenNhanVien = new JLabel("Tên nhân viên:*");
 		lblTenNhanVien.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblTenNhanVien.setBounds(26, 105, 91, 14);
+		lblTenNhanVien.setBounds(26, 97, 91, 14);
 		pnThongTinNhap.add(lblTenNhanVien);
 		
 		tfTenNhanVien = new JTextField();
-		tfTenNhanVien.setBounds(127, 97, 258, 31);
+		tfTenNhanVien.setBounds(127, 89, 258, 31);
 		pnThongTinNhap.add(tfTenNhanVien);
 		tfTenNhanVien.setColumns(10);
 		
@@ -185,21 +185,21 @@ public class QLNhanVienGUI {
 		
 		JLabel lblTaiKhoan = new JLabel("Tên tài khoản:*");
 		lblTaiKhoan.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblTaiKhoan.setBounds(433, 53, 91, 14);
+		lblTaiKhoan.setBounds(433, 37, 91, 14);
 		pnThongTinNhap.add(lblTaiKhoan);
 		
 		tfTenTaiKhoan = new JTextField();
-		tfTenTaiKhoan.setBounds(523, 45, 258, 31);
+		tfTenTaiKhoan.setBounds(523, 29, 258, 31);
 		pnThongTinNhap.add(tfTenTaiKhoan);
 		tfTenTaiKhoan.setColumns(10);
 		
 		JLabel lblMatKhau = new JLabel("Mật khẩu:*");
 		lblMatKhau.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblMatKhau.setBounds(433, 105, 91, 14);
+		lblMatKhau.setBounds(433, 97, 91, 14);
 		pnThongTinNhap.add(lblMatKhau);
 		
 		tfMatKhau = new JTextField();
-		tfMatKhau.setBounds(523, 97, 258, 31);
+		tfMatKhau.setBounds(523, 89, 258, 31);
 		pnThongTinNhap.add(tfMatKhau);
 		tfMatKhau.setColumns(10);
 		

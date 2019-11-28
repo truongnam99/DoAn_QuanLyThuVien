@@ -35,7 +35,6 @@ public class QLBaoCaoGUI {
 	private JPanel pnTongQuanQLTK;
 	private JTextField txtfThang;
 	private JTextField txtfNam;
-	private JTextField txtfMaBaoCao;
 	private JTable tbQLThongKe;
 
 	static QLBaoCaoGUI instance=null;
@@ -81,7 +80,7 @@ public class QLBaoCaoGUI {
 		lblTieuDe.setBounds(158, 11, 748, 28);
 		panelTieuDeQLTK.add(lblTieuDe);
 		
-		JLabel lblThang = new JLabel("Th\u00E1ng:");
+		JLabel lblThang = new JLabel("Tháng:");
 		lblThang.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		lblThang.setBounds(81, 44, 46, 31);
 		panelTieuDeQLTK.add(lblThang);
@@ -106,17 +105,7 @@ public class QLBaoCaoGUI {
 		txtfNam.setText(yearFormat.format(date));
 		txtfNam.setColumns(10);
 		
-		JLabel lblMaBaoCao = new JLabel("M\u00E3 b\u00E1o c\u00E1o:");
-		lblMaBaoCao.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblMaBaoCao.setBounds(282, 52, 86, 14);
-		panelTieuDeQLTK.add(lblMaBaoCao);
-		
-		txtfMaBaoCao = new JTextField();
-		txtfMaBaoCao.setBounds(378, 49, 101, 25);
-		panelTieuDeQLTK.add(txtfMaBaoCao);
-		txtfMaBaoCao.setColumns(10);
-		
-		JButton btnThongKe = new JButton("Th\u1ED1ng k\u00EA");
+		JButton btnThongKe = new JButton("Thống kê");
 		btnThongKe.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		btnThongKe.setIcon(new ImageIcon("icon\\edit.png"));
 		btnThongKe.addActionListener(new ActionListener() {
@@ -127,13 +116,13 @@ public class QLBaoCaoGUI {
 				tbQLThongKe.setModel(dtm);
 			}
 		});
-		btnThongKe.setBounds(584, 40, 157, 41);
+		btnThongKe.setBounds(505, 38, 157, 41);
 		panelTieuDeQLTK.add(btnThongKe);
 		
-		JButton btnLapBaoCao = new JButton("L\u1EADp b\u00E1o c\u00E1o");
+		JButton btnLapBaoCao = new JButton("Lập báo cáo");
 		btnLapBaoCao.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		btnLapBaoCao.setIcon(new ImageIcon("icon\\print.png"));
-		btnLapBaoCao.setBounds(824, 40, 157, 41);
+		btnLapBaoCao.setBounds(752, 38, 157, 41);
 		panelTieuDeQLTK.add(btnLapBaoCao);
 		btnLapBaoCao.addActionListener(new ActionListener() {
 			

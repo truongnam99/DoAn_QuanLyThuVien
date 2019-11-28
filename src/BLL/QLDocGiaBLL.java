@@ -153,4 +153,8 @@ public class QLDocGiaBLL {
 		}
 		return dtm;
 	}
+
+	public int SoDocGia() {
+		return DocGiaDAL.getInstance().getSodocgia();
+	}
 }
