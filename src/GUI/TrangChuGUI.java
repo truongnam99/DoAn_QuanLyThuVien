@@ -94,7 +94,7 @@ public class TrangChuGUI {
 		JLabel lblLoGoTruong = new JLabel("New label");
 		lblLoGoTruong.setBackground(Color.LIGHT_GRAY);
 		lblLoGoTruong.setBounds(12, 11, 221, 224);
-		lblLoGoTruong.setIcon(new ImageIcon("C:\\Users\\Hp\\eclipse-workspace\\doanjavaooad\\icon\\PTNKLogo.png"));
+		lblLoGoTruong.setIcon(new ImageIcon("icon\\PTNKLogo.png"));
 		pnMain.add(lblLoGoTruong);
 		
 		JLabel lblTenTruong = new JLabel("TR\u01AF\u1EDCNG PT N\u0102NG KHI\u1EBEU -  \u0110HQG TP.HCM");

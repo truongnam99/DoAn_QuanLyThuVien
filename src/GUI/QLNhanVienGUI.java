@@ -24,16 +24,25 @@ import javax.swing.ScrollPaneConstants;
 
 
 public class QLNhanVienGUI {
-	private JTable tbQLNhanVien;
+	
+	
+	
+	
+	private JTable 	   tbQLNhanVien;
 	private JTextField tfMaTaiKhoan;
 	private JTextField tfTenTaiKhoan;
 	private JTextField tfTenNhanVien;
 	private JTextField tfMatKhau;
+	private JTextField tfEmail;
+	
+	
+	
+	
 	private JPanel pnTongQuanQLNhanVien;
 	private JComboBox<String> cbbLoaiTaiKhoan;
 
 	static QLNhanVienGUI instance=null;
-	private JTextField tfEmail;
+	
 	
 	private QLNhanVienGUI(){
 		initialize();
@@ -237,8 +246,13 @@ public class QLNhanVienGUI {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				
-				NhanVienDTO nv = new NhanVienDTO(tfMaTaiKhoan.getText(), tfTenTaiKhoan.getText(), 
-						tfMatKhau.getText(), tfTenNhanVien.getText(), cbbLoaiTaiKhoan.getSelectedItem().toString(), tfEmail.getText());
+				NhanVienDTO nv = new NhanVienDTO(
+						tfMaTaiKhoan.getText(), 
+						tfTenTaiKhoan.getText(), 
+						tfMatKhau.getText(), 
+						tfTenNhanVien.getText(), 
+						cbbLoaiTaiKhoan.getSelectedItem().toString(), 
+						tfEmail.getText());
 				String result = QLNhanVienBLL.getInstance().changeProcessing(nv);
 				lblMessage.setText(result);
 				reloadResources();

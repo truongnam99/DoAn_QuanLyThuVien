@@ -8,7 +8,7 @@ import DAL.MuonTraDAL;
 import DTO.MuonTraDTO;
 
 public class QLMuonTraBLL {
-public static QLMuonTraBLL instance;
+	public static QLMuonTraBLL instance;
 	
 	private QLMuonTraBLL(){
 		
@@ -38,31 +38,22 @@ public static QLMuonTraBLL instance;
 			return "Xóa thành công!";
 		return "Xóa thất bại, các thuộc tính trước khi xóa";
 	}
-	public DefaultTableModel getResources() {
-		ArrayList<MuonTraDTO> dsMuonTra = new ArrayList<MuonTraDTO>();
-		dsMuonTra = MuonTraDAL.getInstance().getResources();
-		DefaultTableModel dtm = new DefaultTableModel();
-		try {
-			dtm.addColumn("STT");
-			dtm.addColumn("Mã độc giả");
-			dtm.addColumn("Mã sách");
-			dtm.addColumn("Ngày mượn");
-			dtm.addColumn("Ngày trả");
-			dtm.addColumn("Trạng thái");
-			dtm.addColumn("TRẢ SÁCH");
-			int i = 1;
-			for(MuonTraDTO dg : dsMuonTra) {
-				Object[] row = {i++, dg.getMaDocGia(), dg.getMaSach(),dg.getNgayMuon(),dg.getNgayTra(),dg.getTrangThai()};
-				dtm.addRow(row);
-			}
-			
-		}
-		catch(Exception ex) {
-			ex.printStackTrace();
-		}
-		finally {
-			
-		}
-		return dtm;
-	}
+	
+	  public DefaultTableModel getResources() { ArrayList<MuonTraDTO> dsMuonTra =
+	  new ArrayList<MuonTraDTO>(); dsMuonTra =
+	  MuonTraDAL.getInstance().getResources(); DefaultTableModel dtm = new
+	  DefaultTableModel(); try { dtm.addColumn("STT"); dtm.addColumn("Mã độc giả");
+	  dtm.addColumn("Mã sách"); dtm.addColumn("Ngày mượn");
+	  dtm.addColumn("Ngày trả"); dtm.addColumn("Trạng thái");
+	  dtm.addColumn("TRẢ SÁCH");
+	  
+	  int i = 1; for(MuonTraDTO dg : dsMuonTra) { Object[] row = {i++,
+	  dg.getMaDocGia(),
+	  dg.getMaSach(),dg.getNgayMuon(),dg.getNgayTra(),dg.getTrangThai()};
+	  dtm.addRow(row); }
+	  
+	  } catch(Exception ex) { ex.printStackTrace(); } finally {
+	  
+	  } return dtm; }
+	 
 }

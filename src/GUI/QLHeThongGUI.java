@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -20,29 +22,117 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 import BLL.QLDocGiaBLL;
+import BLL.QLHeThongBLL;
+import DAL.DAL;
+import DTO.HeThongDTO;
 
 
 public class QLHeThongGUI {
 	private JTextField txtfSoSachMuonHS;
-	private JTextField txtfThoiGianMuonHocSinh;
+	private JTextField txtfThoiGianMuonHS;
 	private JTextField txtfTienPhatHS;
+	private JTextField txtSachHongHS;
+	private JTextField txtMatSachHS;
+
+	
+	
 	private JTextField txtfSoSachMuonGV;
 	private JTextField txtfThoiGianMuonGV;
-	private JTextField textField_5;
+	private JTextField txtfTienPhatGV;
+	private JTextField txtSachHongGV;
+	private JTextField txtMatSachGV;
+	
 	private JPanel pnTongQuanQLQuyDinh;
 	
 	static QLHeThongGUI instance=null;
-	private JTextField txtSachHongHS;
-	private JTextField txtMatSachHS;
 	private JTextField textField;
 	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
+	private JTextField textField_6;
+	private JTextField textField_7;
+	private JTextField textField_8;
+	private JTextField textField_9;
+	
+	
+	
+	void clearField() {
+		txtfSoSachMuonHS.setText("");
+		txtfThoiGianMuonHS.setText("");
+		txtfTienPhatHS.setText("");
+		txtSachHongHS.setText("");
+		txtMatSachHS.setText("");
+
+		
+		
+		txtfSoSachMuonGV.setText("");
+		txtfThoiGianMuonGV.setText("");
+		txtfTienPhatGV.setText("");
+		txtSachHongGV.setText("");
+		txtMatSachGV.setText("");
+	}
+	
+	
 	
 	private QLHeThongGUI(){
 		initialize();
 		loadResources();
 	}
 	
+	
+	
+	
+	
+	//IN LÊN MÀN HÌNH
 	private void loadResources() {
+		
+		
+		ArrayList<HeThongDTO> dsHeThong = QLHeThongBLL.getInstance().getResources();
+		txtfSoSachMuonHS.setText(dsHeThong.get(0).getGiaTri());
+		txtfThoiGianMuonHS.setText(dsHeThong.get(1).getGiaTri());
+		txtfTienPhatHS.setText(dsHeThong.get(2).getGiaTri());
+		txtSachHongHS.setText(dsHeThong.get(3).getGiaTri());
+		txtMatSachHS.setText(dsHeThong.get(4).getGiaTri());
+		
+		txtfSoSachMuonGV.setText(dsHeThong.get(5).getGiaTri());
+		txtfThoiGianMuonGV.setText(dsHeThong.get(6).getGiaTri());
+		txtfTienPhatGV.setText(dsHeThong.get(7).getGiaTri());
+		txtSachHongGV.setText(dsHeThong.get(8).getGiaTri());
+		txtMatSachGV.setText(dsHeThong.get(9).getGiaTri());
+		
+		textField.setText(dsHeThong.get(0).getDonVi());
+		textField_1.setText(dsHeThong.get(1).getDonVi());
+		textField_2.setText(dsHeThong.get(2).getDonVi());
+		textField_3.setText(dsHeThong.get(3).getDonVi());
+		textField_4.setText(dsHeThong.get(4).getDonVi());
+		textField_5.setText(dsHeThong.get(5).getDonVi());
+		textField_6.setText(dsHeThong.get(6).getDonVi());
+		textField_7.setText(dsHeThong.get(7).getDonVi());
+		textField_8.setText(dsHeThong.get(8).getDonVi());
+		textField_9.setText(dsHeThong.get(9).getDonVi());
+		
+		//CĂN LỀ CỘT BÊN TRÁI
+		txtfSoSachMuonHS.setHorizontalAlignment(SwingConstants.CENTER);
+		txtfThoiGianMuonHS.setHorizontalAlignment(SwingConstants.CENTER);
+		txtfTienPhatHS.setHorizontalAlignment(SwingConstants.CENTER);
+		txtSachHongHS.setHorizontalAlignment(SwingConstants.CENTER);
+		txtMatSachHS.setHorizontalAlignment(SwingConstants.CENTER);
+		
+	
+		//CĂN LỀ CỘT BÊN PHẢI
+		txtfSoSachMuonGV.setHorizontalAlignment(SwingConstants.CENTER);
+		txtfThoiGianMuonGV.setHorizontalAlignment(SwingConstants.CENTER);
+		txtfTienPhatGV.setHorizontalAlignment(SwingConstants.CENTER);
+		txtSachHongGV.setHorizontalAlignment(SwingConstants.CENTER);
+		txtMatSachGV.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		
+	}
+	
+	
+	private void reloadRecources() {
 		
 	}
 	
@@ -58,6 +148,10 @@ public class QLHeThongGUI {
 	
 	public JPanel getPnTongQuanQLHeThong() {
 		return pnTongQuanQLQuyDinh;
+	}
+	public static void AppearRules() {
+		//txtfSoSachMuonHS
+		;
 	}
 	private void initialize() {
 		
@@ -111,19 +205,21 @@ public class QLHeThongGUI {
 		pnThongTinHocSinh.add(lblSoSachMuonHS);
 		
 		txtfSoSachMuonHS = new JTextField();
-		txtfSoSachMuonHS.setBounds(181, 33, 205, 30);
+		txtfSoSachMuonHS.setBounds(181, 33, 122, 30);
 		pnThongTinHocSinh.add(txtfSoSachMuonHS);
 		txtfSoSachMuonHS.setColumns(10);
+	
+		
 		
 		JLabel lblThoiGianMuonHS = new JLabel("Th\u1EDDi gian m\u01B0\u1EE3n t\u1ED1i \u0111a:");
 		lblThoiGianMuonHS.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		lblThoiGianMuonHS.setBounds(10, 99, 144, 14);
 		pnThongTinHocSinh.add(lblThoiGianMuonHS);
 		
-		txtfThoiGianMuonHocSinh = new JTextField();
-		txtfThoiGianMuonHocSinh.setBounds(181, 91, 205, 30);
-		pnThongTinHocSinh.add(txtfThoiGianMuonHocSinh);
-		txtfThoiGianMuonHocSinh.setColumns(10);
+		txtfThoiGianMuonHS = new JTextField();
+		txtfThoiGianMuonHS.setBounds(181, 91, 122, 30);
+		pnThongTinHocSinh.add(txtfThoiGianMuonHS);
+		txtfThoiGianMuonHS.setColumns(10);
 		
 		JLabel lblTienPhatHS = new JLabel("Tiền phạt mượn trễ:");
 		lblTienPhatHS.setFont(new Font("Times New Roman", Font.BOLD, 12));
@@ -131,7 +227,7 @@ public class QLHeThongGUI {
 		pnThongTinHocSinh.add(lblTienPhatHS);
 		
 		txtfTienPhatHS = new JTextField();
-		txtfTienPhatHS.setBounds(181, 150, 205, 30);
+		txtfTienPhatHS.setBounds(181, 150, 122, 30);
 		pnThongTinHocSinh.add(txtfTienPhatHS);
 		txtfTienPhatHS.setColumns(10);
 		
@@ -145,15 +241,54 @@ public class QLHeThongGUI {
 		lblMatSachHS.setBounds(10, 280, 122, 14);
 		pnThongTinHocSinh.add(lblMatSachHS);
 		
-		txtSachHongHS = new JTextField();
-		txtSachHongHS.setBounds(181, 211, 205, 30);
+		txtSachHongHS = new JTextField("");
+		txtSachHongHS.setHorizontalAlignment(SwingConstants.CENTER);
+		txtSachHongHS.setBounds(181, 211, 122, 30);
 		pnThongTinHocSinh.add(txtSachHongHS);
 		txtSachHongHS.setColumns(10);
+		txtfSoSachMuonHS.setLayout(null);
 		
-		txtMatSachHS = new JTextField();
-		txtMatSachHS.setBounds(181, 272, 205, 30);
+		
+		txtMatSachHS = new JTextField("");
+		txtMatSachHS.setHorizontalAlignment(SwingConstants.CENTER);
+		txtMatSachHS.setBounds(181, 272, 122, 30);
 		pnThongTinHocSinh.add(txtMatSachHS);
 		txtMatSachHS.setColumns(10);
+		
+		textField = new JTextField();
+		textField.setText((String) null);
+		textField.setHorizontalAlignment(SwingConstants.CENTER);
+		textField.setColumns(10);
+		textField.setBounds(310, 33, 76, 30);
+		pnThongTinHocSinh.add(textField);
+		
+		textField_1 = new JTextField();
+		textField_1.setText((String) null);
+		textField_1.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_1.setColumns(10);
+		textField_1.setBounds(310, 91, 76, 30);
+		pnThongTinHocSinh.add(textField_1);
+		
+		textField_2 = new JTextField();
+		textField_2.setText((String) null);
+		textField_2.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_2.setColumns(10);
+		textField_2.setBounds(310, 150, 76, 30);
+		pnThongTinHocSinh.add(textField_2);
+		
+		textField_3 = new JTextField();
+		textField_3.setText((String) null);
+		textField_3.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_3.setColumns(10);
+		textField_3.setBounds(310, 211, 76, 30);
+		pnThongTinHocSinh.add(textField_3);
+		
+		textField_4 = new JTextField();
+		textField_4.setText((String) null);
+		textField_4.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_4.setColumns(10);
+		textField_4.setBounds(310, 272, 76, 30);
+		pnThongTinHocSinh.add(textField_4);
 		
 		JPanel pnGiaoVien = new JPanel();
 		pnGiaoVien.setBounds(596, 46, 392, 336);
@@ -178,7 +313,7 @@ public class QLHeThongGUI {
 		
 		txtfSoSachMuonGV = new JTextField();
 		txtfSoSachMuonGV.setColumns(10);
-		txtfSoSachMuonGV.setBounds(178, 33, 205, 30);
+		txtfSoSachMuonGV.setBounds(178, 33, 127, 30);
 		pnThongTinGiaoVien.add(txtfSoSachMuonGV);
 		
 		JLabel lblThoiGianMuonGV = new JLabel("Th\u1EDDi gian m\u01B0\u1EE3n t\u1ED1i \u0111a:");
@@ -188,7 +323,7 @@ public class QLHeThongGUI {
 		
 		txtfThoiGianMuonGV = new JTextField();
 		txtfThoiGianMuonGV.setColumns(10);
-		txtfThoiGianMuonGV.setBounds(178, 91, 205, 30);
+		txtfThoiGianMuonGV.setBounds(178, 91, 127, 30);
 		pnThongTinGiaoVien.add(txtfThoiGianMuonGV);
 		
 		JLabel lblTienPhatGV = new JLabel("Tiền phạt mượn trễ:");
@@ -196,41 +331,129 @@ public class QLHeThongGUI {
 		lblTienPhatGV.setBounds(10, 158, 127, 14);
 		pnThongTinGiaoVien.add(lblTienPhatGV);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(178, 150, 205, 30);
-		pnThongTinGiaoVien.add(textField_5);
+		txtfTienPhatGV = new JTextField();
+		txtfTienPhatGV.setColumns(10);
+		txtfTienPhatGV.setBounds(178, 150, 127, 30);
+		pnThongTinGiaoVien.add(txtfTienPhatGV);
 		
 		JLabel lblNewLabel = new JLabel("Sách bị hư hỏng:");
 		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		lblNewLabel.setBounds(10, 219, 127, 14);
 		pnThongTinGiaoVien.add(lblNewLabel);
 		
-		textField = new JTextField();
-		textField.setBounds(178, 211, 205, 30);
-		pnThongTinGiaoVien.add(textField);
-		textField.setColumns(10);
+		txtSachHongGV = new JTextField("");
+		txtSachHongGV.setBounds(178, 211, 127, 30);
+		pnThongTinGiaoVien.add(txtSachHongGV);
+		txtSachHongGV.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Mất sách:");
 		lblNewLabel_1.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		lblNewLabel_1.setBounds(10, 280, 108, 14);
 		pnThongTinGiaoVien.add(lblNewLabel_1);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(178, 272, 205, 30);
-		pnThongTinGiaoVien.add(textField_1);
-		textField_1.setColumns(10);
+		txtMatSachGV = new JTextField("");
+
+		txtMatSachGV.setBounds(178, 272, 127, 30);
+		pnThongTinGiaoVien.add(txtMatSachGV);
+		txtMatSachGV.setColumns(10);
 		
-		JButton btnLuu = new JButton("L\u01B0u");
+		textField_5 = new JTextField();
+		textField_5.setText((String) null);
+		textField_5.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_5.setColumns(10);
+		textField_5.setBounds(307, 33, 76, 30);
+		pnThongTinGiaoVien.add(textField_5);
+		
+		textField_6 = new JTextField();
+		textField_6.setText((String) null);
+		textField_6.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_6.setColumns(10);
+		textField_6.setBounds(307, 91, 76, 30);
+		pnThongTinGiaoVien.add(textField_6);
+		
+		textField_7 = new JTextField();
+		textField_7.setText((String) null);
+		textField_7.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_7.setColumns(10);
+		textField_7.setBounds(307, 150, 76, 30);
+		pnThongTinGiaoVien.add(textField_7);
+		
+		textField_8 = new JTextField();
+		textField_8.setText((String) null);
+		textField_8.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_8.setColumns(10);
+		textField_8.setBounds(307, 211, 76, 30);
+		pnThongTinGiaoVien.add(textField_8);
+		
+		textField_9 = new JTextField();
+		textField_9.setText((String) null);
+		textField_9.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_9.setColumns(10);
+		textField_9.setBounds(307, 272, 76, 30);
+		pnThongTinGiaoVien.add(textField_9);
+		
+		
+		//LƯU
+		JButton btnLuu = 	new JButton("L\u01B0u");
 		btnLuu.setBounds(223, 426, 139, 41);
 		pnThongTinQuyDinh.add(btnLuu);
 		btnLuu.setIcon(new ImageIcon("icon\\save.png"));
 		btnLuu.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		btnLuu.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				String query0 = "update quydinh set GiaTri=\""+txtfSoSachMuonHS.getText()+"\" where MaQuyDinh=\"QD000001\"";
+				String query1 = "update quydinh set GiaTri=\""+txtfThoiGianMuonHS.getText()+"\" where MaQuyDinh=\"QD000002\"";
+				String query2 = "update quydinh set GiaTri=\""+txtfTienPhatHS.getText()+"\" where MaQuyDinh=\"QD000003\"";
+				String query3 = "update quydinh set GiaTri=\""+txtSachHongHS.getText()+"\" where MaQuyDinh=\"QD000004\"";
+				String query4 = "update quydinh set GiaTri=\""+txtMatSachHS.getText()+"\" where MaQuyDinh=\"QD000005\"";
+				
+				
+				String query5 = "update quydinh set GiaTri=\""+txtfSoSachMuonGV.getText()+"\" where MaQuyDinh=\"QD000006\"";
+				String query6 = "update quydinh set GiaTri=\""+txtfThoiGianMuonGV.getText()+"\" where MaQuyDinh=\"QD000007\"";
+				String query7 = "update quydinh set GiaTri=\""+txtfTienPhatGV.getText()+"\" where MaQuyDinh=\"QD000008\"";
+				String query8 = "update quydinh set GiaTri=\""+txtSachHongGV.getText()+"\" where MaQuyDinh=\"QD000009\"";
+				String query9 = "update quydinh set GiaTri=\""+txtMatSachGV.getText()+"\" where MaQuyDinh=\"QD000010\"";
+				System.out.println(query0);
+				
+				DAL.getInstance().executeQueryUpdate(query0);
+				
+				  DAL.getInstance().executeQueryUpdate(query1);
+				  DAL.getInstance().executeQueryUpdate(query2);
+				  DAL.getInstance().executeQueryUpdate(query3);
+				  DAL.getInstance().executeQueryUpdate(query4);
+				  DAL.getInstance().executeQueryUpdate(query5);
+				  DAL.getInstance().executeQueryUpdate(query6);
+				  DAL.getInstance().executeQueryUpdate(query7);
+				  DAL.getInstance().executeQueryUpdate(query8);
+				  DAL.getInstance().executeQueryUpdate(query9);
+				 
+				
+
+			}
+		} );
 		
-		JButton btnSua = new JButton("S\u1EEDa");
-		btnSua.setBounds(725, 426, 139, 41);
-		pnThongTinQuyDinh.add(btnSua);
-		btnSua.setIcon(new ImageIcon("icon\\setting.png"));
-		btnSua.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		
+		
+		//HỦY
+		
+		
+		
+		JButton btnHuy = new JButton("Hủy");
+		btnHuy.setBounds(725, 426, 139, 41);
+		pnThongTinQuyDinh.add(btnHuy);
+		btnHuy.setIcon(new ImageIcon("icon\\setting.png"));
+		btnHuy.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		btnHuy.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				//clearField();
+				loadResources();
+			}
+		});
 	}
 }
