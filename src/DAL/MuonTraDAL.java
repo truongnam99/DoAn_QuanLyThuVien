@@ -6,7 +6,10 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import org.apache.poi.util.SystemOutLogger;
+
 import DTO.*;
+import MyException.ContainException;
 import MyException.MyException;
 
 public class MuonTraDAL {
@@ -47,15 +50,15 @@ public class MuonTraDAL {
 		return dsMuonTra;
 	}
 
-	public int addProcessing(String maSach, String maDocGia, String ngayMuon, String ngayTra){
+	public int addProcessing(MuonTraDTO mt) throws ContainException{
 		try {
-			String query = "insert into quanlymuonsach values(\"" + maDocGia + "\", \"" + maSach + "\", \"" + ngayMuon + "\", \"" + ngayTra+"\", \"0\")";
+			String query = "insert into quanlymuonsach values(\"" + mt.getMaDocGia() + "\", \"" + mt.getMaSach() + "\", \"" + mt.getNgayMuon() + "\", \"" + mt.getNgayTra()+"\", \"0\")";
 			System.out.println(query+ "tai addProcessing ở MuonTraDAL");
 			int result = DAL.getInstance().executeQueryUpdate(query);
 			
 			if(result > 0) {
-				SachDAL.getInstance().changeTrangThai(maSach, "Đang được mượn");
-				dsMuonTra.add(new MuonTraDTO(maDocGia, maSach, Date.valueOf(ngayMuon), Date.valueOf(ngayTra), 0+""));
+				SachDAL.getInstance().changeTrangThai(mt.getMaSach(), "Đang được mượn");
+				dsMuonTra.add(new MuonTraDTO(mt.getMaDocGia(), mt.getMaSach(), mt.getNgayMuon(), mt.getNgayTra(), 0+""));
 			}
 			return result;
 		}catch(MyException e) {
@@ -63,16 +66,19 @@ public class MuonTraDAL {
 		}
 	}
 
-	public int changeProcessing(String maDocGia, String maSach, String ngayMuon, String ngayTra) {
+	public int changeProcessing(MuonTraDTO mt) {
 		int result;
-		String query = "update quanlymuonsach set NgayMuon=\""+ngayMuon+"\", NgayTra=\""+ngayTra+"\" where MaSach=\""+maSach+"\" and MaDocGia=\""+maDocGia+"\"";
+		String query = "update quanlymuonsach set NgayMuon=\""+mt.getNgayMuon()+"\", NgayTra=\""+mt.getNgayTra()+"\" where MaSach=\""+mt.getMaSach()+"\" and MaDocGia=\""+mt.getMaDocGia()+"\"";
+		System.out.println("update quanlymuonsach set NgayMuon=\""+mt.getNgayMuon()+"\", NgayTra=\""+mt.getNgayTra()+"\" where MaSach=\""+mt.getMaSach()+"\" and MaDocGia=\""+mt.getMaDocGia()+"\"");
 		result = DAL.getInstance().executeQueryUpdate(query);
 		if (result > 0)
+			//for(int i=0;i<dsMuonTra.size();i++) {
+				//MuonTraDTO item=dsMuonTra.get(i);
 			for (MuonTraDTO item:dsMuonTra) {
-				if (item.getMaDocGia().equals(maDocGia) && item.getMaSach().equals(maSach))
+				if (item.getMaDocGia().equals(mt.getMaDocGia()) && item.getMaSach().equals(mt.getMaSach()))
 					{
-						item.setNgayMuon(Date.valueOf(ngayMuon));
-						item.setNgayTra(Date.valueOf(ngayTra));
+						item.setNgayMuon(mt.getNgayMuon());
+						item.setNgayTra(mt.getNgayTra());
 						break;
 					}
 			}
@@ -90,5 +96,10 @@ public class MuonTraDAL {
 		}
 		return result;
 		
+	}
+
+	public ArrayList<MuonTraDTO> reloadResources() {
+		// TODO Auto-generated method stub
+		return dsMuonTra;
 	}
 }

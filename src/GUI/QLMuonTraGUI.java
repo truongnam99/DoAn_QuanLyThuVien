@@ -27,6 +27,8 @@ import BLL.QLMuonTraBLL;
 import CustomControl.ButtonEditor;
 import CustomControl.ButtonRenderer;
 import DTO.MuonTraDTO;
+import MyException.ContainException;
+import MyException.MyException;
 
 public class QLMuonTraGUI {
 
@@ -56,6 +58,8 @@ public class QLMuonTraGUI {
 		tbMuonTra.getColumn("Trả sách").setCellEditor(new  ButtonEditor(new JCheckBox()));
 	}
 	
+
+	
 	public static QLMuonTraGUI getInstance() {
 		if (instance == null)
 			instance = new QLMuonTraGUI();
@@ -72,7 +76,9 @@ public class QLMuonTraGUI {
 	private void setStateForTextfeild() {
 		tfMaDocGia.setEditable(isEdit);
 		tfMaSach.setEditable(isEdit);
-		
+		tfTenSach.setEditable(isEdit);
+		tfHoTen.setEditable(isEdit);
+		tfTrangThai.setEditable(isEdit);
 	}
 	private void initialize() {
 		pnMain = new JPanel();
@@ -153,9 +159,8 @@ public class QLMuonTraGUI {
 		        		// hiển thị thông tin vào trong các trường
 		        		tfMaDocGia.setText(tbMuonTra.getValueAt(tbMuonTra.getSelectedRow(), 1).toString());
 		        		tfHoTen.setText(tbMuonTra.getValueAt(tbMuonTra.getSelectedRow(), 2).toString());;
-		        		
-		        		tfTenSach.setText(tbMuonTra.getValueAt(tbMuonTra.getSelectedRow(), 4).toString());;
 		        		tfMaSach.setText(tbMuonTra.getValueAt(tbMuonTra.getSelectedRow(), 3).toString());;
+		        		tfTenSach.setText(tbMuonTra.getValueAt(tbMuonTra.getSelectedRow(), 4).toString());;
 		        		tfNgayMuon.setText(tbMuonTra.getValueAt(tbMuonTra.getSelectedRow(), 5).toString());;
 		        		tfNgayTra.setText(tbMuonTra.getValueAt(tbMuonTra.getSelectedRow(), 6).toString());;
 		        		tfTrangThai.setText(tbMuonTra.getValueAt(tbMuonTra.getSelectedRow(), 7).toString());;
@@ -180,7 +185,17 @@ public class QLMuonTraGUI {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String msg = QLMuonTraBLL.getInstance().addProcessing(tfMaDocGia.getText(), tfMaSach.getText(), tfNgayMuon.getText(), tfNgayTra.getText());;
+				MuonTraDTO mt=new MuonTraDTO(tfMaDocGia.getText(), tfMaSach.getText(), Date.valueOf(tfNgayMuon.getText()), Date.valueOf(tfNgayTra.getText()));
+				String msg = null;
+				try {
+					msg = QLMuonTraBLL.getInstance().addProcessing(mt);
+				} catch (MyException e1) {
+					
+					e1.printStackTrace();
+				} catch (ContainException e1) {
+					
+					e1.printStackTrace();
+				};
 				lblMessage.setText(msg);
 				loadResources();
 			}
@@ -195,7 +210,8 @@ public class QLMuonTraGUI {
 		btnSua.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String msg = QLMuonTraBLL.getInstance().changeProcessing(tfMaDocGia.getText(), tfMaSach.getText(), tfNgayMuon.getText(), tfNgayTra.getText());;
+				MuonTraDTO mt = new MuonTraDTO(tfMaDocGia.getText(), tfMaSach.getText(), Date.valueOf(tfNgayMuon.getText()), Date.valueOf(tfNgayTra.getText()));
+				String msg = QLMuonTraBLL.getInstance().changeProcessing(mt);;
 				lblMessage.setText(msg);
 				loadResources();
 			}

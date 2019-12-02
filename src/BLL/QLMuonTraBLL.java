@@ -13,6 +13,7 @@ import DAL.SachDAL;
 import DTO.DocGiaDTO;
 import DTO.MuonTraDTO;
 import DTO.SachDTO;
+import MyException.ContainException;
 import MyException.MyException;
 import MyException.MyNullException;
 
@@ -80,45 +81,54 @@ public class QLMuonTraBLL {
 		return dtm;
 	}
 
-	private void checkData(String maDocGia, String maSach, String ngayMuon, String ngayTra) throws MyNullException, MyException{
-		if (maDocGia.equals(""))
+	
+	private void checkData(MuonTraDTO mt) throws MyNullException, MyException{
+		if (mt.getMaDocGia().equals(""))
 			throw new MyNullException("Mã độc giả đang bị trống");
-		if(maSach.equals(""))
+		if(mt.getMaSach().equals(""))
 			throw new MyNullException("Mã độc giả đang bị trống");
 		try {
-			java.util.Date nm = new java.util.Date(ngayMuon);
-			java.util.Date nt = new java.util.Date(ngayTra);
+			Date nm;
+			Date nt;
 			
-			SachDTO s = SachDAL.getInstance().getSach(maSach);	
+				 nm = mt.getNgayMuon();
+				 nt = mt.getNgayTra();
+				
+			SachDTO s = SachDAL.getInstance().getSach(mt.getMaSach());	
 			
 			if(nm.compareTo(nt) > 0) {
 				throw new MyException("Ngày mượn phải bé hơn ngày trả");
 			}
 			
-			java.util.Date nn = new java.util.Date(s.getNgayNhap().toString());
+			Date nn = (Date) s.getNgayNhap();
 			
 			if(nm.compareTo(nn) < 0) {
 				throw new MyException("Ngày mượn đang bé hơn ngày nhập sách vào");
 			}
 		}
 		catch(Exception e) {
-			System.out.println("insert into quanlymuonsach values(\"" + maDocGia + "\", \"" + maSach + "\", \"" + ngayMuon + "\", \"" + ngayTra+"\", \"0\")");
+			e.printStackTrace();
 			throw new MyException("Ngày tháng bị lỗi");
 		}
 		
 	}
 	
-	public String addProcessing(String maDocGia, String maSach, String ngayMuon, String ngayTra) {
+	
+
+	
+	public String addProcessing(MuonTraDTO mt) throws MyException, ContainException  {
 		try {
-			checkData(maDocGia, maSach, ngayMuon, ngayTra);
-			boolean trong = SachDAL.getInstance().isTrong(maSach);
+			checkData(mt);
+			String msg;
+			boolean trong = SachDAL.getInstance().isTrong(mt.getMaSach());
 			if (!trong)
-				return "Sách nhập vào đang được mượn! Vui lòng kiểm tra lại";
-			int result = MuonTraDAL.getInstance().addProcessing(maSach, maDocGia, ngayMuon, ngayTra);
+				msg= "Sách nhập vào đang được mượn! Vui lòng kiểm tra lại";
+			int result = MuonTraDAL.getInstance().addProcessing(mt);
 			if (result> 0)
-				return "Thêm thành công";
+				msg= "Đã thêm thành công";
 			else
-				return "Thêm thất bại";
+				msg= "Thêm lỗi! Vui lòng thử lại";
+			return msg;
 		}catch(MyNullException e1) {
 			return e1.getMessage();
 		}catch(MyException e2) {
@@ -126,22 +136,24 @@ public class QLMuonTraBLL {
 		}
 	}
 
-	public String changeProcessing(String maDocGia, String maSach, String ngayMuon, String ngayTra) {
+		public String changeProcessing(MuonTraDTO mt) {
 		
 		try {
-			checkData(maDocGia, maSach, ngayMuon, ngayTra);
-			if(!maDocGia.equals(muonTra.getMaDocGia())) {
-				return "Mã độc giả không được thay đổi";
+			String msg;
+			checkData(mt);
+			if(!mt.getMaDocGia().equals(mt.getMaDocGia())) {
+				msg= "Mã độc giả không được thay đổi";
 				
 			}
-			if(!maSach.equalsIgnoreCase(muonTra.getMaSach())) {
-				return "Mã sách không được thay đổi";
+			if(!mt.getMaSach().equalsIgnoreCase(mt.getMaSach())) {
+				msg= "Mã sách không được thay đổi";
 			}
-			int result = MuonTraDAL.getInstance().changeProcessing(maDocGia, maSach, ngayMuon, ngayTra);
+			int result = MuonTraDAL.getInstance().changeProcessing(mt);
 			if(result>0)
-				return "Thay đổi thành công";
+				msg= "Thay đổi thành công";
 			else
-				return "Thay đổi không thành công";
+				msg= "Thay đổi không thành công";
+			return msg;
 		}catch(MyNullException e1) {
 			return e1.getMessage();
 		}catch(MyException e2) {
@@ -162,6 +174,48 @@ public class QLMuonTraBLL {
 		// TODO Auto-generated method stub
 		return MuonTraDAL.getInstance().getResources().size();
 	}
+
+	public DefaultTableModel reloadResources() {
+		ArrayList<MuonTraDTO> dsMuonTra = new ArrayList<MuonTraDTO>();
+		dsMuonTra = MuonTraDAL.getInstance().reloadResources();
+		DefaultTableModel dtm = new DefaultTableModel();
+		
+		try {
+			dtm.addColumn("STT");
+			dtm.addColumn("Mã độc giả");
+			dtm.addColumn("Họ và tên");
+			dtm.addColumn("Mã sách");
+			dtm.addColumn("Tên sách");
+			dtm.addColumn("Ngày mượn");
+			dtm.addColumn("Ngày trả");
+			dtm.addColumn("Trạng thái");
+			dtm.addColumn("Trả sách");
+			int i = 1;
+			for(MuonTraDTO mt : dsMuonTra) {
+				if (mt.getTrangThai().equals("-1"))//đã trả
+					continue;
+				Object[] row = {i++, mt.getMaDocGia(), 
+						DocGiaDAL.getInstance().getTenDocGia(mt.getMaDocGia()), 
+						mt.getMaSach(),
+						SachDAL.getInstance().getTenSach(mt.getMaSach()),
+						mt.getNgayMuon(),
+						mt.getNgayTra(),
+						mt.getTrangThai(),
+						"Trả"};
+				dtm.addRow(row);
+			}
+		}
+		catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		finally {
+			
+		}
+		return dtm;
+		
+	}
+
+	
 	
 	
 

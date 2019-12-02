@@ -22,9 +22,9 @@ public class SachDAL {
 		return instance;
 	}
 	
-	public boolean isTrong(String maSach) throws MyException{
+	public boolean isTrong(String mt) throws MyException{
 		for (SachDTO s: dsSach) {
-			if (s.getMaSach().equals(maSach))
+			if (s.getMaSach().equals(mt))
 				if (s.getTrangThai().equals("Trống"))
 					return true;
 				else 
