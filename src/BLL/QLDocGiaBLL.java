@@ -95,7 +95,7 @@ public class QLDocGiaBLL {
 			dtm.addColumn("Loại độc giả");
 			dtm.addColumn("Lớp/Chuyên môn");
 			dtm.addColumn("Ngày sinh");
-			dtm.addColumn("SDT");
+			dtm.addColumn("SĐT");
 			dtm.addColumn("Email");
 			int i = 1;
 			for(DocGiaDTO dg : dsDocGia) {
@@ -136,7 +136,7 @@ public class QLDocGiaBLL {
 			dtm.addColumn("Loại độc giả");
 			dtm.addColumn("Lớp/ Chuyên môn");
 			dtm.addColumn("Ngày sinh");
-			dtm.addColumn("SDT");
+			dtm.addColumn("SĐT");
 			dtm.addColumn("Email");
 			int i = 1;
 			for(DocGiaDTO dg : dsDocGia) {

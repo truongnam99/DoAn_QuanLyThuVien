@@ -21,6 +21,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import javax.swing.ScrollPaneConstants;
 
 public class QLThanhLyGUI {
 	private static QLThanhLyGUI instance;
@@ -63,6 +64,8 @@ public class QLThanhLyGUI {
 		pnMain.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollPane.setBounds(0, 75, 343, 327);
 		pnMain.add(scrollPane);
 		
@@ -81,6 +84,8 @@ public class QLThanhLyGUI {
 		});
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollPane_1.setBounds(353, 75, 691, 327);
 		pnMain.add(scrollPane_1);
 		

@@ -29,6 +29,7 @@ import BLL.BaoCaoBLL;
 
 import javax.swing.SwingConstants;
 import DTO.BaoCaoMuonDTO;
+import javax.swing.ScrollPaneConstants;
 
 public class QLBaoCaoGUI {
 
@@ -133,21 +134,15 @@ public class QLBaoCaoGUI {
 		});
 		
 		JPanel pnQLThongKe = new JPanel();
-		pnQLThongKe.setBounds(0, 89, 1065, 471);
+		pnQLThongKe.setBounds(0, 89, 1065, 472);
 		pnTongQuanQLTK.add(pnQLThongKe);
-		pnQLThongKe.setLayout(new BorderLayout());
+		pnQLThongKe.setLayout(null);
 		tbQLThongKe = new JTable();
-		tbQLThongKe.setBounds(0, 0, 624, 352);
-		JScrollPane sc = new JScrollPane(tbQLThongKe, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		tbQLThongKe.setBounds(0, 0, 1050, 452);
+		JScrollPane sc = new JScrollPane(tbQLThongKe, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		sc.setBounds(0, 0, 1055, 472);
 		pnQLThongKe.add(sc);
-//		tbQLThongKe.setModel(new DefaultTableModel(
-//			new Object[][] {
-//				{null, null, null, null},
-//				{null, null, null, null},
-//			},
-//			new String[] {"Tên thể loại", "Số lượt mượn", "Tỉ lệ"
-//			}
-//		));
+
 		
 	}
 }

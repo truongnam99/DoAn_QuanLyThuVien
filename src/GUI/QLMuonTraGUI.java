@@ -140,7 +140,7 @@ public class QLMuonTraGUI {
 		tbMuonTra = new JTable();
 		tbMuonTra.setBounds(0, 0, 1060, 230);
 		JScrollPane sc = new JScrollPane(tbMuonTra, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		sc.setBounds(0, 44, 1065, 212);
+		sc.setBounds(0, 44, 1055, 212);
 		tbMuonTra.addMouseListener(new MouseAdapter() {
 			@Override
 		    public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -290,7 +290,7 @@ public class QLMuonTraGUI {
 		
 		tfTenSach = new JTextField();
 		tfTenSach.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		tfTenSach.setBounds(561, 89, 274, 30);
+		tfTenSach.setBounds(561, 85, 274, 30);
 		pnThongTinNhap.add(tfTenSach);
 		tfTenSach.setColumns(10);
 		
@@ -318,11 +318,17 @@ public class QLMuonTraGUI {
 		pnThongTinNhap.add(tfTrangThai);
 		tfTrangThai.setColumns(10);
 		
-		lblMessage = new JLabel("(*) Không được bỏ trống");
+		lblMessage = new JLabel("");
 		lblMessage.setFont(new Font("Times New Roman", Font.ITALIC, 12));
 		lblMessage.setForeground(Color.red);
-		lblMessage.setBounds(145, 11, 690, 25);
+		lblMessage.setBounds(145, 11, 311, 25);
 		pnThongTinNhap.add(lblMessage);
+		
+		JLabel lblKhongBoTrong = new JLabel("(*) Không được bỏ trống");
+		lblKhongBoTrong.setForeground(Color.RED);
+		lblKhongBoTrong.setFont(new Font("Times New Roman", Font.ITALIC, 12));
+		lblKhongBoTrong.setBounds(464, 11, 235, 22);
+		pnThongTinNhap.add(lblKhongBoTrong);
 		
 		JButton btnHuy = new JButton();
 		btnHuy.setIcon(new ImageIcon("icon\\del.png"));

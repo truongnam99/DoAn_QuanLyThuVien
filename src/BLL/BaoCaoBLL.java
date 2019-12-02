@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
@@ -40,6 +41,7 @@ public class BaoCaoBLL {
 		return instance;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public DefaultTableModel thongKe(int thang, int nam) {
 		dtm = new DefaultTableModel();
 		dtm.addColumn("Tên thể loại");
@@ -55,6 +57,7 @@ public class BaoCaoBLL {
 					if (maSach.equals(sach.getMaSach())){
 						String theLoai = sach.getTheLoai();
 						dsTheLoai.add(theLoai);
+						
 						break;
 					}
 				}
@@ -81,6 +84,7 @@ public class BaoCaoBLL {
 			Object[] row = {item, count, (float)count/tongLuotMuon * 100};
 			dataRow.add(row);
 			dtm.addRow(row);
+		
 		}
 		
 		return dtm;
@@ -135,10 +139,11 @@ public class BaoCaoBLL {
 	
 		SimpleDateFormat sdf = new SimpleDateFormat("dd MM yyyy");
 		try {
-			FileOutputStream out = new FileOutputStream(new File("Báo cáo ngày "+ sdf.format(now) + ".docx"));
+			FileOutputStream out = new FileOutputStream(new File("Báo cáo mượn ngày "+ sdf.format(now) + ".docx"));
 			document.write(out);
 			out.close();
 			document.close();
+			JOptionPane.showMessageDialog(null, "Thành công!","Thông báo",1);
 			System.out.println("Thành công");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

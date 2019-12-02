@@ -68,62 +68,70 @@ public class TrangChuGUI {
 		pnTrangChu.setLayout(null);
 		
 		pnTitle = new JPanel();
-		pnTitle.setBounds(10, 0, 1065, 118);
+		pnTitle.setBounds(10, 0, 1060, 118);
 		pnTrangChu.add(pnTitle);
 		pnTitle.setBackground(SystemColor.activeCaption);
 		pnTitle.setLayout(null);
 		
 		JLabel lblQuyenSach = new JLabel("QUYỂN SÁCH");
+		lblQuyenSach.setForeground(new Color(255, 69, 0));
 		lblQuyenSach.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		lblQuyenSach.setIcon(new ImageIcon("icon\\quyensach.png"));
-		lblQuyenSach.setBounds(111, 40, 143, 39);
+		lblQuyenSach.setBounds(70, 41, 143, 39);
 		pnTitle.add(lblQuyenSach);
 		
 		JLabel lblTheLoai = new JLabel("THỂ LOẠI");
+		lblTheLoai.setForeground(new Color(255, 69, 0));
 		lblTheLoai.setIcon(new ImageIcon("icon\\theloai.png"));
 		lblTheLoai.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblTheLoai.setBounds(384, 39, 123, 41);
+		lblTheLoai.setBounds(357, 41, 123, 41);
 		pnTitle.add(lblTheLoai);
 		
 		JLabel lblDocGia = new JLabel("ĐỘC GIẢ");
+		lblDocGia.setForeground(new Color(255, 69, 0));
 		lblDocGia.setIcon(new ImageIcon("icon\\367785583.jpg"));
 		lblDocGia.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblDocGia.setBounds(629, 40, 116, 39);
+		lblDocGia.setBounds(621, 41, 116, 39);
 		pnTitle.add(lblDocGia);
 		
-		JLabel lblSachMuon = new JLabel("SÁCH MƯỢN");
+		JLabel lblSachMuon = new JLabel("LƯỢT MƯỢN");
+		lblSachMuon.setForeground(new Color(255, 69, 0));
 		lblSachMuon.setIcon(new ImageIcon("icon\\images.png"));
 		lblSachMuon.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblSachMuon.setBounds(866, 40, 131, 39);
+		lblSachMuon.setBounds(866, 41, 132, 39);
 		pnTitle.add(lblSachMuon);
 		
 		JLabel lblSoCuonSach = new JLabel("");
+		lblSoCuonSach.setForeground(new Color(255, 69, 0));
 		lblSoCuonSach.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		lblSoCuonSach.setBounds(89, 40, 21, 39);
+		lblSoCuonSach.setBounds(53, 41, 16, 39);
 		lblSoCuonSach.setText(soCuonSach+"");
 		pnTitle.add(lblSoCuonSach);
 		
 		JLabel lblSoTheLoai = new JLabel("");
+		lblSoTheLoai.setForeground(new Color(255, 69, 0));
 		lblSoTheLoai.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		lblSoTheLoai.setBounds(365, 40, 21, 39);
+		lblSoTheLoai.setBounds(343, 42, 16, 39);
 		lblSoTheLoai.setText(soTheLoai+"");
 		pnTitle.add(lblSoTheLoai);
 		
 		JLabel lblSoDocGia = new JLabel("");
+		lblSoDocGia.setForeground(new Color(255, 69, 0));
 		lblSoDocGia.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		lblSoDocGia.setBounds(605, 40, 21, 39);
+		lblSoDocGia.setBounds(602, 41, 16, 39);
 		lblSoDocGia.setText(soDocGia+"");
 		pnTitle.add(lblSoDocGia);
 		
 		JLabel lblSoSachMuon = new JLabel("");
+		lblSoSachMuon.setForeground(new Color(255, 69, 0));
 		lblSoSachMuon.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		lblSoSachMuon.setBounds(852, 40, 16, 39);
+		lblSoSachMuon.setBounds(852, 41, 16, 39);
 		lblSoSachMuon.setText(soSachMuon+"");
 		pnTitle.add(lblSoSachMuon);
 		
 		pnMain = new JPanel();
 		pnMain.setBackground(SystemColor.inactiveCaptionBorder);
-		pnMain.setBounds(10, 121, 1065, 560);
+		pnMain.setBounds(10, 121, 1060, 560);
 		pnTrangChu.add(pnMain);
 		pnMain.setLayout(null);
 		
@@ -177,7 +185,7 @@ public class TrangChuGUI {
 		mnTrangChu.setHorizontalAlignment(SwingConstants.LEFT);
 		mnTrangChu.setBackground(SystemColor.textHighlight);
 		mnTrangChu.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		mnTrangChu.setForeground(SystemColor.menuText);
+		mnTrangChu.setForeground(Color.BLACK);
 		mnTrangChu.addActionListener(new ActionListener() {
 			
 			@Override
@@ -192,6 +200,7 @@ public class TrangChuGUI {
 		});
 		
 		JMenuItem mnChaoMung = new JMenuItem("CHÀO MỪNG");
+		mnChaoMung.setForeground(Color.BLACK);
 		mnChaoMung.setIcon(new ImageIcon("icon\\taikhoan.png"));
 		mnChaoMung.setBackground(SystemColor.textHighlight);
 		mnChaoMung.setFont(new Font("Times New Roman", Font.BOLD, 14));
@@ -217,7 +226,7 @@ public class TrangChuGUI {
 		JMenuItem mnQLSach = new JMenuItem("QUẢN LÝ SÁCH");
 		mnQLSach.setIcon(new ImageIcon("icon\\book.png"));
 		mnQLSach.setHorizontalAlignment(SwingConstants.LEFT);
-		mnQLSach.setForeground(SystemColor.menuText);
+		mnQLSach.setForeground(Color.BLACK);
 		mnQLSach.setBackground(SystemColor.textHighlight);
 		mnQLSach.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		mbMenu.add(mnQLSach);
@@ -240,7 +249,7 @@ public class TrangChuGUI {
 		mnQLDocGia.setIcon(new ImageIcon("icon\\people.png"));
 		mnQLDocGia.setBackground(SystemColor.textHighlight);
 		mnQLDocGia.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		mnQLDocGia.setForeground(SystemColor.menuText);
+		mnQLDocGia.setForeground(Color.BLACK);
 		mbMenu.add(mnQLDocGia);
 		mnQLDocGia.addActionListener(new ActionListener() {
 			
@@ -260,7 +269,7 @@ public class TrangChuGUI {
 		mnQLMuonTra.setIcon(new ImageIcon("icon\\muontra.png"));
 		mnQLMuonTra.setHorizontalAlignment(SwingConstants.LEFT);
 		mnQLMuonTra.setBackground(SystemColor.textHighlight);
-		mnQLMuonTra.setForeground(SystemColor.menuText);
+		mnQLMuonTra.setForeground(Color.BLACK);
 		mnQLMuonTra.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		mbMenu.add(mnQLMuonTra);
 		mnQLMuonTra.addActionListener(new ActionListener() {
@@ -279,7 +288,7 @@ public class TrangChuGUI {
 		JMenuItem mnQLPhatTien = new JMenuItem("QUẢN LÝ VI PHẠM");
 		mnQLPhatTien.setIcon(new ImageIcon("icon\\phattien.png"));
 		mnQLPhatTien.setHorizontalAlignment(SwingConstants.LEFT);
-		mnQLPhatTien.setForeground(SystemColor.menuText);
+		mnQLPhatTien.setForeground(Color.BLACK);
 		mnQLPhatTien.setBackground(SystemColor.textHighlight);
 		mnQLPhatTien.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		mbMenu.add(mnQLPhatTien);
@@ -300,7 +309,7 @@ public class TrangChuGUI {
 		mnThongKe.setIcon(new ImageIcon("icon\\chart2.png"));
 		mnThongKe.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		mnThongKe.setBackground(SystemColor.textHighlight);
-		mnThongKe.setForeground(SystemColor.menuText);
+		mnThongKe.setForeground(Color.BLACK);
 		mbMenu.add(mnThongKe);
 		
 		JMenuItem mnBaoCao = new JMenuItem("BÁO CÁO SÁCH MƯỢN");
@@ -347,7 +356,7 @@ public class TrangChuGUI {
 		mnThanhLy.setIcon(new ImageIcon("icon\\System.png"));
 		mnThanhLy.setHorizontalAlignment(SwingConstants.LEFT);
 		mnThanhLy.setBackground(SystemColor.textHighlight);
-		mnThanhLy.setForeground(SystemColor.menuText);
+		mnThanhLy.setForeground(Color.BLACK);
 		mnThanhLy.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		mbMenu.add(mnThanhLy);
 		mnThanhLy.addActionListener(new ActionListener() {
@@ -367,7 +376,7 @@ public class TrangChuGUI {
 		mnHeThong.setIcon(new ImageIcon("icon\\thaydoiquydinh.png"));
 		mnHeThong.setHorizontalAlignment(SwingConstants.LEFT);
 		mnHeThong.setBackground(SystemColor.textHighlight);
-		mnHeThong.setForeground(SystemColor.menuText);
+		mnHeThong.setForeground(Color.BLACK);
 		mnHeThong.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		mbMenu.add(mnHeThong);
 		mnHeThong.addActionListener(new ActionListener() {

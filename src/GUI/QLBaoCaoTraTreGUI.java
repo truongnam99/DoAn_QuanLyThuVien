@@ -22,6 +22,7 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Calendar;
+import javax.swing.ScrollPaneConstants;
 
 
 
@@ -112,11 +113,12 @@ public class QLBaoCaoTraTreGUI {
 		JPanel pnThongKe = new JPanel();
 		pnThongKe.setBounds(0, 88, 1065, 472);
 		pnTongQuanTKSach.add(pnThongKe);
-		pnThongKe.setLayout(new BorderLayout());
+		pnThongKe.setLayout(null);
 		
 		tbThongKe = new JTable();
-		tbThongKe.setBounds(0, 0, 624, 352);
-		JScrollPane sc = new JScrollPane(tbThongKe, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		tbThongKe.setBounds(0, 0, 1050, 452);
+		JScrollPane sc = new JScrollPane(tbThongKe, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		sc.setBounds(0, 0, 1055, 472);
 		pnThongKe.add(sc,BorderLayout.CENTER);
 		
 		

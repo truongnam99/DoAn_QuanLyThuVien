@@ -99,21 +99,21 @@ public class QLSachGUI {
 		pnTongQuanQLSach.add(pnTieuDeQLSach);
 		pnTieuDeQLSach.setLayout(null);
 		
-		JLabel lblQLSach = new JLabel("QUÁN LÝ SÁCH");
+		JLabel lblQLSach = new JLabel("QUẢN LÝ SÁCH");
 		lblQLSach.setForeground(Color.RED);
 		lblQLSach.setFont(new Font("Times New Roman", Font.BOLD, 24));
 		lblQLSach.setBounds(448, 11, 219, 35);
 		pnTieuDeQLSach.add(lblQLSach);
 		
 		JPanel pnQLSach = new JPanel();
-		pnQLSach.setBounds(0, 52, 1065, 212);
+		pnQLSach.setBounds(0, 52, 1065, 230);
 		pnTongQuanQLSach.add(pnQLSach);
-		pnQLSach.setLayout(new BorderLayout());
+		pnQLSach.setLayout(null);
 		
 		
 		JPanel pnThongTinSach = new JPanel();
 		pnThongTinSach.setBackground(SystemColor.activeCaption);
-		pnThongTinSach.setBounds(0, 265, 1065, 295);
+		pnThongTinSach.setBounds(0, 281, 1065, 279);
 		pnTongQuanQLSach.add(pnThongTinSach);
 		pnThongTinSach.setLayout(null);
 		
@@ -124,110 +124,116 @@ public class QLSachGUI {
 		
 		JPanel pnThongTinNhap = new JPanel();
 		pnThongTinNhap.setBackground(SystemColor.inactiveCaptionBorder);
-		pnThongTinNhap.setBounds(10, 32, 855, 252);
+		pnThongTinNhap.setBounds(10, 34, 855, 234);
 		pnThongTinSach.add(pnThongTinNhap);
 		pnThongTinNhap.setLayout(null);
 		
 		JLabel lblMaSach = new JLabel("Mã sách:*");
 		lblMaSach.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblMaSach.setBounds(24, 58, 66, 14);
+		lblMaSach.setBounds(24, 31, 66, 14);
 		pnThongTinNhap.add(lblMaSach);
 		
 		tfMaSach = new JTextField();
-		tfMaSach.setBounds(115, 49, 258, 32);
+		tfMaSach.setBounds(115, 26, 258, 32);
 		pnThongTinNhap.add(tfMaSach);
 		tfMaSach.setColumns(10);
 		
 		JLabel lblTenSach = new JLabel("Tên sách:*");
 		lblTenSach.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblTenSach.setBounds(24, 100, 66, 14);
+		lblTenSach.setBounds(24, 73, 66, 14);
 		pnThongTinNhap.add(lblTenSach);
 		
 		tfTenSach = new JTextField();
-		tfTenSach.setBounds(115, 92, 258, 31);
+		tfTenSach.setBounds(115, 69, 258, 31);
 		pnThongTinNhap.add(tfTenSach);
 		tfTenSach.setColumns(10);
 		
 		JLabel lblTacGia = new JLabel("Tác giả:");
 		lblTacGia.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblTacGia.setBounds(24, 142, 66, 14);
+		lblTacGia.setBounds(24, 115, 66, 14);
 		pnThongTinNhap.add(lblTacGia);
 		
 		tfTacGia = new JTextField();
-		tfTacGia.setBounds(115, 134, 258, 31);
+		tfTacGia.setBounds(115, 111, 258, 31);
 		pnThongTinNhap.add(tfTacGia);
 		tfTacGia.setColumns(10);
 		
 		JLabel lblTheLoai = new JLabel("Thể loại:");
 		lblTheLoai.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblTheLoai.setBounds(24, 184, 66, 14);
+		lblTheLoai.setBounds(24, 158, 66, 14);
 		pnThongTinNhap.add(lblTheLoai);
 		
 		JLabel lblTinhTrang = new JLabel("Tình trạng:");
 		lblTinhTrang.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblTinhTrang.setBounds(24, 226, 74, 14);
+		lblTinhTrang.setBounds(24, 200, 74, 14);
 		pnThongTinNhap.add(lblTinhTrang);
 		
 		tfTheLoai = new JTextField();
-		tfTheLoai.setBounds(115, 176, 258, 31);
+		tfTheLoai.setBounds(115, 153, 258, 31);
 		pnThongTinNhap.add(tfTheLoai);
 		tfTheLoai.setColumns(10);
 		
 		rdbtnTrong = new JRadioButton("Trống");
 		rdbtnTrong.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		rdbtnTrong.setBounds(115, 222, 57, 23);
+		rdbtnTrong.setBounds(115, 196, 57, 23);
 		pnThongTinNhap.add(rdbtnTrong);
 		
 		JLabel lblNhaXuatBan = new JLabel("Nhà xuất bản:");
 		lblNhaXuatBan.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblNhaXuatBan.setBounds(454, 58, 74, 14);
+		lblNhaXuatBan.setBounds(455, 31, 74, 14);
 		pnThongTinNhap.add(lblNhaXuatBan);
 		
 		tfNhaXuatBan = new JTextField();
-		tfNhaXuatBan.setBounds(551, 49, 258, 31);
+		tfNhaXuatBan.setBounds(551, 26, 258, 31);
 		pnThongTinNhap.add(tfNhaXuatBan);
 		tfNhaXuatBan.setColumns(10);
 		
 		JLabel lblNamXuatBan = new JLabel("Năm xuất bản:*");
 		lblNamXuatBan.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblNamXuatBan.setBounds(455, 100, 86, 14);
+		lblNamXuatBan.setBounds(455, 73, 86, 14);
 		pnThongTinNhap.add(lblNamXuatBan);
 		
 		tfNamXuatBan = new JTextField();
-		tfNamXuatBan.setBounds(551, 91, 258, 31);
+		tfNamXuatBan.setBounds(551, 69, 258, 31);
 		pnThongTinNhap.add(tfNamXuatBan);
 		tfNamXuatBan.setColumns(10);
 		
 		JLabel lblNgayNhap = new JLabel("Ngày nhập:*");
 		lblNgayNhap.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblNgayNhap.setBounds(455, 142, 66, 14);
+		lblNgayNhap.setBounds(455, 115, 66, 14);
 		pnThongTinNhap.add(lblNgayNhap);
 		
 		tfNgayNhap = new JTextField();
-		tfNgayNhap.setBounds(551, 133, 258, 31);
+		tfNgayNhap.setBounds(551, 111, 258, 31);
 		pnThongTinNhap.add(tfNgayNhap);
 		tfNgayNhap.setColumns(10);
 		
 		JLabel lblTriGia = new JLabel("Giá sách:*");
 		lblTriGia.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblTriGia.setBounds(455, 184, 73, 14);
+		lblTriGia.setBounds(455, 158, 73, 14);
 		pnThongTinNhap.add(lblTriGia);
 		
 		tfTriGia = new JTextField();
-		tfTriGia.setBounds(551, 175, 258, 31);
+		tfTriGia.setBounds(551, 153, 258, 31);
 		pnThongTinNhap.add(tfTriGia);
 		tfTriGia.setColumns(10);
 		
-		lblMessage = new JLabel("(*) Không được để trống");
+		lblMessage = new JLabel("");
 		lblMessage.setForeground(Color.RED);
 		lblMessage.setFont(new Font("Times New Roman", Font.ITALIC, 12));
-		lblMessage.setBounds(115, 11, 694, 23);
+		lblMessage.setBounds(115, 4, 694, 23);
 		pnThongTinNhap.add(lblMessage);
+		
+		JLabel lblKhongBoTrong = new JLabel("(*) Không được bỏ trống");
+		lblKhongBoTrong.setForeground(Color.RED);
+		lblKhongBoTrong.setFont(new Font("Times New Roman", Font.ITALIC, 12));
+		lblKhongBoTrong.setBounds(455, 196, 222, 23);
+		pnThongTinNhap.add(lblKhongBoTrong);
 		
 		JButton btnThem = new JButton("Thêm");
 		btnThem.setIcon(new ImageIcon("icon\\new.png"));
 		btnThem.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		btnThem.setBounds(902, 32, 138, 41);
+		btnThem.setBounds(900, 34, 138, 41);
 		btnThem.addActionListener(new ActionListener() {
 			
 			@Override
@@ -273,13 +279,13 @@ public class QLSachGUI {
 		});
 		btnSua.setIcon(new ImageIcon("icon\\setting.png"));
 		btnSua.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		btnSua.setBounds(902, 103, 138, 41);
+		btnSua.setBounds(900, 98, 138, 41);
 		pnThongTinSach.add(btnSua);
 		
 		JButton btnHuy = new JButton("Hủy");
 		btnHuy.setIcon(new ImageIcon("icon\\del.png"));
 		btnHuy.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		btnHuy.setBounds(902, 173, 138, 41);
+		btnHuy.setBounds(900, 161, 138, 41);
 		pnThongTinSach.add(btnHuy);
 		btnHuy.addActionListener(new ActionListener() {
 			
@@ -294,7 +300,7 @@ public class QLSachGUI {
 		JButton btnXoa = new JButton("Xóa");
 		btnXoa.setIcon(new ImageIcon("icon\\delete.png"));
 		btnXoa.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		btnXoa.setBounds(902, 243, 138, 41);
+		btnXoa.setBounds(900, 226, 138, 41);
 		pnThongTinSach.add(btnXoa);
 		btnXoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -306,10 +312,10 @@ public class QLSachGUI {
 		});
 		
 		tbQLSach = new JTable();
-		tbQLSach.setBounds(0, 0, 1060, 167);
+		tbQLSach.setBounds(0, 0, 1050, 167);
 		JScrollPane sc = new JScrollPane(tbQLSach, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		pnQLSach.add(sc);
-		sc.setBounds(10, 65, 1065, 195);
+		sc.setBounds(0, 0, 1055, 230);
 		tbQLSach.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			
 			@Override

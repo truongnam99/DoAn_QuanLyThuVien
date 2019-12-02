@@ -103,12 +103,12 @@ public class QLNhanVienGUI {
 		JPanel pnQLNhanVien = new JPanel();
 		pnQLNhanVien.setBounds(0, 71, 1065, 230);
 		pnTongQuanQLNhanVien.add(pnQLNhanVien);
-		pnQLNhanVien.setLayout(new BorderLayout());
+		pnQLNhanVien.setLayout(null);
 		
 		tbQLNhanVien = new JTable();
-		tbQLNhanVien.setBounds(0, 0, 1060, 200);
+		tbQLNhanVien.setBounds(0, 0, 1050, 200);
 		JScrollPane sc = new JScrollPane(tbQLNhanVien, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		sc.setBounds(0, 0, 1078, 190);
+		sc.setBounds(0, 0, 1055, 230);
 		tbQLNhanVien.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			
 			@Override
@@ -216,7 +216,7 @@ public class QLNhanVienGUI {
 		JLabel lblKhongBoTrong = new JLabel();
 		lblKhongBoTrong.setForeground(Color.RED);
 		lblKhongBoTrong.setFont(new Font("Times New Roman", Font.ITALIC, 12));
-		lblKhongBoTrong.setBounds(127, 187, 654, 21);
+		lblKhongBoTrong.setBounds(433, 186, 359, 21);
 		lblKhongBoTrong.setText("(*) Không được bỏ trống");
 		pnThongTinNhap.add(lblKhongBoTrong);
 		

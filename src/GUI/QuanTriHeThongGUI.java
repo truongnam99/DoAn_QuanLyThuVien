@@ -31,13 +31,13 @@ public class QuanTriHeThongGUI {
 	void init() {
 		frmMain = new JFrame("Quản lý thư viện");
 		frmMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmMain.setBounds(100, 100, 1065, 650);//595
+		frmMain.setBounds(100, 100, 1072, 650);//595
 		//frmMain.getContentPane().add(QLNhanVienGUI.getInstance().getPnTongQuanQLNhanVien());
 		frmMain.getContentPane().add(QLNhanVienGUI.getInstance().getPnTongQuanQLNhanVien());
 		frmMain.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 560, 1049, 50);
+		panel.setBounds(0, 560, 1072, 50);
 		frmMain.getContentPane().add(panel);
 		panel.setLayout(null);
 		

@@ -108,7 +108,7 @@ public class QLMuonTraBLL {
 		}
 		catch(Exception e) {
 			e.printStackTrace();
-			throw new MyException("Ngày tháng bị lỗi");
+			throw new MyException("Ngày tháng bị lỗi hoặc sách không tồn tại");
 		}
 		
 	}

@@ -103,14 +103,14 @@ public class QLPhatTienGUI {
 		pnTieuDeQLViPham.add(lblQLViPham);
 		
 		JPanel pnQLViPham = new JPanel();
-		pnQLViPham.setBounds(0, 67, 1065, 230);
+		pnQLViPham.setBounds(0, 67, 1065, 237);
 		pnTongQuanQLViPham.add(pnQLViPham);
-		pnQLViPham.setLayout(new BorderLayout());
+		pnQLViPham.setLayout(null);
 		
 		tbQLViPham = new JTable();
 		tbQLViPham.setBounds(0, 0, 1050, 170);
 		JScrollPane sc = new JScrollPane(tbQLViPham, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		sc.setBounds(0, 0, 1078, 180);
+		sc.setBounds(0, 0, 1055, 237);
 		tbQLViPham.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			
 			@Override
@@ -141,7 +141,7 @@ public class QLPhatTienGUI {
 		pnThongTinDocGia.add(lblThongTinDocGia);
 		
 		JPanel pnThongTinNhap = new JPanel();
-		pnThongTinNhap.setBounds(10, 34, 843, 208);
+		pnThongTinNhap.setBounds(10, 34, 862, 208);
 		pnThongTinNhap.setBackground(SystemColor.inactiveCaptionBorder);
 		pnThongTinDocGia.add(pnThongTinNhap);
 		pnThongTinNhap.setLayout(null);
