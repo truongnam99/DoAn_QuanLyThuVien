@@ -1,27 +1,18 @@
 package GUI;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableModel;
-
-import BLL.QLDocGiaBLL;
 import BLL.QLHeThongBLL;
 import DAL.DAL;
 import DTO.HeThongDTO;
@@ -131,15 +122,6 @@ public class QLHeThongGUI {
 		
 	}
 	
-	
-	private void reloadRecources() {
-		
-	}
-	
-	private void refreshDataTable() {
-		
-	}
-	
 	public static QLHeThongGUI getInstance() {
 		if(instance == null)
 			instance = new QLHeThongGUI();
@@ -191,7 +173,7 @@ public class QLHeThongGUI {
 		JLabel lblHocSinh = new JLabel("Học sinh");
 		lblHocSinh.setBounds(5, 0, 59, 23);
 		pnHocSinh.add(lblHocSinh);
-		lblHocSinh.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		lblHocSinh.setFont(new Font("Times New Roman", Font.BOLD, 13));
 		
 		JPanel pnThongTinHocSinh = new JPanel();
 		pnThongTinHocSinh.setBackground(SystemColor.inactiveCaptionBorder);
@@ -200,7 +182,7 @@ public class QLHeThongGUI {
 		pnThongTinHocSinh.setLayout(null);
 		
 		JLabel lblSoSachMuonHS = new JLabel("Số sách mượn tối đa:");
-		lblSoSachMuonHS.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		lblSoSachMuonHS.setFont(new Font("Times New Roman", Font.BOLD, 13));
 		lblSoSachMuonHS.setBounds(10, 41, 144, 14);
 		pnThongTinHocSinh.add(lblSoSachMuonHS);
 		
@@ -212,7 +194,7 @@ public class QLHeThongGUI {
 		
 		
 		JLabel lblThoiGianMuonHS = new JLabel("Thời gian mượn tối đa:");
-		lblThoiGianMuonHS.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		lblThoiGianMuonHS.setFont(new Font("Times New Roman", Font.BOLD, 13));
 		lblThoiGianMuonHS.setBounds(10, 99, 144, 14);
 		pnThongTinHocSinh.add(lblThoiGianMuonHS);
 		
@@ -222,7 +204,7 @@ public class QLHeThongGUI {
 		txtfThoiGianMuonHS.setColumns(10);
 		
 		JLabel lblTienPhatHS = new JLabel("Tiền phạt mượn trễ:");
-		lblTienPhatHS.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		lblTienPhatHS.setFont(new Font("Times New Roman", Font.BOLD, 13));
 		lblTienPhatHS.setBounds(10, 158, 144, 14);
 		pnThongTinHocSinh.add(lblTienPhatHS);
 		
@@ -232,12 +214,12 @@ public class QLHeThongGUI {
 		txtfTienPhatHS.setColumns(10);
 		
 		JLabel lblSachHongHS = new JLabel("Sách bị hư hỏng:");
-		lblSachHongHS.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		lblSachHongHS.setFont(new Font("Times New Roman", Font.BOLD, 13));
 		lblSachHongHS.setBounds(10, 219, 122, 14);
 		pnThongTinHocSinh.add(lblSachHongHS);
 		
 		JLabel lblMatSachHS = new JLabel("Mất sách:");
-		lblMatSachHS.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		lblMatSachHS.setFont(new Font("Times New Roman", Font.BOLD, 13));
 		lblMatSachHS.setBounds(10, 280, 122, 14);
 		pnThongTinHocSinh.add(lblMatSachHS);
 		
@@ -298,7 +280,7 @@ public class QLHeThongGUI {
 		JLabel lblGiaoVien = new JLabel("Giáo viên");
 		lblGiaoVien.setBounds(5, 0, 76, 22);
 		pnGiaoVien.add(lblGiaoVien);
-		lblGiaoVien.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		lblGiaoVien.setFont(new Font("Times New Roman", Font.BOLD, 13));
 		
 		JPanel pnThongTinGiaoVien = new JPanel();
 		pnThongTinGiaoVien.setBackground(SystemColor.inactiveCaptionBorder);
@@ -307,7 +289,7 @@ public class QLHeThongGUI {
 		pnThongTinGiaoVien.setLayout(null);
 		
 		JLabel lblSoSachMuonGV = new JLabel("Số sách mượn tối đa:");
-		lblSoSachMuonGV.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		lblSoSachMuonGV.setFont(new Font("Times New Roman", Font.BOLD, 13));
 		lblSoSachMuonGV.setBounds(10, 42, 144, 14);
 		pnThongTinGiaoVien.add(lblSoSachMuonGV);
 		
@@ -317,7 +299,7 @@ public class QLHeThongGUI {
 		pnThongTinGiaoVien.add(txtfSoSachMuonGV);
 		
 		JLabel lblThoiGianMuonGV = new JLabel("Thời gian mượn tối đa:");
-		lblThoiGianMuonGV.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		lblThoiGianMuonGV.setFont(new Font("Times New Roman", Font.BOLD, 13));
 		lblThoiGianMuonGV.setBounds(10, 99, 144, 14);
 		pnThongTinGiaoVien.add(lblThoiGianMuonGV);
 		
@@ -327,7 +309,7 @@ public class QLHeThongGUI {
 		pnThongTinGiaoVien.add(txtfThoiGianMuonGV);
 		
 		JLabel lblTienPhatGV = new JLabel("Tiền phạt mượn trễ:");
-		lblTienPhatGV.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		lblTienPhatGV.setFont(new Font("Times New Roman", Font.BOLD, 13));
 		lblTienPhatGV.setBounds(10, 158, 127, 14);
 		pnThongTinGiaoVien.add(lblTienPhatGV);
 		
@@ -337,7 +319,7 @@ public class QLHeThongGUI {
 		pnThongTinGiaoVien.add(txtfTienPhatGV);
 		
 		JLabel lblNewLabel = new JLabel("Sách bị hư hỏng:");
-		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 13));
 		lblNewLabel.setBounds(10, 219, 127, 14);
 		pnThongTinGiaoVien.add(lblNewLabel);
 		
@@ -347,7 +329,7 @@ public class QLHeThongGUI {
 		txtSachHongGV.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Mất sách:");
-		lblNewLabel_1.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		lblNewLabel_1.setFont(new Font("Times New Roman", Font.BOLD, 13));
 		lblNewLabel_1.setBounds(10, 280, 108, 14);
 		pnThongTinGiaoVien.add(lblNewLabel_1);
 		
@@ -439,7 +421,16 @@ public class QLHeThongGUI {
 		
 		//HỦY
 		
-		
+		textField_1.setFont(new Font("Times New Roman", Font.BOLD, 13));
+		textField_2.setFont(new Font("Times New Roman", Font.BOLD, 13));
+		textField_3.setFont(new Font("Times New Roman", Font.BOLD, 13));
+		textField_4.setFont(new Font("Times New Roman", Font.BOLD, 13));
+		textField_5.setFont(new Font("Times New Roman", Font.BOLD, 13));
+		textField_6.setFont(new Font("Times New Roman", Font.BOLD, 13));
+		textField_7.setFont(new Font("Times New Roman", Font.BOLD, 13));
+		textField_8.setFont(new Font("Times New Roman", Font.BOLD, 13));
+		textField_9.setFont(new Font("Times New Roman", Font.BOLD, 13));
+		textField.setFont(new Font("Times New Roman", Font.BOLD, 13));
 		
 		JButton btnHuy = new JButton("Hủy");
 		btnHuy.setBounds(725, 426, 139, 41);

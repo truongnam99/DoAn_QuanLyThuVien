@@ -7,6 +7,8 @@ import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -25,6 +27,7 @@ import DTO.LoaiDocGiaDTO;
 import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import com.toedter.calendar.JDateChooser;
 
 public class QLDocGiaGUI {
 	static QLDocGiaGUI instance = null;
@@ -33,11 +36,11 @@ public class QLDocGiaGUI {
 	private JTextField tfHoTen;
 	private JTextField tfEmail;
 	private JTextField tfSDT;
-	private JTextField tfNgaySinh;
 	private JTextField tfLopChuyenMon;
 	private JTextField tfMaDocGia;
 	private JComboBox<LoaiDocGiaDTO> cbbLoaiDocGia;
 	private JLabel lblMessage;
+	private JDateChooser dcNgaySinh;
 	
 	private boolean isEdit = true;
 	
@@ -76,7 +79,7 @@ public class QLDocGiaGUI {
 		tfHoTen.setText("");
 		tfLopChuyenMon.setText("");
 		tfMaDocGia.setText("");
-		tfNgaySinh.setText("");
+		dcNgaySinh.setDate(null);
 		tfSDT.setText("");
 		cbbLoaiDocGia.setSelectedItem(0);
 	}
@@ -139,7 +142,7 @@ public class QLDocGiaGUI {
 				}
 				
 				tfLopChuyenMon.setText(tbDocGia.getValueAt(tbDocGia.getSelectedRow(), 4).toString());
-				tfNgaySinh.setText(tbDocGia.getValueAt(tbDocGia.getSelectedRow(), 5).toString());
+				dcNgaySinh.setDate(Date.valueOf(tbDocGia.getValueAt(tbDocGia.getSelectedRow(), 5).toString()));
 				tfSDT.setText(tbDocGia.getValueAt(tbDocGia.getSelectedRow(), 6).toString());
 				tfEmail.setText(tbDocGia.getValueAt(tbDocGia.getSelectedRow(), 7).toString());
 			}
@@ -160,7 +163,7 @@ public class QLDocGiaGUI {
 		pnThongTinNhap.setLayout(null);
 		
 		JLabel lblHoTen = new JLabel("Họ Tên:*");
-		lblHoTen.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		lblHoTen.setFont(new Font("Times New Roman", Font.BOLD, 13));
 		lblHoTen.setBounds(10, 82, 89, 26);
 		pnThongTinNhap.add(lblHoTen);
 		
@@ -171,7 +174,7 @@ public class QLDocGiaGUI {
 		tfHoTen.setColumns(10);
 		
 		JLabel lblMaDocGia = new JLabel("Mã độc giả:*");
-		lblMaDocGia.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		lblMaDocGia.setFont(new Font("Times New Roman", Font.BOLD, 13));
 		lblMaDocGia.setBounds(10, 39, 89, 26);
 		pnThongTinNhap.add(lblMaDocGia);
 		
@@ -182,7 +185,7 @@ public class QLDocGiaGUI {
 		tfMaDocGia.setColumns(10);
 		
 		JLabel lblLoaiDocGia = new JLabel("Loại độc giả:*");
-		lblLoaiDocGia.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		lblLoaiDocGia.setFont(new Font("Times New Roman", Font.BOLD, 13));
 		lblLoaiDocGia.setBounds(10, 125, 89, 26);
 		pnThongTinNhap.add(lblLoaiDocGia);
 		
@@ -191,7 +194,7 @@ public class QLDocGiaGUI {
 		pnThongTinNhap.add(cbbLoaiDocGia);
 		
 		JLabel lblLopChuyenMon = new JLabel("Lớp/Chuyên môn:*");
-		lblLopChuyenMon.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		lblLopChuyenMon.setFont(new Font("Times New Roman", Font.BOLD, 13));
 		lblLopChuyenMon.setBounds(428, 39, 133, 26);
 		pnThongTinNhap.add(lblLopChuyenMon);
 		
@@ -202,18 +205,12 @@ public class QLDocGiaGUI {
 		tfLopChuyenMon.setColumns(10);
 		
 		JLabel lblNgaySinh = new JLabel("Ngày sinh:*");
-		lblNgaySinh.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		lblNgaySinh.setFont(new Font("Times New Roman", Font.BOLD, 13));
 		lblNgaySinh.setBounds(428, 82, 113, 26);
 		pnThongTinNhap.add(lblNgaySinh);
 		
-		tfNgaySinh = new JTextField();
-		tfNgaySinh.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		tfNgaySinh.setBounds(564, 81, 258, 30);
-		pnThongTinNhap.add(tfNgaySinh);
-		tfNgaySinh.setColumns(10);
-		
 		JLabel lblSDT = new JLabel("Số điện thoại:");
-		lblSDT.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		lblSDT.setFont(new Font("Times New Roman", Font.BOLD, 13));
 		lblSDT.setBounds(428, 125, 119, 26);
 		pnThongTinNhap.add(lblSDT);
 		
@@ -234,12 +231,21 @@ public class QLDocGiaGUI {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				
-				if(tfNgaySinh.getText().equals("")) {
+				if(dcNgaySinh.getDate() == null) {
 					lblMessage.setText("Ngày sinh đang bị trống");
 					return;
 				}
-				DocGiaDTO dg = new DocGiaDTO(tfMaDocGia.getText(), tfHoTen.getText(), 
-						(LoaiDocGiaDTO) cbbLoaiDocGia.getSelectedItem(), tfLopChuyenMon.getText(), Date.valueOf(tfNgaySinh.getText()), tfSDT.getText(), tfEmail.getText());
+
+				DocGiaDTO dg = null;
+				try {
+					Calendar cal = dcNgaySinh.getCalendar();
+					java.util.Date date = cal.getTime();
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+					dg = new DocGiaDTO(tfMaDocGia.getText(), tfHoTen.getText(), 
+							(LoaiDocGiaDTO) cbbLoaiDocGia.getSelectedItem(), tfLopChuyenMon.getText(), Date.valueOf(sdf.format(date)), tfSDT.getText(), tfEmail.getText());
+				}catch(Exception e1) {
+					lblMessage.setText("Kiểm tra ngày tháng");
+				}
 				String result = QLDocGiaBLL.getInstance().addProcessing(dg);
 				lblMessage.setText(result);
 				reloadResources();
@@ -269,8 +275,16 @@ public class QLDocGiaGUI {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				DocGiaDTO dg = new DocGiaDTO(tfMaDocGia.getText(), tfHoTen.getText(), 
-						(LoaiDocGiaDTO) cbbLoaiDocGia.getSelectedItem(), tfLopChuyenMon.getText(), Date.valueOf(tfNgaySinh.getText()), tfSDT.getText(), tfEmail.getText());
+				DocGiaDTO dg = null;
+				try {
+				Calendar cal = dcNgaySinh.getCalendar();
+				java.util.Date date = cal.getTime();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				dg = new DocGiaDTO(tfMaDocGia.getText(), tfHoTen.getText(), 
+						(LoaiDocGiaDTO) cbbLoaiDocGia.getSelectedItem(), tfLopChuyenMon.getText(), Date.valueOf(sdf.format(date)), tfSDT.getText(), tfEmail.getText());
+				}catch(Exception e1) {
+					lblMessage.setText("Kiểm tra ngày tháng");
+				}
 				String result = QLDocGiaBLL.getInstance().changeProcessing(dg);
 				lblMessage.setText(result);
 				reloadResources();
@@ -298,8 +312,6 @@ public class QLDocGiaGUI {
 		tfHoTen.setNextFocusableComponent(tfMaDocGia);
 		tfMaDocGia.setNextFocusableComponent(cbbLoaiDocGia);
 		cbbLoaiDocGia.setNextFocusableComponent(tfLopChuyenMon);
-		tfLopChuyenMon.setNextFocusableComponent(tfNgaySinh);
-		tfNgaySinh.setNextFocusableComponent(tfSDT);
 		tfSDT.setNextFocusableComponent(btnThem);
 		btnThem.setNextFocusableComponent(btnHuy);
 		btnHuy.setNextFocusableComponent(btnXoa);
@@ -313,20 +325,25 @@ public class QLDocGiaGUI {
 		pnThongTinNhap.add(tfEmail);
 		
 		JLabel lblEmail = new JLabel("Email:");
-		lblEmail.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		lblEmail.setFont(new Font("Times New Roman", Font.BOLD, 13));
 		lblEmail.setBounds(10, 171, 81, 26);
 		pnThongTinNhap.add(lblEmail);
 		
 		lblMessage = new JLabel();
-		lblMessage.setFont(new Font("Times New Roman", Font.ITALIC, 12));
+		lblMessage.setFont(new Font("Times New Roman", Font.ITALIC, 13));
 		lblMessage.setForeground(Color.red);
 		lblMessage.setBounds(109, 5, 713, 26);
 		pnThongTinNhap.add(lblMessage);
 		
 		JLabel lblKhongBoTrong = new JLabel("(*) Không được bỏ trống");
-		lblKhongBoTrong.setFont(new Font("Times New Roman", Font.ITALIC, 12));
+		lblKhongBoTrong.setFont(new Font("Times New Roman", Font.ITALIC, 13));
 		lblKhongBoTrong.setForeground(Color.red);
 		lblKhongBoTrong.setBounds(429, 173, 393, 26);
 		pnThongTinNhap.add(lblKhongBoTrong);
+		
+		dcNgaySinh = new JDateChooser();
+		dcNgaySinh.setBounds(564, 82, 258, 30);
+		dcNgaySinh.setDateFormatString("yyyy-MM-dd");
+		pnThongTinNhap.add(dcNgaySinh);
 	}
 }

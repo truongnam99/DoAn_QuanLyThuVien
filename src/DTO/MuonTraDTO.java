@@ -70,4 +70,10 @@ public class MuonTraDTO {
 	public void setTrangThai(String trangThai) {
 		TrangThai = trangThai;
 	}
+	
+	@Override
+	public String toString() {
+		String s = maDocGia + maSach;
+		return s;
+	}
 }

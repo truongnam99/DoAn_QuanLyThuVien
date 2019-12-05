@@ -21,6 +21,7 @@ import BLL.QLNhanVienBLL;
 import DTO.NhanVienDTO;
 
 import javax.swing.ScrollPaneConstants;
+import javax.swing.JPasswordField;
 
 
 public class QLNhanVienGUI {
@@ -29,10 +30,8 @@ public class QLNhanVienGUI {
 	
 	
 	private JTable 	   tbQLNhanVien;
-	private JTextField tfMaTaiKhoan;
 	private JTextField tfTenTaiKhoan;
 	private JTextField tfTenNhanVien;
-	private JTextField tfMatKhau;
 	private JTextField tfEmail;
 	
 	
@@ -42,6 +41,8 @@ public class QLNhanVienGUI {
 	private JComboBox<String> cbbLoaiTaiKhoan;
 
 	static QLNhanVienGUI instance=null;
+	private JPasswordField pfPass;
+	private boolean isShow = false;
 	
 	
 	private QLNhanVienGUI(){
@@ -73,8 +74,7 @@ public class QLNhanVienGUI {
 	
 	private void clearField() {
 		tfEmail.setText("");
-		tfMaTaiKhoan.setText("");
-		tfMatKhau.setText("");
+		pfPass.setText("");
 		tfTenNhanVien.setText("");
 		tfTenTaiKhoan.setText("");
 		cbbLoaiTaiKhoan.setSelectedIndex(0);
@@ -113,15 +113,12 @@ public class QLNhanVienGUI {
 			
 			@Override
 			public void valueChanged(ListSelectionEvent arg0) {
-				//System.out.println(tbQLNhanVien.getSelectedRow());
 				if (tbQLNhanVien.getSelectedRow()<0)
 					return;
-				tfMaTaiKhoan.setText(tbQLNhanVien.getValueAt(tbQLNhanVien.getSelectedRow(), 1).toString());
 				tfTenTaiKhoan.setText(tbQLNhanVien.getValueAt(tbQLNhanVien.getSelectedRow(), 2).toString());
-				tfMatKhau.setText(tbQLNhanVien.getValueAt(tbQLNhanVien.getSelectedRow(), 3).toString());
+				pfPass.setText(tbQLNhanVien.getValueAt(tbQLNhanVien.getSelectedRow(), 3).toString());
 				tfTenNhanVien.setText(tbQLNhanVien.getValueAt(tbQLNhanVien.getSelectedRow(), 4).toString());
 				cbbLoaiTaiKhoan.setSelectedItem(tbQLNhanVien.getValueAt(tbQLNhanVien.getSelectedRow(), 5).toString());
-				//tfLoaiTaiKhoan.setText(tbQLNhanVien.getValueAt(tbQLNhanVien.getSelectedRow(), 5).toString());
 				tfEmail.setText(tbQLNhanVien.getValueAt(tbQLNhanVien.getSelectedRow(), 6).toString());
 			}
 		});
@@ -144,39 +141,29 @@ public class QLNhanVienGUI {
 		pnThongTinNhanVien.add(pnThongTinNhap);
 		pnThongTinNhap.setLayout(null);
 		
-		JLabel lblMessage = new JLabel();
+		JLabel lblMessage = new JLabel("(*) Không được bỏ trống");
 		lblMessage.setForeground(Color.RED);
-		lblMessage.setFont(new Font("Times New Roman", Font.ITALIC, 12));
-		lblMessage.setBounds(127, 10, 654, 21);
+		lblMessage.setFont(new Font("Times New Roman", Font.ITALIC, 14));
+		lblMessage.setBounds(125, 11, 654, 34);
 		pnThongTinNhap.add(lblMessage);
 		
-		JLabel lblMaTaiKhoan = new JLabel("Mã tài khoản:*");
-		lblMaTaiKhoan.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblMaTaiKhoan.setBounds(26, 37, 91, 14);
-		pnThongTinNhap.add(lblMaTaiKhoan);
-		
-		tfMaTaiKhoan = new JTextField();
-		tfMaTaiKhoan.setBounds(127, 29, 258, 31);
-		pnThongTinNhap.add(tfMaTaiKhoan);
-		tfMaTaiKhoan.setColumns(10);
-		
 		JLabel lblTenNhanVien = new JLabel("Tên nhân viên:*");
-		lblTenNhanVien.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblTenNhanVien.setBounds(26, 97, 91, 14);
+		lblTenNhanVien.setFont(new Font("Times New Roman", Font.BOLD, 13));
+		lblTenNhanVien.setBounds(24, 116, 91, 30);
 		pnThongTinNhap.add(lblTenNhanVien);
 		
 		tfTenNhanVien = new JTextField();
-		tfTenNhanVien.setBounds(127, 89, 258, 31);
+		tfTenNhanVien.setBounds(125, 116, 258, 31);
 		pnThongTinNhap.add(tfTenNhanVien);
 		tfTenNhanVien.setColumns(10);
 		
 		JLabel lblLoaiTaiKhoan = new JLabel("Chức vụ:*");
-		lblLoaiTaiKhoan.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblLoaiTaiKhoan.setBounds(26, 161, 91, 14);
+		lblLoaiTaiKhoan.setFont(new Font("Times New Roman", Font.BOLD, 13));
+		lblLoaiTaiKhoan.setBounds(420, 116, 91, 30);
 		pnThongTinNhap.add(lblLoaiTaiKhoan);
 		
 		cbbLoaiTaiKhoan = new JComboBox<String>();
-		cbbLoaiTaiKhoan.setBounds(127,  150, 258, 31);
+		cbbLoaiTaiKhoan.setBounds(521,  116, 258, 31);
 		cbbLoaiTaiKhoan.addItem("");
 		cbbLoaiTaiKhoan.addItem("Thủ thư");
 		cbbLoaiTaiKhoan.addItem("Quản trị hệ thống");
@@ -184,41 +171,51 @@ public class QLNhanVienGUI {
 		
 		
 		JLabel lblTaiKhoan = new JLabel("Tên tài khoản:*");
-		lblTaiKhoan.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblTaiKhoan.setBounds(433, 37, 91, 14);
+		lblTaiKhoan.setFont(new Font("Times New Roman", Font.BOLD, 13));
+		lblTaiKhoan.setBounds(24, 56, 91, 30);
 		pnThongTinNhap.add(lblTaiKhoan);
 		
 		tfTenTaiKhoan = new JTextField();
-		tfTenTaiKhoan.setBounds(523, 29, 258, 31);
+		tfTenTaiKhoan.setBounds(125, 56, 258, 31);
 		pnThongTinNhap.add(tfTenTaiKhoan);
 		tfTenTaiKhoan.setColumns(10);
 		
 		JLabel lblMatKhau = new JLabel("Mật khẩu:*");
-		lblMatKhau.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblMatKhau.setBounds(433, 97, 91, 14);
+		lblMatKhau.setFont(new Font("Times New Roman", Font.BOLD, 13));
+		lblMatKhau.setBounds(420, 56, 91, 30);
 		pnThongTinNhap.add(lblMatKhau);
 		
-		tfMatKhau = new JTextField();
-		tfMatKhau.setBounds(523, 89, 258, 31);
-		pnThongTinNhap.add(tfMatKhau);
-		tfMatKhau.setColumns(10);
-		
 		JLabel lblEmail = new JLabel("Email:");
-		lblEmail.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblEmail.setBounds(433, 161, 91, 14);
+		lblEmail.setFont(new Font("Times New Roman", Font.BOLD, 13));
+		lblEmail.setBounds(24, 177, 91, 30);
 		pnThongTinNhap.add(lblEmail);
 		
 		tfEmail = new JTextField();
 		tfEmail.setColumns(10);
-		tfEmail.setBounds(523, 150, 258, 31);
+		tfEmail.setBounds(125, 177, 258, 31);
 		pnThongTinNhap.add(tfEmail);
 		
-		JLabel lblKhongBoTrong = new JLabel();
-		lblKhongBoTrong.setForeground(Color.RED);
-		lblKhongBoTrong.setFont(new Font("Times New Roman", Font.ITALIC, 12));
-		lblKhongBoTrong.setBounds(433, 186, 359, 21);
-		lblKhongBoTrong.setText("(*) Không được bỏ trống");
-		pnThongTinNhap.add(lblKhongBoTrong);
+		pfPass = new JPasswordField();
+		pfPass.setBounds(521, 56, 152, 30);
+		pnThongTinNhap.add(pfPass);
+		
+		JButton btnShowPass = new JButton("Hiển thị");
+		btnShowPass.setBounds(683, 56, 96, 30);
+		pnThongTinNhap.add(btnShowPass);
+		btnShowPass.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(isShow) {
+					isShow = false;
+					pfPass.setEchoChar((char)0);
+				}
+				else {
+					isShow = true;
+					pfPass.setEchoChar('*');
+				}
+			}
+		});
 		
 		JButton btnThem = new JButton("Thêm");
 		btnThem.setIcon(new ImageIcon("icon\\new.png"));
@@ -228,7 +225,12 @@ public class QLNhanVienGUI {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				NhanVienDTO nv = new NhanVienDTO(tfMaTaiKhoan.getText(), tfTenTaiKhoan.getText(), tfMatKhau.getText(), 
+				String maTK;
+				if (tbQLNhanVien.getRowCount()<= 0) 
+					maTK = "TK0";
+				else
+					maTK ="TK" + (1+Integer.parseInt(tbQLNhanVien.getValueAt(tbQLNhanVien.getRowCount()-1, 1).toString().substring(2)));
+				NhanVienDTO nv = new NhanVienDTO(maTK, tfTenTaiKhoan.getText(), pfPass.getText(), 
 						tfTenNhanVien.getText(), cbbLoaiTaiKhoan.getSelectedItem().toString(), tfEmail.getText());
 				String result = QLNhanVienBLL.getInstance().addProcessing(nv);
 				lblMessage.setText(result);
@@ -247,9 +249,9 @@ public class QLNhanVienGUI {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				NhanVienDTO nv = new NhanVienDTO(
-						tfMaTaiKhoan.getText(), 
+						tbQLNhanVien.getValueAt(tbQLNhanVien.getSelectedRow(), 1).toString(), 
 						tfTenTaiKhoan.getText(), 
-						tfMatKhau.getText(), 
+						pfPass.getText(), 
 						tfTenNhanVien.getText(), 
 						cbbLoaiTaiKhoan.getSelectedItem().toString(), 
 						tfEmail.getText());
@@ -281,7 +283,7 @@ public class QLNhanVienGUI {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				String msg = QLNhanVienBLL.getInstance().deleteProcessing(tfMaTaiKhoan.getText());
+				String msg = QLNhanVienBLL.getInstance().deleteProcessing(tbQLNhanVien.getValueAt(tbQLNhanVien.getSelectedRow(), 1).toString(), cbbLoaiTaiKhoan.getSelectedItem().toString());
 				lblMessage.setText(msg);
 				reloadResources();
 				clearField();

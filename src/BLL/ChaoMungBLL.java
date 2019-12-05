@@ -3,7 +3,6 @@ package BLL;
 import DAL.NhanVienDAL;
 import DTO.NhanVienDTO;
 import GUI.QLChaoMung;
-import GUI.QLNhanVienGUI;
 
 public class ChaoMungBLL {
 	private static ChaoMungBLL instance;

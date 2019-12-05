@@ -18,10 +18,7 @@ import BLL.QLBaoCaoTreBLL;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.Calendar;
 import javax.swing.ScrollPaneConstants;
 
 

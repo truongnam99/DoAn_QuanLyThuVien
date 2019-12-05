@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
 --
--- Host: localhost    Database: qltv
+-- Host: 127.0.0.1    Database: qltv
 -- ------------------------------------------------------
 -- Server version	8.0.18
 
@@ -42,7 +42,6 @@ CREATE TABLE `docgia` (
 
 LOCK TABLES `docgia` WRITE;
 /*!40000 ALTER TABLE `docgia` DISABLE KEYS */;
-INSERT INTO `docgia` VALUES ('DG000001','Trương Hoàng Nam','LDG00001','12A1','1999-01-25','0949709036',NULL),('DG000002','Phạm Tuấn Anh','LDG00001','12A1','1999-01-25','0949709036',''),('dg000005','Phạm Tuấn Anh','LDG00001','12A2','1999-02-16','09484886','null'),('DG01','Lê Minh Phúc','LDG00001','12A2','1999-02-16','09484886','');
 /*!40000 ALTER TABLE `docgia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,11 +81,7 @@ CREATE TABLE `quanlymuonsach` (
   `MaSach` varchar(8) NOT NULL,
   `NgayMuon` date NOT NULL,
   `NgayTra` date NOT NULL,
-  `TrangThai` tinyint(4) NOT NULL,
-  PRIMARY KEY (`MaDocGia`,`MaSach`),
-  KEY `FK_QUANLYMUONSACH_SACH_MS_idx` (`MaSach`),
-  CONSTRAINT `FK_QUANLYMUONSACH_DOCGIA_MDG` FOREIGN KEY (`MaDocGia`) REFERENCES `docgia` (`MaDocGia`),
-  CONSTRAINT `FK_QUANLYMUONSACH_SACH_MS` FOREIGN KEY (`MaSach`) REFERENCES `sach` (`MaSach`)
+  `TrangThai` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -96,7 +91,6 @@ CREATE TABLE `quanlymuonsach` (
 
 LOCK TABLES `quanlymuonsach` WRITE;
 /*!40000 ALTER TABLE `quanlymuonsach` DISABLE KEYS */;
-INSERT INTO `quanlymuonsach` VALUES ('DG000001','ST000001','2019-11-05','2019-11-05',-1),('DG000001','ST000002','2019-11-05','2019-11-01',-1),('DG000001','ST000003','2019-11-05','2019-11-01',0),('DG000001','ST000005','2019-11-05','2019-11-01',-1),('DG000002','ST000003','2019-11-05','2019-11-10',-1),('DG000002','ST000004','2019-11-05','2019-11-10',-1),('DG000002','ST000005','2019-11-05','2019-11-10',-1);
 /*!40000 ALTER TABLE `quanlymuonsach` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -136,7 +130,8 @@ DROP TABLE IF EXISTS `quydinh`;
 CREATE TABLE `quydinh` (
   `MaQuyDinh` varchar(8) NOT NULL,
   `TenQuyDinh` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`MaQuyDinh`)
+  `GiaTri` int(15) DEFAULT NULL,
+  `DonVi` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -146,6 +141,7 @@ CREATE TABLE `quydinh` (
 
 LOCK TABLES `quydinh` WRITE;
 /*!40000 ALTER TABLE `quydinh` DISABLE KEYS */;
+INSERT INTO `quydinh` VALUES ('QD000001','Số sách mượn tối đa HS',3,'Cuốn'),('QD000002','Thời gian mượn tối đa HS',1,'Tuần'),('QD000003','Tiền phạt mượn trễ HS',10000,'VND/tuần'),('QD000004','Sách bị hư hỏng HS',0,'VND'),('QD000005','Mất sách HS',0,'VND'),('QD000006','Số sách mượn tối đa GV',3,'cuốn'),('QD000007','Thời gian mượn tối đa GV',2,'Tuần'),('QD000008','Tiền phạt mượn trễ GV',10000,'VND/tuần'),('QD000009','Sách bị hư hỏng GV',0,'VND'),('QD000010','Mất sách GV',0,'VND');
 /*!40000 ALTER TABLE `quydinh` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,7 +172,6 @@ CREATE TABLE `sach` (
 
 LOCK TABLES `sach` WRITE;
 /*!40000 ALTER TABLE `sach` DISABLE KEYS */;
-INSERT INTO `sach` VALUES ('ST000001','Bộ giáo dục và đào tạo','Toán 11','Toán học','Bộ giáo dục và đào tạo','2019-01-05',23000,'Trống','2013-05-01'),('ST000002','Bộ giáo dục và đào tạo','Toán 12','Toán học','Bộ giáo dục và đào tạo','2019-01-05',23000,'Trống','2013-05-01'),('ST000003','Nhiều tác giả','Văn 11','Văn học','Giáo dục','2015-02-02',23000,'Đang được mượn','2012-01-01'),('ST000004','Nhiều tác giả','Toán cao cấp','Toán học','Giáo dục','2015-02-02',23000,'Trống','2012-01-01'),('ST000005','Bộ giáo dục và đào tạo','Toán 10','Toán học','Bộ giáo dục và đào tạo','2019-01-05',20000,'Đang được mượn','2013-05-01');
 /*!40000 ALTER TABLE `sach` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -210,7 +205,6 @@ CREATE TABLE `sachthanhly` (
 
 LOCK TABLES `sachthanhly` WRITE;
 /*!40000 ALTER TABLE `sachthanhly` DISABLE KEYS */;
-INSERT INTO `sachthanhly` VALUES ('ST000001','8','Bộ giáo dục và đào tạo','Toán 11','Toán học','Bộ giáo dục và đào tạo','2019-01-05',23000,'Trống','2013-05-01'),('ST000002','8','Bộ giáo dục và đào tạo','Toán 12','Toán học','Bộ giáo dục và đào tạo','2019-01-05',23000,'Trống','2013-05-01'),('ST000004','1','Nhiều tác giả','Toán cao cấp','Toán học','Giáo dục','2015-02-02',23000,'Trống','2012-01-01'),('ST000005','3','Bộ giáo dục và đào tạo','Toán 10','Toán học','Bộ giáo dục và đào tạo','2019-01-05',20000,'Đang được mượn','2013-05-01'),('ST000006','2','Nhiều tác giả','Toán cao cấp','Toán học','Giáo dục','2015-02-02',23000,'Trống','2012-01-01');
 /*!40000 ALTER TABLE `sachthanhly` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -238,7 +232,7 @@ CREATE TABLE `taikhoan` (
 
 LOCK TABLES `taikhoan` WRITE;
 /*!40000 ALTER TABLE `taikhoan` DISABLE KEYS */;
-INSERT INTO `taikhoan` VALUES ('admin','admin','admin','admin','Quản trị hệ thống',''),('TK01','hoangnam','hoangnam','Hoang Nam','Thủ thư','');
+INSERT INTO `taikhoan` VALUES ('TK0','admin','admin','admin','Quản trị hệ thống','');
 /*!40000 ALTER TABLE `taikhoan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -263,31 +257,8 @@ CREATE TABLE `thanhly` (
 
 LOCK TABLES `thanhly` WRITE;
 /*!40000 ALTER TABLE `thanhly` DISABLE KEYS */;
-INSERT INTO `thanhly` VALUES ('0','2019-11-27','khong'),('1','2019-11-27','a'),('2','2019-11-27','test'),('3','2019-11-27',''),('4','2019-11-27',''),('5','2019-11-27',''),('6','2019-11-27',''),('7','2019-11-27',''),('8','2019-11-27','test');
+INSERT INTO `thanhly` VALUES ('0','2019-12-05',''),('1','2019-12-05',''),('2','2019-12-05',''),('3','2019-12-05','');
 /*!40000 ALTER TABLE `thanhly` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `thongtinquydinh`
---
-
-DROP TABLE IF EXISTS `thongtinquydinh`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `thongtinquydinh` (
-  `MaQuyDinh` varchar(8) NOT NULL,
-  `GiaTri` int(11) NOT NULL,
-  PRIMARY KEY (`MaQuyDinh`,`GiaTri`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `thongtinquydinh`
---
-
-LOCK TABLES `thongtinquydinh` WRITE;
-/*!40000 ALTER TABLE `thongtinquydinh` DISABLE KEYS */;
-/*!40000 ALTER TABLE `thongtinquydinh` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -299,4 +270,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-28 13:23:35
+-- Dump completed on 2019-12-05 15:08:23

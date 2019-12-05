@@ -4,10 +4,6 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
-
-import org.apache.poi.util.SystemOutLogger;
-
 import DTO.*;
 import MyException.ContainException;
 import MyException.MyException;
@@ -46,6 +42,15 @@ public class MuonTraDAL {
 		}
 	}
 	
+	public int soSachDangMuon(String maDocGia) {
+		int count = 0;
+		for (MuonTraDTO item: dsMuonTra) {
+			if (item.getMaDocGia().equals(maDocGia) && Integer.parseInt(item.getTrangThai())>= 0)
+				count++;
+		}
+		return count;
+	}
+	
 	public ArrayList<MuonTraDTO> getResources() {
 		return dsMuonTra;
 	}
@@ -53,7 +58,6 @@ public class MuonTraDAL {
 	public int addProcessing(MuonTraDTO mt) throws ContainException{
 		try {
 			String query = "insert into quanlymuonsach values(\"" + mt.getMaDocGia() + "\", \"" + mt.getMaSach() + "\", \"" + mt.getNgayMuon() + "\", \"" + mt.getNgayTra()+"\", \"0\")";
-			System.out.println(query+ "tai addProcessing ở MuonTraDAL");
 			int result = DAL.getInstance().executeQueryUpdate(query);
 			
 			if(result > 0) {
@@ -72,8 +76,12 @@ public class MuonTraDAL {
 		System.out.println("update quanlymuonsach set NgayMuon=\""+mt.getNgayMuon()+"\", NgayTra=\""+mt.getNgayTra()+"\" where MaSach=\""+mt.getMaSach()+"\" and MaDocGia=\""+mt.getMaDocGia()+"\"");
 		result = DAL.getInstance().executeQueryUpdate(query);
 		if (result > 0)
-			//for(int i=0;i<dsMuonTra.size();i++) {
-				//MuonTraDTO item=dsMuonTra.get(i);
+			try {
+				SachDAL.getInstance().changeTrangThai(mt.getMaSach(), "Trống");
+			} catch (MyException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			for (MuonTraDTO item:dsMuonTra) {
 				if (item.getMaDocGia().equals(mt.getMaDocGia()) && item.getMaSach().equals(mt.getMaSach()))
 					{
@@ -85,14 +93,16 @@ public class MuonTraDAL {
 		return result;
 	}
 
-	public int traSach(String maDocGia, String maSach) {
+	public int traSach(String maDocGia, String maSach) throws MyException {
 		int result;
 		String query = "update quanlymuonsach set TrangThai = -1 where MaSach=\""+maSach+"\" and MaDocGia=\"" +maDocGia+"\"";
 		result = DAL.getInstance().executeQueryUpdate(query);
-		if (result >0)
-		for (MuonTraDTO item:dsMuonTra) {
-			if(item.getMaDocGia().equals(maDocGia)&& item.getMaSach().equals(maSach))
-				item.setTrangThai("-1");
+		if (result >0) {
+			for (MuonTraDTO item:dsMuonTra) {
+				if(item.getMaDocGia().equals(maDocGia)&& item.getMaSach().equals(maSach))
+					item.setTrangThai("-1");
+			}
+			SachDAL.getInstance().changeTrangThai(maSach, "Trống");
 		}
 		return result;
 		

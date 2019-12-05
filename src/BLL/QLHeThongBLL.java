@@ -1,7 +1,6 @@
 package BLL;
 
 import java.util.ArrayList;
-import javax.swing.table.DefaultTableModel;
 import DAL.HeThongDAL;
 import DTO.HeThongDTO;
 

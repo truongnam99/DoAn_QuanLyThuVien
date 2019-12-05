@@ -10,7 +10,6 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
 
 import BLL.QLThanhLyBLL;
 import MyException.MyException;
@@ -91,6 +90,17 @@ public class QLThanhLyGUI {
 		
 		tbSachThanhLy = new JTable();
 		scrollPane_1.setViewportView(tbSachThanhLy);
+		tbSachThanhLy.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent arg0) {
+				if(tbSachThanhLy.getSelectedRow() < 0)
+					return;
+				
+				tfMaSach.setText(tbSachThanhLy.getValueAt(tbSachThanhLy.getSelectedRow(), 0).toString());
+				tfTenSach.setText(tbSachThanhLy.getValueAt(tbSachThanhLy.getSelectedRow(), 1).toString());
+			}
+		});
 		
 		lblMaSach = new JLabel("Mã sách:");
 		lblMaSach.setBounds(10, 415, 63, 21);
@@ -121,6 +131,7 @@ public class QLThanhLyGUI {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 				tbSachThanhLy.setModel(QLThanhLyBLL.getInstance().addProcessing(tfMaSach.getText()));
+				lblMessage.setText("Sách đã được thêm vào danh sách sách thanh lý");
 				}catch(MyException e) {
 					lblMessage.setText(e.getMessage());
 				}
@@ -137,6 +148,7 @@ public class QLThanhLyGUI {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					tbSachThanhLy.setModel(QLThanhLyBLL.getInstance().delProcessing(tfMaSach.getText()));
+					lblMessage.setText("Sách đã được xóa vào danh sách sách thanh lý");
 					}catch(MyException e) {
 						lblMessage.setText(e.getMessage());
 					}

@@ -1,8 +1,9 @@
 package BLL;
 
-import java.net.ConnectException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+
+import DAL.DocGiaDAL;
 import DAL.PhatTienDAL;
 import DTO.*;
 import MyException.ContainException;
@@ -56,6 +57,8 @@ public class QLPhatTienBLL {
 			checkData(pt);
 			String msg;
 			int result=PhatTienDAL.getInstance().addProcessing(pt);
+			if(!DocGiaDAL.getInstance().isContain(pt.getMaDocGia()))
+				return "Mã độc giả không tồn tại";
 			switch(result)
 			{
 			case -1:

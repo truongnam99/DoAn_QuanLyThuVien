@@ -7,7 +7,6 @@ import javax.swing.table.TableModel;
 import DAL.SachDAL;
 import DAL.ThanhLyDAL;
 import DTO.*;
-import GUI.QLThanhLyGUI;
 import MyException.MyException;
 
 public class QLThanhLyBLL {

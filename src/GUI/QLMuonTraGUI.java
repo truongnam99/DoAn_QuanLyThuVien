@@ -8,11 +8,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -20,15 +21,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableModel;
 
-import BLL.QLDocGiaBLL;
 import BLL.QLMuonTraBLL;
 import CustomControl.ButtonEditor;
 import CustomControl.ButtonRenderer;
 import DTO.MuonTraDTO;
 import MyException.ContainException;
 import MyException.MyException;
+import com.toedter.calendar.JDateChooser;
 
 public class QLMuonTraGUI {
 
@@ -40,10 +40,10 @@ public class QLMuonTraGUI {
 	private JTextField tfMaDocGia;
 	private JTextField tfTenSach;
 	private JTextField tfMaSach;
-	private JTextField tfNgayMuon;
-	private JTextField tfNgayTra;
 	private JTextField tfTrangThai;
 	private JLabel lblMessage;
+	private JDateChooser dcNgayTra;
+	private JDateChooser dcNgayMuon;
 	
 	private boolean isEdit = true;
 	
@@ -127,12 +127,13 @@ public class QLMuonTraGUI {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				if(tfTimKiem.getText().length()==0)
 					JOptionPane.showMessageDialog(null, "Bạn chưa nhập từ khóa cần tìm!","Thông báo",1);
 				else
 				{
-					//String sql1="select *from muontra where maDocGia like'%"+tfTimKiem.getText()+"%'or hoTen like'%%'";
+					tbMuonTra.setModel(QLMuonTraBLL.getInstance().timKiem(tfTimKiem.getText()));
+					tbMuonTra.getColumn("Trả sách").setCellRenderer(new ButtonRenderer());
+					tbMuonTra.getColumn("Trả sách").setCellEditor(new  ButtonEditor(new JCheckBox()));
 				}
 			}
 		});
@@ -158,13 +159,25 @@ public class QLMuonTraGUI {
 		        		setStateForTextfeild();
 		        		// hiển thị thông tin vào trong các trường
 		        		tfMaDocGia.setText(tbMuonTra.getValueAt(tbMuonTra.getSelectedRow(), 1).toString());
-		        		tfHoTen.setText(tbMuonTra.getValueAt(tbMuonTra.getSelectedRow(), 2).toString());;
-		        		tfMaSach.setText(tbMuonTra.getValueAt(tbMuonTra.getSelectedRow(), 3).toString());;
-		        		tfTenSach.setText(tbMuonTra.getValueAt(tbMuonTra.getSelectedRow(), 4).toString());;
-		        		tfNgayMuon.setText(tbMuonTra.getValueAt(tbMuonTra.getSelectedRow(), 5).toString());;
-		        		tfNgayTra.setText(tbMuonTra.getValueAt(tbMuonTra.getSelectedRow(), 6).toString());;
-		        		tfTrangThai.setText(tbMuonTra.getValueAt(tbMuonTra.getSelectedRow(), 7).toString());;
-		        		QLMuonTraBLL.getInstance().muonTra = new MuonTraDTO(tfMaDocGia.getText(), tfMaSach.getText(), Date.valueOf(tfNgayMuon.getText()), Date.valueOf(tfNgayTra.getText()));
+		        		tfHoTen.setText(tbMuonTra.getValueAt(tbMuonTra.getSelectedRow(), 2).toString());
+		        		tfMaSach.setText(tbMuonTra.getValueAt(tbMuonTra.getSelectedRow(), 3).toString());
+		        		tfTenSach.setText(tbMuonTra.getValueAt(tbMuonTra.getSelectedRow(), 4).toString());
+		        		try {
+			        		dcNgayMuon.setDate(Date.valueOf(tbMuonTra.getValueAt(tbMuonTra.getSelectedRow(), 5).toString()));
+			        		dcNgayTra.setDate(Date.valueOf(tbMuonTra.getValueAt(tbMuonTra.getSelectedRow(), 6).toString()));
+			        		tfTrangThai.setText(tbMuonTra.getValueAt(tbMuonTra.getSelectedRow(), 7).toString());
+			        		Calendar cal = dcNgayMuon.getCalendar();
+							java.util.Date date = cal.getTime();
+							SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+							String nm = sdf.format(date);
+							cal = dcNgayTra.getCalendar();
+							date = cal.getTime();
+							String nt = sdf.format(date);
+			        		QLMuonTraBLL.getInstance().muonTra = new MuonTraDTO(tfMaDocGia.getText(), tfMaSach.getText(), Date.valueOf(nm), Date.valueOf(nt));
+		        		}catch(Exception e1) {
+		        			lblMessage.setText(e1.getMessage());
+		        			
+		        		}
 		        	}
 		        }
 		    }
@@ -185,8 +198,23 @@ public class QLMuonTraGUI {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MuonTraDTO mt=new MuonTraDTO(tfMaDocGia.getText(), tfMaSach.getText(), Date.valueOf(tfNgayMuon.getText()), Date.valueOf(tfNgayTra.getText()));
 				String msg = null;
+				MuonTraDTO mt = null;
+				try {
+					Calendar cal = dcNgayMuon.getCalendar();
+					java.util.Date date = cal.getTime();
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+					String nm = sdf.format(date);
+					cal = dcNgayTra.getCalendar();
+					date = cal.getTime();
+					String nt = sdf.format(date);
+					mt=new MuonTraDTO(tfMaDocGia.getText(), tfMaSach.getText(), Date.valueOf(nm), Date.valueOf(nt));
+				}catch(Exception e1) {
+					lblMessage.setText("Kiểm tra ngày tháng");
+				}
+				if(mt==null)
+					return;
+				
 				try {
 					msg = QLMuonTraBLL.getInstance().addProcessing(mt);
 				} catch (MyException e1) {
@@ -210,8 +238,23 @@ public class QLMuonTraGUI {
 		btnSua.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MuonTraDTO mt = new MuonTraDTO(tfMaDocGia.getText(), tfMaSach.getText(), Date.valueOf(tfNgayMuon.getText()), Date.valueOf(tfNgayTra.getText()));
-				String msg = QLMuonTraBLL.getInstance().changeProcessing(mt);;
+				MuonTraDTO mt = null;
+				try {
+					Calendar cal = dcNgayMuon.getCalendar();
+					java.util.Date date = cal.getTime();
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+					String nm = sdf.format(date);
+					cal = dcNgayTra.getCalendar();
+					date = cal.getTime();
+					String nt = sdf.format(date);
+					mt = new MuonTraDTO(tfMaDocGia.getText(), tfMaSach.getText(), Date.valueOf(nm), Date.valueOf(nt));
+				}catch(Exception e1) {
+					lblMessage.setText("Kiểm tra ngày tháng");
+				}
+				if(mt==null)
+					return;
+				
+				String msg = QLMuonTraBLL.getInstance().changeProcessing(mt);
 				lblMessage.setText(msg);
 				loadResources();
 			}
@@ -242,37 +285,37 @@ public class QLMuonTraGUI {
 		pnThongTinNhap.setLayout(null);
 		
 		JLabel lblHoTen = new JLabel("Họ và tên:");
-		lblHoTen.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		lblHoTen.setFont(new Font("Times New Roman", Font.BOLD, 13));
 		lblHoTen.setBounds(21, 107, 114, 26);
 		pnThongTinNhap.add(lblHoTen);
 		
 		JLabel lblMaDocGia = new JLabel("Mã độc giả:*");
-		lblMaDocGia.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		lblMaDocGia.setFont(new Font("Times New Roman", Font.BOLD, 13));
 		lblMaDocGia.setBounds(21, 47, 114, 26);
 		pnThongTinNhap.add(lblMaDocGia);
 		
 		JLabel lblTrangThai = new JLabel("Trạng thái:");
-		lblTrangThai.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		lblTrangThai.setFont(new Font("Times New Roman", Font.BOLD, 13));
 		lblTrangThai.setBounds(21, 170, 114, 26);
 		pnThongTinNhap.add(lblTrangThai);
 		
 		JLabel lblTenSach = new JLabel("Tên sách:");
-		lblTenSach.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		lblTenSach.setFont(new Font("Times New Roman", Font.BOLD, 13));
 		lblTenSach.setBounds(464, 89, 87, 26);
 		pnThongTinNhap.add(lblTenSach);
 		
 		JLabel lblMaSach = new JLabel("Mã sách:*");
-		lblMaSach.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		lblMaSach.setFont(new Font("Times New Roman", Font.BOLD, 13));
 		lblMaSach.setBounds(464, 47, 87, 26);
 		pnThongTinNhap.add(lblMaSach);
 		
 		JLabel lblNgayMuon = new JLabel("Ngày mượn:*");
-		lblNgayMuon.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		lblNgayMuon.setFont(new Font("Times New Roman", Font.BOLD, 13));
 		lblNgayMuon.setBounds(464, 129, 87, 26);
 		pnThongTinNhap.add(lblNgayMuon);
 		
 		JLabel lblNgayTra = new JLabel("Ngày trả:*");
-		lblNgayTra.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		lblNgayTra.setFont(new Font("Times New Roman", Font.BOLD, 13));
 		lblNgayTra.setBounds(464, 170, 87, 26);
 		pnThongTinNhap.add(lblNgayTra);
 		
@@ -300,18 +343,6 @@ public class QLMuonTraGUI {
 		pnThongTinNhap.add(tfMaSach);
 		tfMaSach.setColumns(10);
 		
-		tfNgayMuon = new JTextField();
-		tfNgayMuon.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		tfNgayMuon.setBounds(561, 126, 274, 30);
-		pnThongTinNhap.add(tfNgayMuon);
-		tfNgayMuon.setColumns(10);
-		
-		tfNgayTra = new JTextField();
-		tfNgayTra.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		tfNgayTra.setBounds(561, 167, 274, 30);
-		pnThongTinNhap.add(tfNgayTra);
-		tfNgayTra.setColumns(10);
-		
 		tfTrangThai = new JTextField();
 		tfTrangThai.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		tfTrangThai.setBounds(145, 167, 258, 30);
@@ -319,16 +350,26 @@ public class QLMuonTraGUI {
 		tfTrangThai.setColumns(10);
 		
 		lblMessage = new JLabel("");
-		lblMessage.setFont(new Font("Times New Roman", Font.ITALIC, 12));
+		lblMessage.setFont(new Font("Times New Roman", Font.ITALIC, 13));
 		lblMessage.setForeground(Color.red);
 		lblMessage.setBounds(145, 11, 311, 25);
 		pnThongTinNhap.add(lblMessage);
 		
 		JLabel lblKhongBoTrong = new JLabel("(*) Không được bỏ trống");
 		lblKhongBoTrong.setForeground(Color.RED);
-		lblKhongBoTrong.setFont(new Font("Times New Roman", Font.ITALIC, 12));
+		lblKhongBoTrong.setFont(new Font("Times New Roman", Font.ITALIC, 13));
 		lblKhongBoTrong.setBounds(464, 11, 235, 22);
 		pnThongTinNhap.add(lblKhongBoTrong);
+		
+		dcNgayMuon = new JDateChooser();
+		dcNgayMuon.setBounds(561, 129, 274, 30);
+		dcNgayMuon.setDateFormatString("yyyy-MM-dd");
+		pnThongTinNhap.add(dcNgayMuon);
+		
+		dcNgayTra = new JDateChooser();
+		dcNgayTra.setBounds(561, 170, 274, 30);
+		dcNgayTra.setDateFormatString("yyyy-MM-dd");
+		pnThongTinNhap.add(dcNgayTra);
 		
 		JButton btnHuy = new JButton();
 		btnHuy.setIcon(new ImageIcon("icon\\del.png"));
@@ -346,9 +387,10 @@ public class QLMuonTraGUI {
 				
 				tfMaDocGia.setText("");
 				tfMaSach.setText("");
-				tfNgayMuon.setText("");
-				tfNgayTra.setText("");
+				dcNgayMuon.setDate(null);
+				dcNgayTra.setDate(null);
 				tfTenSach.setText("");
+				loadResources();
 				
 			}
 		});

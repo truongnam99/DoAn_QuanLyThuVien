@@ -7,39 +7,37 @@ import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-import BLL.QLDocGiaBLL;
 import BLL.QLPhatTienBLL;
 import DTO.PhatTienDTO;
 
 import javax.swing.ScrollPaneConstants;
-import javax.swing.JComboBox;
+import com.toedter.calendar.JDateChooser;
+import javax.swing.JTextArea;
 
 
 public class QLPhatTienGUI {
 	private JTable tbQLViPham;
-	private JTextField txtfMaLanPhat;
-	private JTextField txtfSoTien;
-	private JTextField txtfNgayPhat;
+	private JTextField tfSoTien;
 	private JPanel pnTongQuanQLViPham;
 
 	static QLPhatTienGUI instance=null;
-	private JTextField txtfLyDo;
-	private JTextField txtfMaDocGia;
+	private JTextField tfMaDocGia;
+	private JDateChooser dcNgayPhat;
+	JTextArea taLyDo;
 	
 	private boolean isEdit = true;
 	
@@ -65,7 +63,6 @@ public class QLPhatTienGUI {
 	}
 	
 	private void setStateForTextfeild() {
-		txtfMaLanPhat.setEditable(isEdit);
 	}
 	
 	private void reloadResources() {
@@ -76,11 +73,10 @@ public class QLPhatTienGUI {
 	}
 	
 	private void clearField() {
-		txtfMaLanPhat.setText("");
-		txtfSoTien.setText("");
-		txtfMaDocGia.setText("");
-		txtfNgayPhat.setText("");
-		txtfLyDo.setText("");
+		tfSoTien.setText("");
+		tfMaDocGia.setText("");
+		dcNgayPhat.setDate(null);
+		taLyDo.setText("");
 	}
 	
 	private void initialize() {
@@ -120,11 +116,10 @@ public class QLPhatTienGUI {
 					return;
 				isEdit = false;
 				setStateForTextfeild();
-				txtfMaLanPhat.setText(tbQLViPham.getValueAt(tbQLViPham.getSelectedRow(), 1).toString());
-				txtfSoTien.setText(tbQLViPham.getValueAt(tbQLViPham.getSelectedRow(), 2).toString());
-				txtfMaDocGia.setText(tbQLViPham.getValueAt(tbQLViPham.getSelectedRow(), 3).toString());
-				txtfNgayPhat.setText(tbQLViPham.getValueAt(tbQLViPham.getSelectedRow(), 4).toString());
-				txtfLyDo.setText(tbQLViPham.getValueAt(tbQLViPham.getSelectedRow(), 5).toString());
+				tfSoTien.setText(tbQLViPham.getValueAt(tbQLViPham.getSelectedRow(), 2).toString());
+				tfMaDocGia.setText(tbQLViPham.getValueAt(tbQLViPham.getSelectedRow(), 3).toString());
+				dcNgayPhat.setDate(Date.valueOf(tbQLViPham.getValueAt(tbQLViPham.getSelectedRow(), 4).toString()));
+				taLyDo.setText(tbQLViPham.getValueAt(tbQLViPham.getSelectedRow(), 5).toString());
 			}
 		});
 		pnQLViPham.add(sc,BorderLayout.CENTER);
@@ -146,67 +141,55 @@ public class QLPhatTienGUI {
 		pnThongTinDocGia.add(pnThongTinNhap);
 		pnThongTinNhap.setLayout(null);
 		
-		JLabel lblMaLanPhat = new JLabel("Mã lần phạt:*");
-		lblMaLanPhat.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblMaLanPhat.setBounds(32, 36, 80, 14);
-		pnThongTinNhap.add(lblMaLanPhat);
-		
 		JLabel lblMaDocGia = new JLabel("Mã độc giả:*");
-		lblMaDocGia.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblMaDocGia.setBounds(32, 161, 80, 14);
+		lblMaDocGia.setFont(new Font("Times New Roman", Font.BOLD, 13 ));
+		lblMaDocGia.setBounds(30, 52, 80, 30);
 		pnThongTinNhap.add(lblMaDocGia);
 		
 		JLabel lblSoTien = new JLabel("Số tiền:*");
-		lblSoTien.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblSoTien.setBounds(32, 97, 72, 14);
+		lblSoTien.setFont(new Font("Times New Roman", Font.BOLD, 13 ));
+		lblSoTien.setBounds(30, 109, 72, 30);
 		pnThongTinNhap.add(lblSoTien);
 		
 		JLabel lblNgayPhat = new JLabel("Ngày phạt:*");
-		lblNgayPhat.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblNgayPhat.setBounds(459, 36, 72, 14);
+		lblNgayPhat.setFont(new Font("Times New Roman", Font.BOLD, 13 ));
+		lblNgayPhat.setBounds(30, 167, 72, 30);
 		pnThongTinNhap.add(lblNgayPhat);
 		
-		txtfMaLanPhat = new JTextField();
-		txtfMaLanPhat.setBounds(116, 28, 258, 31);
-		pnThongTinNhap.add(txtfMaLanPhat);
-		txtfMaLanPhat.setColumns(10);
-		
-		txtfSoTien = new JTextField();
-		txtfSoTien.setBounds(116, 89, 258, 31);
-		pnThongTinNhap.add(txtfSoTien);
-		txtfSoTien.setColumns(10);
-		
-		txtfNgayPhat = new JTextField();
-		txtfNgayPhat.setBounds(541, 28, 258, 31);
-		pnThongTinNhap.add(txtfNgayPhat);
-		txtfNgayPhat.setColumns(10);
+		tfSoTien = new JTextField();
+		tfSoTien.setBounds(112, 109, 263, 31);
+		tfSoTien.setFont(new Font("Times New Roman", Font.BOLD, 13 ));
+		pnThongTinNhap.add(tfSoTien);
+		tfSoTien.setColumns(10);
 		
 		JLabel lblLyDo = new JLabel("Lý do:");
-		lblLyDo.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		lblLyDo.setBounds(459, 97, 59, 14);
+		lblLyDo.setFont(new Font("Times New Roman", Font.BOLD, 13 ));
+		lblLyDo.setBounds(441, 52, 59, 30);
 		pnThongTinNhap.add(lblLyDo);
 		
-		txtfLyDo = new JTextField();
-		txtfLyDo.setBounds(541, 89, 258, 31);
-		pnThongTinNhap.add(txtfLyDo);
-		txtfLyDo.setColumns(10);
+		tfMaDocGia = new JTextField();
+		tfMaDocGia.setBounds(112, 52, 263, 31);
+		tfMaDocGia.setFont(new Font("Times New Roman", Font.BOLD, 13 ));
+		pnThongTinNhap.add(tfMaDocGia);
+		tfMaDocGia.setColumns(10);
 		
-		txtfMaDocGia = new JTextField();
-		txtfMaDocGia.setBounds(116, 147, 258, 31);
-		pnThongTinNhap.add(txtfMaDocGia);
-		txtfMaDocGia.setColumns(10);
-		
-		JLabel lblMessage = new JLabel("");
-		lblMessage.setFont(new Font("Times New Roman", Font.ITALIC, 12));
+		JLabel lblMessage = new JLabel("(*) Không được để trống");
+		lblMessage.setFont(new Font("Times New Roman", Font.ITALIC, 13 ));
 		lblMessage.setForeground(Color.RED);
-		lblMessage.setBounds(116, 3, 683, 22);
+		lblMessage.setBounds(112, 11, 683, 30);
 		pnThongTinNhap.add(lblMessage);
 		
-		JLabel lblKhongBoTrong = new JLabel("(*) Không được bỏ trống");
-		lblKhongBoTrong.setForeground(Color.RED);
-		lblKhongBoTrong.setFont(new Font("Times New Roman", Font.ITALIC, 12));
-		lblKhongBoTrong.setBounds(457, 161, 144, 14);
-		pnThongTinNhap.add(lblKhongBoTrong);
+		dcNgayPhat = new JDateChooser();
+		dcNgayPhat.setBounds(112, 166, 263, 31);
+		dcNgayPhat.setDateFormatString("yyyy-MM-dd");
+		dcNgayPhat.setFont(new Font("Times New Roman", Font.BOLD, 13 ));
+		pnThongTinNhap.add(dcNgayPhat);
+		
+		taLyDo = new JTextArea();
+		taLyDo.setBounds(510, 55, 308, 142);
+		taLyDo.setFont(new Font("Times New Roman", Font.BOLD, 13 ));
+		taLyDo.setLineWrap(true);
+		pnThongTinNhap.add(taLyDo);
 		
 		JButton btnThem = new JButton("Th\u00EAm");
 		btnThem.setBounds(897, 37, 138, 41);
@@ -219,7 +202,19 @@ public class QLPhatTienGUI {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				try {
-					PhatTienDTO pt=new PhatTienDTO(txtfMaLanPhat.getText(),txtfSoTien.getText(),txtfMaDocGia.getText(),Date.valueOf(txtfNgayPhat.getText().toString()),txtfLyDo.getText());
+					Calendar cal = dcNgayPhat.getCalendar();
+					java.util.Date date = cal.getTime();
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+					String ngayPhat = sdf.format(date);
+					
+					String maLanPhat;
+					if(tbQLViPham.getRowCount() == 0)
+						maLanPhat = "P0";
+					else {
+						maLanPhat = "P" + (1+Integer.parseInt(tbQLViPham.getValueAt(tbQLViPham.getRowCount()-1, 1).toString().substring(1)));
+					}
+					
+					PhatTienDTO pt=new PhatTienDTO(maLanPhat,tfSoTien.getText(),tfMaDocGia.getText(),Date.valueOf(ngayPhat),taLyDo.getText());
 					String result =QLPhatTienBLL.getInstance().addProcessing(pt);
 					lblMessage.setText(result);
 					reloadResources();
@@ -255,8 +250,7 @@ public class QLPhatTienGUI {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				String msg=QLPhatTienBLL.getInstance().deleteProcessing(txtfMaLanPhat.getText());
+				String msg=QLPhatTienBLL.getInstance().deleteProcessing(tbQLViPham.getValueAt(tbQLViPham.getSelectedRow(), 1).toString());
 				lblMessage.setText(msg);
 				reloadResources();
 				clearField();
@@ -272,7 +266,11 @@ public class QLPhatTienGUI {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					PhatTienDTO pt=new PhatTienDTO(txtfMaLanPhat.getText(),txtfSoTien.getText(),txtfMaDocGia.getText(),Date.valueOf(txtfNgayPhat.getText().toString()),txtfLyDo.getText());
+					Calendar cal = dcNgayPhat.getCalendar();
+					java.util.Date date = cal.getTime();
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+					String ngayPhat = sdf.format(date);
+					PhatTienDTO pt=new PhatTienDTO(tbQLViPham.getValueAt(tbQLViPham.getSelectedRow(), 1).toString(),tfSoTien.getText(),tfMaDocGia.getText(),Date.valueOf(ngayPhat),taLyDo.getText());
 					String result=QLPhatTienBLL.getInstance().changeProcessing(pt);
 					lblMessage.setText(result);
 					reloadResources();

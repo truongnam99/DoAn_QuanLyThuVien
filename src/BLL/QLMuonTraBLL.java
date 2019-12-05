@@ -2,15 +2,14 @@ package BLL;
 
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.zip.DataFormatException;
 
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import DAL.DocGiaDAL;
+import DAL.HeThongDAL;
 import DAL.MuonTraDAL;
 import DAL.SachDAL;
-import DTO.DocGiaDTO;
 import DTO.MuonTraDTO;
 import DTO.SachDTO;
 import MyException.ContainException;
@@ -87,6 +86,8 @@ public class QLMuonTraBLL {
 			throw new MyNullException("Mã độc giả đang bị trống");
 		if(mt.getMaSach().equals(""))
 			throw new MyNullException("Mã độc giả đang bị trống");
+		if(!SachDAL.getInstance().isTrong(mt.getMaSach()))
+			throw new MyException("Sách này đang được mượn");
 		try {
 			Date nm;
 			Date nt;
@@ -119,6 +120,15 @@ public class QLMuonTraBLL {
 	public String addProcessing(MuonTraDTO mt) throws MyException, ContainException  {
 		try {
 			checkData(mt);
+			int soSachDangMuon = MuonTraDAL.getInstance().soSachDangMuon(mt.getMaDocGia());
+			if (DocGiaDAL.getInstance().getDocGia(mt.getMaDocGia()).getLoaiDocGia().toString().equalsIgnoreCase("Học sinh")) {
+				if(soSachDangMuon >= Integer.parseInt(HeThongDAL.getInstance().getResources().get(0).getGiaTri()))
+					return "Độc giả này đã mượn đủ số cuốn được quy định";
+			}
+			else
+				if(soSachDangMuon >= Integer.parseInt(HeThongDAL.getInstance().getResources().get(5).getGiaTri()))
+					return "Độc giả này đã mượn đủ số cuốn được quy định";
+			
 			String msg;
 			boolean trong = SachDAL.getInstance().isTrong(mt.getMaSach());
 			if (!trong)
@@ -162,11 +172,16 @@ public class QLMuonTraBLL {
 	}
 
 	public String traSach(String maDocGia, String maSach) {
-		int result = MuonTraDAL.getInstance().traSach(maDocGia, maSach);
-		if (result > 0)
-			return "Trả sách thành công";
-		else
-			return "Trả sách không thành công";
+		try{
+			int result = MuonTraDAL.getInstance().traSach(maDocGia, maSach);
+			if (result > 0)
+				return "Trả sách thành công";
+			else
+				return "Trả sách không thành công";
+		}catch(Exception e1) {
+			return e1.getMessage();
+		}
+		
 		
 	}
 
@@ -213,6 +228,44 @@ public class QLMuonTraBLL {
 		}
 		return dtm;
 		
+	}
+
+	
+	public TableModel timKiem(String key) {
+		DefaultTableModel dtm = new DefaultTableModel();
+		ArrayList<MuonTraDTO> dsMuonTra = new ArrayList<MuonTraDTO>();
+		dsMuonTra = MuonTraDAL.getInstance().reloadResources();
+		dtm.addColumn("STT");
+		dtm.addColumn("Mã độc giả");
+		dtm.addColumn("Họ và tên");
+		dtm.addColumn("Mã sách");
+		dtm.addColumn("Tên sách");
+		dtm.addColumn("Ngày mượn");
+		dtm.addColumn("Ngày trả");
+		dtm.addColumn("Trạng thái");
+		dtm.addColumn("Trả sách");
+		int i = 0;
+		System.out.println(key);
+		for(MuonTraDTO mt : dsMuonTra) {
+			if (mt.getTrangThai().equals("-1"))//đã trả
+				continue;
+			String thongTin = SachDAL.getInstance().getThongTin(mt.getMaSach())+ DocGiaDAL.getInstance().thongTin(mt.getMaDocGia());
+			thongTin = thongTin.toLowerCase();
+			key = key.toLowerCase();
+			if(thongTin.contains(key)) {
+				Object[] row = {i++, mt.getMaDocGia(), 
+						DocGiaDAL.getInstance().getTenDocGia(mt.getMaDocGia()), 
+						mt.getMaSach(),
+						SachDAL.getInstance().getTenSach(mt.getMaSach()),
+						mt.getNgayMuon(),
+						mt.getNgayTra(),
+						mt.getTrangThai(),
+						"Trả"};
+				dtm.addRow(row);
+			}
+		}
+		
+		return dtm;
 	}
 
 	

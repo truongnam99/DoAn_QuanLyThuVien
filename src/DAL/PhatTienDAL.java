@@ -1,6 +1,5 @@
 package DAL;
 
-import java.net.ConnectException;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.util.ArrayList;

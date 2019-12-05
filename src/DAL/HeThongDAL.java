@@ -1,10 +1,8 @@
 package DAL;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
 
 import DTO.*;
 
@@ -21,8 +19,6 @@ public class HeThongDAL {
 			instance = new HeThongDAL();
 		return instance;
 	}
-	
-	
 	
 	public ArrayList<HeThongDTO> getResources(){
 		try {
@@ -43,8 +39,6 @@ public class HeThongDAL {
 		return dsHeThong;
 	}
 	public void changeProcessing(HeThongDTO ht) {
-		String query ="update quydinh set GiaTri=\""+ht.getGiaTri()+"\"where ";
+		//String query ="update quydinh set GiaTri=\""+ht.getGiaTri()+"\"where ";
 	}
-
-	
 }

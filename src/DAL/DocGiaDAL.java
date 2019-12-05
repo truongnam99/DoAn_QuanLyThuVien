@@ -91,9 +91,16 @@ public class DocGiaDAL {
 		return false;
 	}
 	
+	public boolean isContain(String maDocGia) {
+		for (DocGiaDTO item: dsDocGia)
+			if (item.getMaDocGia().equals(maDocGia))
+				return true;
+		return false;
+	}
+	
 	public int addProcessing(DocGiaDTO dg) throws ContainException{
 		if (isContain(dg))
-			throw new ContainException("Độc giả đã tồn tại");
+			throw new ContainException("Độc giả đã tồn tại, hoặc Mã độc giả bị trùng!");
 		String query = "insert into docgia values(\"" + dg.getMaDocGia()+"\", \""+ dg.getTenDocGia()+"\", \""+ dg.getLoaiDocGia().getMaLoaiDocGia()+"\", \""+ 
 				dg.getLopMon()+ "\", \""+ dg.getNgaySinh()+"\", \"" + dg.getSdt() +"\", \""+ dg.getEmail()+"\")";
 		int result = DAL.getInstance().executeQueryUpdate(query);
@@ -144,6 +151,14 @@ public class DocGiaDAL {
 		return dsDocGia;
 	}
 
+	public String thongTin(String maDocGia) {
+		for (DocGiaDTO dg:dsDocGia) {
+			if(maDocGia.equalsIgnoreCase(dg.getMaDocGia()))
+				return dg.getMaDocGia()+dg.getTenDocGia();
+		}
+		return "";
+	}
+	
 	public int getSodocgia() {
 		
 		return dsDocGia.size();

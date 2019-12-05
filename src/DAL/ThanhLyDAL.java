@@ -1,12 +1,10 @@
 package DAL;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import DTO.*;
-import MyException.ContainException;
 
 public class ThanhLyDAL {
 

@@ -7,7 +7,6 @@ import java.awt.SystemColor;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -103,6 +102,7 @@ public class QLDangNhapGUI {
 		
 		pfMatKhau = new JPasswordField();
 		pfMatKhau.setBounds(111, 195, 167, 26);
+		pfMatKhau.setFont(new Font("Times New Roman", Font.BOLD, 13));
 		pnDangNhap.add(pfMatKhau);
 		pfMatKhau.setColumns(10);
 		pfMatKhau.addKeyListener(new KeyListener() {

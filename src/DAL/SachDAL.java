@@ -125,6 +125,14 @@ public class SachDAL {
 		return result;
 	}
 
+	public String getThongTin(String maSach) {
+		for (SachDTO s: dsSach) {
+			if (s.getMaSach().equals(maSach))
+				return s.getMaSach()+s.getTenSach() + s.getTacGia();
+		}
+		return "";
+	}
+	
 	public int changeProcessing(SachDTO s) {
 		int result;
 		String query = "update sach set TenSach=\"" + s.getTenSach() 

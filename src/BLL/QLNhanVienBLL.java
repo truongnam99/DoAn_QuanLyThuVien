@@ -50,7 +50,11 @@ public class QLNhanVienBLL {
 	public String addProcessing(NhanVienDTO nv) {
 		try{
 			checkData(nv);
-		
+			ArrayList<NhanVienDTO> dsNhanVien = NhanVienDAL.getInstance().getResource();
+			for(NhanVienDTO item: dsNhanVien) {
+				if(item.getTenTaiKhoan().equals(nv.getTenTaiKhoan()))
+					return "Tên tài khoản đã tồn tại";
+			}
 			String msg;
 			int result = NhanVienDAL.getInstance().addProcessing(nv);
 			switch(result)
@@ -66,7 +70,6 @@ public class QLNhanVienBLL {
 			return msg;
 		}
 		catch(MyNullException ex1) {
-			System.out.println(ex1);
 			return ex1.getMessage();
 		}
 		catch(ContainException ex2) {
@@ -76,7 +79,7 @@ public class QLNhanVienBLL {
 	
 	public DefaultTableModel reloadResources() {
 		ArrayList<NhanVienDTO> dsNhanVien = new ArrayList<NhanVienDTO>();
-		dsNhanVien = NhanVienDAL.getInstance().reloadResource();
+		dsNhanVien = NhanVienDAL.getInstance().getResource();
 		DefaultTableModel dtm = new DefaultTableModel();
 		try {
 			dtm.addColumn("STT");
@@ -103,11 +106,11 @@ public class QLNhanVienBLL {
 	
 	public DefaultTableModel getResources() {
 		ArrayList<NhanVienDTO> dsNhanVien = new ArrayList<NhanVienDTO>();
-		dsNhanVien = NhanVienDAL.getInstance().reloadResource();
+		dsNhanVien = NhanVienDAL.getInstance().getResource();
 		DefaultTableModel dtm = new DefaultTableModel();
 		try {
 			dtm.addColumn("STT");
-			dtm.addColumn("Mã nhân viên");
+			dtm.addColumn("Mã tài khoản");
 			dtm.addColumn("Tên tài khoản");
 			dtm.addColumn("Mật khẩu");
 			dtm.addColumn("Tên nhân viên");
@@ -131,14 +134,23 @@ public class QLNhanVienBLL {
 	
 	public String changeProcessing(NhanVienDTO nv) {
 		String msg;
+		ArrayList<NhanVienDTO> dsNhanVien = NhanVienDAL.getInstance().getResource();
+		boolean check = false;
+		for (NhanVienDTO item: dsNhanVien) {
+			if (nv.getMaTaiKhoan().equals(item.getMaTaiKhoan())) {
+				if (item.getLoaiTaiKhoan().equals("Quản trị hệ thống"))
+					check = true;
+				break;
+			}
+		}
+		if (check && nv.getLoaiTaiKhoan().equalsIgnoreCase("Thủ thư") && NhanVienDAL.getInstance().countAdminAcount() == 1)
+			return "Hệ thống cần có ít nhất 1 Quản trị hệ thống";
 		try {
 			checkData(nv);
-			
 			int result = NhanVienDAL.getInstance().changeProcessing(nv);
 			switch(result)
 			{
 			case -1:
-				//msg = "Error";
 			case 0:
 				msg = "Sửa không thành công! Vui lòng thử lại";
 				break;
@@ -152,11 +164,12 @@ public class QLNhanVienBLL {
 		}
 	}
 	
-	public String deleteProcessing(String matk) {
+	public String deleteProcessing(String matk, String loaiTaiKhoan) {
 		
 		if (matk.equals(""))
 			return "Không có tài khoản nào được chọn để xóa";
-		
+		if (loaiTaiKhoan.equalsIgnoreCase("Quản trị hệ thống") && NhanVienDAL.getInstance().countAdminAcount() == 1)
+			return "Hệ thống cần có ít nhất 1 Quản trị hệ thống";
 		int result = NhanVienDAL.getInstance().deleteProcessing(matk);
 		if (result > 0)
 			return "Xóa thành công";

@@ -3,15 +3,11 @@ package GUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 
 import javax.swing.*;
 
-import DAL.DAL;
 import com.toedter.calendar.JCalendar;
 
-import BLL.ChaoMungBLL;
 import BLL.QLDocGiaBLL;
 import BLL.QLMuonTraBLL;
 import BLL.QLSachBLL;
@@ -59,8 +55,6 @@ public class TrangChuGUI {
 		frmTrangChu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmTrangChu.getContentPane().setLayout(null);
 		//frmTrangChu.setResizable(false);
-		
-		ImageIcon icTrangChu = new ImageIcon("icon\\home.png");
 		
 		pnTrangChu = new JPanel();
 		pnTrangChu.setBounds(260, 0, 1065, 681);
@@ -199,7 +193,7 @@ public class TrangChuGUI {
 			}
 		});
 		
-		JMenuItem mnChaoMung = new JMenuItem("CHÀO MỪNG");
+		JMenuItem mnChaoMung = new JMenuItem("THÔNG TIN CÁ NHÂN");
 		mnChaoMung.setForeground(Color.BLACK);
 		mnChaoMung.setIcon(new ImageIcon("icon\\taikhoan.png"));
 		mnChaoMung.setBackground(SystemColor.textHighlight);

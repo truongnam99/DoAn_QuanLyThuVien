@@ -91,7 +91,16 @@ public class NhanVienDAL {
 		return result;
 	}
 	
-	public ArrayList<NhanVienDTO> reloadResource(){
+	public ArrayList<NhanVienDTO> getResource(){
 		return dsNhanVien;
+	}
+	
+	public int countAdminAcount() {
+		int count =0;
+		for(NhanVienDTO item: dsNhanVien) {
+			if (item.getLoaiTaiKhoan().equalsIgnoreCase("Quản trị hệ thống"))
+				count++;
+		}
+		return count;
 	}
 }
