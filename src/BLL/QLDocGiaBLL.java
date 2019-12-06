@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import DAL.DocGiaDAL;
 import DTO.*;
@@ -157,4 +158,37 @@ public class QLDocGiaBLL {
 	public int SoDocGia() {
 		return DocGiaDAL.getInstance().getSodocgia();
 	}
+	
+	public TableModel timKiem(String key) {
+		DefaultTableModel dtm=new DefaultTableModel();
+		ArrayList<DocGiaDTO> dsDocGia=new ArrayList<DocGiaDTO>();
+		dsDocGia=DocGiaDAL.getInstance().reloadResources();
+		dtm.addColumn("STT");
+		dtm.addColumn("Mã độc giả");
+		dtm.addColumn("Họ và tên");
+		dtm.addColumn("Loại độc giả");
+		dtm.addColumn("Lớp/ Chuyên môn");
+		dtm.addColumn("Ngày sinh");
+		dtm.addColumn("SĐT");
+		dtm.addColumn("Email");
+		int i=0;
+		System.out.println(key);
+		for(DocGiaDTO dg:dsDocGia) {
+			String thongTin=DocGiaDAL.getInstance().thongTin(dg.getMaDocGia());
+			thongTin=thongTin.toLowerCase();
+			key=key.toLowerCase();
+			if(thongTin.contains(key)) {
+				Object[] row= {i++,dg.getMaDocGia(),
+						dg.getTenDocGia(),
+						dg.getLoaiDocGia(),
+						dg.getLopMon(),
+						dg.getNgaySinh(),
+						dg.getSdt(),
+						dg.getEmail()};
+				dtm.addRow(row);
+				}
+			}
+		return dtm;
+		}
+	
 }

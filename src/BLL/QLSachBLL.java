@@ -2,6 +2,7 @@ package BLL;
 import java.util.ArrayList;
 
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import DAL.SachDAL;
 import DTO.*;
@@ -22,11 +23,11 @@ public static QLSachBLL instance;
 	}
 	private boolean checkData(SachDTO s) throws MyNullException, MyException{
 		if (s.getMaSach().equals(""))
-			throw new MyNullException("Mã đọc giả đang bị trống");
+			throw new MyNullException("Mã sách đang bị trống");
 		if(s.getTenSach().toString().equals(""))
-			throw new MyNullException("Loại đọc giả đang bị trống");
+			throw new MyNullException("Tên sách đang bị trống");
 		if(s.getGiaSach().equals(""))
-			throw new MyNullException("Lớp/Môn đang bị bỏ trống");
+			throw new MyNullException("Giá sách đang bị bỏ trống");
 		if(s.getNgayNhap().compareTo(s.getNamXuatBan()) < 0)
 			throw new MyException("Ngày nhập phải lớn hơn năm xuất bản");
 		try {
@@ -151,4 +152,42 @@ public static QLSachBLL instance;
 		}
 		return theLoai.size();
 	}
-}
+	
+	public TableModel timKiem(String key) {
+		DefaultTableModel dtm=new DefaultTableModel();
+		ArrayList<SachDTO> dsSach = new ArrayList<SachDTO>();
+		dsSach = SachDAL.getInstance().getResources();
+			dtm.addColumn("STT");
+			dtm.addColumn("Mã sách");
+			dtm.addColumn("Tên sách");
+			dtm.addColumn("Thể loại");
+			dtm.addColumn("Tác giả");
+			dtm.addColumn("Nhà xuất bản");
+			dtm.addColumn("Ngày nhập");
+			dtm.addColumn("Giá sách");
+			dtm.addColumn("Trạng thái");
+			dtm.addColumn("Năm xuất bản");
+			int i=0;
+			System.out.println(key);
+			for(SachDTO sach:dsSach) {
+				String thongTin=SachDAL.getInstance().getThongTin(sach.getMaSach());
+				thongTin=thongTin.toLowerCase();
+				key=key.toLowerCase();
+				if(thongTin.contains(key)) {
+					Object[] row= {i++,sach.getMaSach(),
+							sach.getTenSach(),
+							sach.getTheLoai(),
+							sach.getTacGia(),
+							sach.getNhaXuatBan(),
+							sach.getNgayNhap(),
+							sach.getGiaSach(),
+							sach.getTrangThai(),
+							sach.getNamXuatBan()};
+					dtm.addRow(row);
+					}
+				}
+			return dtm;
+			}
+	}
+	
+
