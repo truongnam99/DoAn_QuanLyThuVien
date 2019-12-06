@@ -12,8 +12,10 @@ import java.util.Calendar;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -21,6 +23,9 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import BLL.QLDocGiaBLL;
+import BLL.QLMuonTraBLL;
+import CustomControl.ButtonEditor;
+import CustomControl.ButtonRenderer;
 import DTO.DocGiaDTO;
 import DTO.LoaiDocGiaDTO;
 
@@ -43,6 +48,7 @@ public class QLDocGiaGUI {
 	private JDateChooser dcNgaySinh;
 	
 	private boolean isEdit = true;
+	private JTextField tfTimKiem;
 	
 	private QLDocGiaGUI() {
 		initialize();
@@ -94,13 +100,13 @@ public class QLDocGiaGUI {
 		JPanel pnTitle = new JPanel();
 		pnTitle.setLayout(null);
 		pnTitle.setBackground(SystemColor.activeCaption);
-		pnTitle.setBounds(0, 0, 1078, 71);
+		pnTitle.setBounds(0, 0, 1078, 60);
 		pnMain.add(pnTitle);
 		
 		JPanel pnDanhSachDocGia = new JPanel();
 		pnDanhSachDocGia.setLayout(null);
 		pnDanhSachDocGia.setBackground(SystemColor.activeCaption);
-		pnDanhSachDocGia.setBounds(0, 71, 1065, 233);
+		pnDanhSachDocGia.setBounds(0, 60, 1065, 244);
 		pnMain.add(pnDanhSachDocGia);
 		
 		JPanel pnThongTinDocGia = new JPanel();
@@ -122,7 +128,7 @@ public class QLDocGiaGUI {
 		tbDocGia = new JTable();
 		tbDocGia.setBounds(0, 0, 1050, 233);
 		JScrollPane sc = new JScrollPane(tbDocGia, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		sc.setBounds(0, 0, 1055, 233);
+		sc.setBounds(0, 45, 1055, 199);
 		tbDocGia.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			
 			@Override
@@ -149,6 +155,30 @@ public class QLDocGiaGUI {
 			
 		});
 		pnDanhSachDocGia.add(sc,BorderLayout.CENTER);
+		
+		tfTimKiem = new JTextField();
+		tfTimKiem.setBounds(559, 5, 337, 30);
+		pnDanhSachDocGia.add(tfTimKiem);
+		tfTimKiem.setColumns(10);
+		
+		JButton btnTimKiem = new JButton("Tìm kiếm");
+		btnTimKiem.setIcon(new ImageIcon("icon\\find.png"));
+		btnTimKiem.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		btnTimKiem.setBounds(919, 4, 134, 35);
+		btnTimKiem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(tfTimKiem.getText().length()==0)
+					JOptionPane.showMessageDialog(null, "Bạn chưa nhập từ khóa cần tìm!","Thông báo",1);
+				else
+				{
+					tbDocGia.setModel(QLDocGiaBLL.getInstance().timKiem(tfTimKiem.getText()));
+				}
+				
+			}
+		});
+		pnDanhSachDocGia.add(btnTimKiem);
 		
 		JLabel lblThongTinDocGia = new JLabel("THÔNG TIN ĐỘC GIẢ");
 		lblThongTinDocGia.setBounds(10, 0, 186, 28);

@@ -186,7 +186,8 @@ public class QLPhatTienGUI {
 		pnThongTinNhap.add(dcNgayPhat);
 		
 		taLyDo = new JTextArea();
-		taLyDo.setBounds(510, 55, 308, 142);
+		taLyDo.setBackground(SystemColor.controlHighlight);
+		taLyDo.setBounds(510, 53, 308, 142);
 		taLyDo.setFont(new Font("Times New Roman", Font.BOLD, 13 ));
 		taLyDo.setLineWrap(true);
 		pnThongTinNhap.add(taLyDo);

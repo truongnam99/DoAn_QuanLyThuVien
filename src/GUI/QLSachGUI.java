@@ -11,6 +11,7 @@ import java.util.Calendar;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -39,6 +40,7 @@ public class QLSachGUI {
 	private boolean isChanging = false;
 	
 	static QLSachGUI instance=null;
+	private JTextField tfTimKiem;
 	
 	private QLSachGUI(){
 		initialize();
@@ -98,6 +100,7 @@ public class QLSachGUI {
 		pnTieuDeQLSach.add(lblQLSach);
 		
 		JPanel pnQLSach = new JPanel();
+		pnQLSach.setBackground(SystemColor.activeCaption);
 		pnQLSach.setBounds(0, 52, 1065, 230);
 		pnTongQuanQLSach.add(pnQLSach);
 		pnQLSach.setLayout(null);
@@ -155,7 +158,7 @@ public class QLSachGUI {
 		
 		JLabel lblTheLoai = new JLabel("Thể loại:");
 		lblTheLoai.setFont(new Font("Times New Roman", Font.BOLD, 13));
-		lblTheLoai.setBounds(24, 158, 66, 14);
+		lblTheLoai.setBounds(24, 155, 66, 23);
 		pnThongTinNhap.add(lblTheLoai);
 		
 		JLabel lblTinhTrang = new JLabel("Tình trạng:");
@@ -327,7 +330,31 @@ public class QLSachGUI {
 		tbQLSach.setBounds(0, 0, 1050, 167);
 		JScrollPane sc = new JScrollPane(tbQLSach, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		pnQLSach.add(sc);
-		sc.setBounds(0, 0, 1055, 230);
+		sc.setBounds(0, 44, 1055, 186);
+		
+		tfTimKiem = new JTextField();
+		tfTimKiem.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		tfTimKiem.setBounds(559, 5, 337, 30);
+		pnQLSach.add(tfTimKiem);
+		tfTimKiem.setColumns(10);
+		
+		JButton btnTimKiem = new JButton("Tìm kiếm");
+		btnTimKiem.setIcon(new ImageIcon("icon\\find.png"));
+		btnTimKiem.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		btnTimKiem.setBounds(919, 4, 134, 35);
+		btnTimKiem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(tfTimKiem.getText().length()==0)
+					JOptionPane.showMessageDialog(null, "Bạn chưa nhập từ khóa cần tìm!","Thông báo",1);
+				else {
+					tbQLSach.setModel(QLSachBLL.getInstance().timKiem(tfTimKiem.getText()));
+				}
+				
+			}
+		});
+		pnQLSach.add(btnTimKiem);
 		tbQLSach.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			
 			@Override
